@@ -1,5 +1,5 @@
 //
-//  DiseaseCount.swift
+//  DiseaseCounter.swift
 //  Pandemic
 //
 //  Created by Michael Welch on 3/10/16.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct DiseaseCount {
+struct DiseaseCounter {
 
     init() {
         self.init(initialValue: 0)

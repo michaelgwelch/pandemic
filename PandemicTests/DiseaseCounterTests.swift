@@ -1,5 +1,5 @@
 //
-//  DiseaseCountTests.swift
+//  DiseaseCounterTests.swift
 //  Pandemic
 //
 //  Created by Michael Welch on 3/10/16.
@@ -10,38 +10,38 @@ import XCTest
 
 @testable import Pandemic
 
-class DiseaseCountTests: XCTestCase {
+class DiseaseCounterTests: XCTestCase {
 
 
     func testIncrementCountOnDefaultDiseaseThenItHasCountOfOne() {
         // arrange
-        var disease = DiseaseCount()
+        var counter = DiseaseCounter()
 
         // act
-        disease.increase()
+        counter.increase()
 
         // assert
-        XCTAssertEqual(disease.value, 1)
+        XCTAssertEqual(counter.value, 1)
     }
 
     func testIncrementCountOnADiseaseThatHasCountOf3ThenItShouldStillHave3() {
         // arrange
-        var disease = DiseaseCount(initialValue: 3)
+        var counter = DiseaseCounter(initialValue: 3)
         
         // act
-        disease.increase()
+        counter.increase()
 
         // assert
-        XCTAssertEqual(disease.value, 3)
+        XCTAssertEqual(counter.value, 3)
     }
 //
 //    func testIncrementCountOnADiseaseThatHasCountOf3ThenItShouldSignalOutbreak() {
 //        // arrange 
 //        var outbreakDetected:Bool = false
-//        var disease = Disease(initialValue: 3, outbreakMonitor: { outbreakDetected = true })
+//        var counter = Disease(initialValue: 3, outbreakMonitor: { outbreakDetected = true })
 //
 //        // act
-//        disease.increaseCount()
+//        counter.increaseCount()
 //
 //        // assert
 //        XCTAssertTrue(outbreakDetected)
@@ -49,52 +49,52 @@ class DiseaseCountTests: XCTestCase {
 //
     func testDecrementCountOfDiseaseWithCountOf3ThenItHasCountOf2() {
         // arrange
-        var disease = DiseaseCount(initialValue: 3)
+        var counter = DiseaseCounter(initialValue: 3)
 
         // act
-        disease.decrease()
+        counter.decrease()
 
         // assert
-        XCTAssertEqual(disease.value, 2)
+        XCTAssertEqual(counter.value, 2)
     }
 
     func testDecrementCountOfDiseaseWithCountOfZeroThenItStillHasCountOfZero() {
         // arrange
-        var disease = DiseaseCount()
+        var counter = DiseaseCounter()
 
         // act
-        disease.decrease()
+        counter.decrease()
 
         // assert
-        XCTAssertEqual(disease.value, 0)
+        XCTAssertEqual(counter.value, 0)
     }
 
     func testInitializeDiseaseWithMoreThanCountOfThreeThenTheCountWillBeThree() {
         // act
-        let disease = DiseaseCount(initialValue: Int.max)
+        let counter = DiseaseCounter(initialValue: Int.max)
 
         // assert
-        XCTAssertEqual(disease.value, 3)
+        XCTAssertEqual(counter.value, 3)
 
     }
 
     func testInitializeDiseaseWithNegativeCountThenTheCountWillBeZero() {
         // act
-        let disease = DiseaseCount(initialValue: -5)
+        let counter = DiseaseCounter(initialValue: -5)
 
         // assert
-        XCTAssertEqual(disease.value, 0)
+        XCTAssertEqual(counter.value, 0)
     }
 
     func testResetCountOnDiseaseWithCountOfThreeThenCountWillBeZero() {
         // arrange
-        var disease = DiseaseCount(initialValue: 3)
+        var counter = DiseaseCounter(initialValue: 3)
 
         // act
-        disease.reset()
+        counter.reset()
 
         // assert
-        XCTAssertEqual(disease.value, 0)
+        XCTAssertEqual(counter.value, 0)
     }
 
 }
