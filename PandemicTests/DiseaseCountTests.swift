@@ -1,5 +1,5 @@
 //
-//  DiseaseTests.swift
+//  DiseaseCountTests.swift
 //  Pandemic
 //
 //  Created by Michael Welch on 3/10/16.
@@ -10,7 +10,7 @@ import XCTest
 
 @testable import Pandemic
 
-class DiseaseTests: XCTestCase {
+class DiseaseCountTests: XCTestCase {
 
 
     func testIncrementCountOnDefaultDiseaseThenItHasCountOfOne() {

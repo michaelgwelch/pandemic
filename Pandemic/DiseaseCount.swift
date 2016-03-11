@@ -1,5 +1,5 @@
 //
-//  City.swift
+//  DiseaseCount.swift
 //  Pandemic
 //
 //  Created by Michael Welch on 3/10/16.
