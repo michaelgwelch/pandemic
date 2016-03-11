@@ -9,7 +9,8 @@
 /* Begin PBXBuildFile section */
 		E3A02D0F1C923ED200D95E0E /* Pandemic.h in Headers */ = {isa = PBXBuildFile; fileRef = E3A02D0E1C923ED200D95E0E /* Pandemic.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E3A02D161C923ED200D95E0E /* Pandemic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3A02D0B1C923ED200D95E0E /* Pandemic.framework */; };
-		E3A02D1B1C923ED200D95E0E /* PandemicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A02D1A1C923ED200D95E0E /* PandemicTests.swift */; };
+		E3A02D261C923F2100D95E0E /* Disease.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A02D251C923F2100D95E0E /* Disease.swift */; };
+		E3A02D281C923FA900D95E0E /* DiseaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A02D271C923FA900D95E0E /* DiseaseTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,8 +28,9 @@
 		E3A02D0E1C923ED200D95E0E /* Pandemic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Pandemic.h; sourceTree = "<group>"; };
 		E3A02D101C923ED200D95E0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E3A02D151C923ED200D95E0E /* PandemicTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PandemicTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E3A02D1A1C923ED200D95E0E /* PandemicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PandemicTests.swift; sourceTree = "<group>"; };
 		E3A02D1C1C923ED200D95E0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E3A02D251C923F2100D95E0E /* Disease.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Disease.swift; sourceTree = "<group>"; };
+		E3A02D271C923FA900D95E0E /* DiseaseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiseaseTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,7 +57,6 @@
 			children = (
 				E3A02D0D1C923ED200D95E0E /* Pandemic */,
 				E3A02D191C923ED200D95E0E /* PandemicTests */,
-				E3A02D0C1C923ED200D95E0E /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -66,6 +67,7 @@
 				E3A02D151C923ED200D95E0E /* PandemicTests.xctest */,
 			);
 			name = Products;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		E3A02D0D1C923ED200D95E0E /* Pandemic */ = {
@@ -73,6 +75,7 @@
 			children = (
 				E3A02D0E1C923ED200D95E0E /* Pandemic.h */,
 				E3A02D101C923ED200D95E0E /* Info.plist */,
+				E3A02D251C923F2100D95E0E /* Disease.swift */,
 			);
 			path = Pandemic;
 			sourceTree = "<group>";
@@ -80,8 +83,9 @@
 		E3A02D191C923ED200D95E0E /* PandemicTests */ = {
 			isa = PBXGroup;
 			children = (
-				E3A02D1A1C923ED200D95E0E /* PandemicTests.swift */,
 				E3A02D1C1C923ED200D95E0E /* Info.plist */,
+				E3A02D271C923FA900D95E0E /* DiseaseTests.swift */,
+				E3A02D0C1C923ED200D95E0E /* Products */,
 			);
 			path = PandemicTests;
 			sourceTree = "<group>";
@@ -194,6 +198,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3A02D261C923F2100D95E0E /* Disease.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,7 +206,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E3A02D1B1C923ED200D95E0E /* PandemicTests.swift in Sources */,
+				E3A02D281C923FA900D95E0E /* DiseaseTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -305,6 +310,7 @@
 		E3A02D201C923ED200D95E0E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -317,12 +323,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.welch.Pandemic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		E3A02D211C923ED200D95E0E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -379,6 +387,7 @@
 				E3A02D211C923ED200D95E0E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E3A02D221C923ED200D95E0E /* Build configuration list for PBXNativeTarget "PandemicTests" */ = {
 			isa = XCConfigurationList;
@@ -387,6 +396,7 @@
 				E3A02D241C923ED200D95E0E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
