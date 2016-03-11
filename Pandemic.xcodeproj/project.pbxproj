@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		E3A02D0F1C923ED200D95E0E /* Pandemic.h in Headers */ = {isa = PBXBuildFile; fileRef = E3A02D0E1C923ED200D95E0E /* Pandemic.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E3A02D161C923ED200D95E0E /* Pandemic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3A02D0B1C923ED200D95E0E /* Pandemic.framework */; };
-		E3A02D261C923F2100D95E0E /* DiseaseCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A02D251C923F2100D95E0E /* DiseaseCount.swift */; };
-		E3A02D281C923FA900D95E0E /* DiseaseCountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A02D271C923FA900D95E0E /* DiseaseCountTests.swift */; };
+		E3A02D261C923F2100D95E0E /* DiseaseCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A02D251C923F2100D95E0E /* DiseaseCounter.swift */; };
+		E3A02D281C923FA900D95E0E /* DiseaseCounterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A02D271C923FA900D95E0E /* DiseaseCounterTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,8 +29,8 @@
 		E3A02D101C923ED200D95E0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E3A02D151C923ED200D95E0E /* PandemicTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PandemicTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3A02D1C1C923ED200D95E0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E3A02D251C923F2100D95E0E /* DiseaseCount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiseaseCount.swift; sourceTree = "<group>"; };
-		E3A02D271C923FA900D95E0E /* DiseaseCountTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiseaseCountTests.swift; sourceTree = "<group>"; };
+		E3A02D251C923F2100D95E0E /* DiseaseCounter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiseaseCounter.swift; sourceTree = "<group>"; };
+		E3A02D271C923FA900D95E0E /* DiseaseCounterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiseaseCounterTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,7 +75,7 @@
 			children = (
 				E3A02D0E1C923ED200D95E0E /* Pandemic.h */,
 				E3A02D101C923ED200D95E0E /* Info.plist */,
-				E3A02D251C923F2100D95E0E /* DiseaseCount.swift */,
+				E3A02D251C923F2100D95E0E /* DiseaseCounter.swift */,
 			);
 			path = Pandemic;
 			sourceTree = "<group>";
@@ -84,7 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				E3A02D1C1C923ED200D95E0E /* Info.plist */,
-				E3A02D271C923FA900D95E0E /* DiseaseCountTests.swift */,
+				E3A02D271C923FA900D95E0E /* DiseaseCounterTests.swift */,
 				E3A02D0C1C923ED200D95E0E /* Products */,
 			);
 			path = PandemicTests;
@@ -198,7 +198,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E3A02D261C923F2100D95E0E /* DiseaseCount.swift in Sources */,
+				E3A02D261C923F2100D95E0E /* DiseaseCounter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,7 +206,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E3A02D281C923FA900D95E0E /* DiseaseCountTests.swift in Sources */,
+				E3A02D281C923FA900D95E0E /* DiseaseCounterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
