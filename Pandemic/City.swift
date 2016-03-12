@@ -78,6 +78,7 @@ public class City {
     }
 
     // All the cities
-    static let atlanta = City(name: "Atlanta", color: .Yellow, initialCount: 0)
+    static let atlanta = City(name: "Atlanta", color: .Blue, initialCount: 0)
+    static let miami = City(name: "Miami", color: .Yellow, initialCount: 0)
 
 }

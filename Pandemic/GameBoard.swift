@@ -10,7 +10,7 @@ import Foundation
 
 public class GameBoard {
 
-    private let positions:[Pandemic.Character:City]
+    private var positions:[Pandemic.Character:City]
 
     init(withCharacters characters:[Pandemic.Character], inCity city:City) {
         positions = [Character:City](tuples: characters.map { ($0, city) })
@@ -18,6 +18,9 @@ public class GameBoard {
         self._currentCharacterIndex = self.characters.startIndex
     }
 
+    // TODO: Change this to return City. The Controller that we create
+    // can validate that all methods input by user are valid before calling
+    // into GameBoard.
     func positionOfCharacter(character:Character) -> City? {
         return positions[character]
     }
@@ -29,20 +32,19 @@ public class GameBoard {
         return characters[_currentCharacterIndex]
     }
 
-    func executeAction(action:Action) {
-        switch action {
-        case .Pass:
-            switchToNextCharacter()
-        }
+    func executeAction(action:CanTakeAction) {
+        action.execute(self)
     }
 
-    //// Private
-
-    private func switchToNextCharacter() {
+    func switchToNextCharacter() {
         _currentCharacterIndex = _currentCharacterIndex.successor()
         if _currentCharacterIndex == characters.endIndex {
             _currentCharacterIndex = characters.startIndex
         } 
+    }
+
+    func driveOrFerryTo(cityName:String) {
+        positions[self.currentCharacter] = City.miami
     }
 }
 

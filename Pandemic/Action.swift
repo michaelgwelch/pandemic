@@ -8,6 +8,37 @@
 
 import Foundation
 
-enum Action {
-    case Pass
+
+
+protocol CanTakeAction {
+    func execute(board:GameBoard)
+}
+
+
+class Action : CanTakeAction {
+    static let pass:CanTakeAction = PassAction()
+    static func driveOrFerryToCity(cityName:String) -> CanTakeAction {
+        return DriveOrFerryAction(toCityName: cityName)
+    }
+
+    func execute(board: GameBoard) {
+        //nop
+    }
+
+}
+
+class PassAction : Action {
+    override func execute(board: GameBoard) {
+        board.switchToNextCharacter()
+    }
+}
+
+class DriveOrFerryAction : Action {
+    let cityName:String
+    init(toCityName:String) {
+        cityName = toCityName
+    }
+    override func execute(board: GameBoard) {
+        board.driveOrFerryTo(cityName)
+    }
 }

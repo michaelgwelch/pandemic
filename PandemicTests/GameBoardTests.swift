@@ -34,7 +34,7 @@ class GameBoardTests: XCTestCase {
     }
 
     func testWhenPlayerPassesTurnMovesToNextPlayer() {
-        board.executeAction(Action.Pass)
+        board.executeAction(Action.pass)
         let character = board.currentCharacter
         let expectedCharacter = board.characters[1]
         XCTAssertEqual(expectedCharacter, character)
@@ -42,13 +42,21 @@ class GameBoardTests: XCTestCase {
 
     func testWhenLastPlayerPassesTurnMovesToFirstPlayer() {
         // Act
-        board.executeAction(Action.Pass)
-        board.executeAction(Action.Pass)
+        board.executeAction(Action.pass)
+        board.executeAction(Action.pass)
 
         // Assert
         let character = board.currentCharacter
         let expectedCharacter = board.characters[0]
         XCTAssertEqual(expectedCharacter, character)
+    }
+
+    func testWhenPlayerIsInAtlantaHeCanDriveToMiami() {
+        // Act
+        board.executeAction(Action.driveOrFerryToCity("Miami"))
+
+        // Assert
+        XCTAssertTrue(board.positionOfCharacter(board.currentCharacter)! === City.miami)
     }
 
     override func tearDown() {
