@@ -47,43 +47,12 @@ public class City {
         counters[color]!.increase()
     }
 
-    /**
-     Returns the number of disease cubes of this cities color on this city
-     */
-    var count:Int {
+    public func outbreak(inColor color:Color) -> Bool {
+        return counters[color]!.error
+    }
+
+    public func diseaseCount(forColor color:Color) -> Int {
         return counters[color]!.value
-    }
-
-    var redCount:Int {
-        return counters[.Red]!.value
-    }
-
-    var blueCount:Int {
-        return counters[.Blue]!.value
-    }
-
-    var blackCount:Int {
-        return counters[.Black]!.value
-    }
-
-    var yellowCount:Int {
-        return counters[.Yellow]!.value
-    }
-
-    var redOutbreak:Bool {
-        return counters[.Red]!.error
-    }
-
-    var blueOutbreak:Bool {
-        return counters[.Blue]!.error
-    }
-
-    var blackOutbreak:Bool {
-        return counters[.Black]!.error
-    }
-
-    var yellowOutbreak:Bool {
-        return counters[.Yellow]!.error
     }
 
 }
