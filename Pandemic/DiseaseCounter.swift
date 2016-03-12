@@ -8,9 +8,9 @@
 
 import Foundation
 
-struct DiseaseCounter {
+class DiseaseCounter {
 
-    init() {
+    convenience init() {
         self.init(initialValue: 0)
     }
 
@@ -19,6 +19,7 @@ struct DiseaseCounter {
     }
 
     private var _value = 0
+    private(set) var error:Bool = false
 
     private(set) var value:Int {
         get {
@@ -28,21 +29,32 @@ struct DiseaseCounter {
         set (newValue) {
             if newValue > 3 {
                 _value = 3
+                error = true
             } else if newValue >= 0 {
                 _value = newValue
             }
         }
     }
 
-    mutating func increase() {
+    func increase() {
         value = value + 1
     }
 
-    mutating func decrease() {
+    func decrease() {
         value = value - 1
     }
 
-    mutating func reset() {
+    func reset() {
         value = 0
+    }
+
+    internal class func createCounterInError() -> DiseaseCounter {
+        let counter = DiseaseCounter(initialValue: 3)
+        counter.increase()
+        return counter
+    }
+
+    func clearError() {
+        error = false
     }
 }

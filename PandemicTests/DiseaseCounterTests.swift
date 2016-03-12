@@ -15,7 +15,7 @@ class DiseaseCounterTests: XCTestCase {
 
     func testIncrementCountOnDefaultDiseaseThenItHasCountOfOne() {
         // arrange
-        var counter = DiseaseCounter()
+        let counter = DiseaseCounter()
 
         // act
         counter.increase()
@@ -26,7 +26,7 @@ class DiseaseCounterTests: XCTestCase {
 
     func testIncrementCountOnADiseaseThatHasCountOf3ThenItShouldStillHave3() {
         // arrange
-        var counter = DiseaseCounter(initialValue: 3)
+        let counter = DiseaseCounter(initialValue: 3)
         
         // act
         counter.increase()
@@ -49,7 +49,7 @@ class DiseaseCounterTests: XCTestCase {
 //
     func testDecrementCountOfDiseaseWithCountOf3ThenItHasCountOf2() {
         // arrange
-        var counter = DiseaseCounter(initialValue: 3)
+        let counter = DiseaseCounter(initialValue: 3)
 
         // act
         counter.decrease()
@@ -60,7 +60,7 @@ class DiseaseCounterTests: XCTestCase {
 
     func testDecrementCountOfDiseaseWithCountOfZeroThenItStillHasCountOfZero() {
         // arrange
-        var counter = DiseaseCounter()
+        let counter = DiseaseCounter()
 
         // act
         counter.decrease()
@@ -88,13 +88,35 @@ class DiseaseCounterTests: XCTestCase {
 
     func testResetCountOnDiseaseWithCountOfThreeThenCountWillBeZero() {
         // arrange
-        var counter = DiseaseCounter(initialValue: 3)
+        let counter = DiseaseCounter(initialValue: 3)
 
         // act
         counter.reset()
 
         // assert
         XCTAssertEqual(counter.value, 0)
+    }
+
+    func testIncreaseOnACounterWithCountValueOfThreeSetsErrorFlag() {
+        // arrange
+        let counter = DiseaseCounter(initialValue: 3)
+
+        // act
+        counter.increase()
+
+        // assert
+        XCTAssertTrue(counter.error)
+    }
+
+    func testClearErrorOnCity() {
+        // arrange
+        let counter = DiseaseCounter.createCounterInError()
+
+        // act
+        counter.clearError()
+
+        // assert
+        XCTAssertFalse(counter.error)
     }
 
 }

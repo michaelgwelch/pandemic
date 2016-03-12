@@ -11,6 +11,9 @@
 		E3A02D161C923ED200D95E0E /* Pandemic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3A02D0B1C923ED200D95E0E /* Pandemic.framework */; };
 		E3A02D261C923F2100D95E0E /* DiseaseCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A02D251C923F2100D95E0E /* DiseaseCounter.swift */; };
 		E3A02D281C923FA900D95E0E /* DiseaseCounterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A02D271C923FA900D95E0E /* DiseaseCounterTests.swift */; };
+		E3A02D2E1C926D6500D95E0E /* CityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A02D2D1C926D6500D95E0E /* CityTests.swift */; };
+		E3A02D301C9388C800D95E0E /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A02D2F1C9388C800D95E0E /* Color.swift */; };
+		E3A02D321C9388FE00D95E0E /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A02D311C9388FE00D95E0E /* City.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,6 +34,9 @@
 		E3A02D1C1C923ED200D95E0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E3A02D251C923F2100D95E0E /* DiseaseCounter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiseaseCounter.swift; sourceTree = "<group>"; };
 		E3A02D271C923FA900D95E0E /* DiseaseCounterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiseaseCounterTests.swift; sourceTree = "<group>"; };
+		E3A02D2D1C926D6500D95E0E /* CityTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityTests.swift; sourceTree = "<group>"; };
+		E3A02D2F1C9388C800D95E0E /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		E3A02D311C9388FE00D95E0E /* City.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +82,8 @@
 				E3A02D0E1C923ED200D95E0E /* Pandemic.h */,
 				E3A02D101C923ED200D95E0E /* Info.plist */,
 				E3A02D251C923F2100D95E0E /* DiseaseCounter.swift */,
+				E3A02D2F1C9388C800D95E0E /* Color.swift */,
+				E3A02D311C9388FE00D95E0E /* City.swift */,
 			);
 			path = Pandemic;
 			sourceTree = "<group>";
@@ -85,6 +93,7 @@
 			children = (
 				E3A02D1C1C923ED200D95E0E /* Info.plist */,
 				E3A02D271C923FA900D95E0E /* DiseaseCounterTests.swift */,
+				E3A02D2D1C926D6500D95E0E /* CityTests.swift */,
 				E3A02D0C1C923ED200D95E0E /* Products */,
 			);
 			path = PandemicTests;
@@ -199,6 +208,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E3A02D261C923F2100D95E0E /* DiseaseCounter.swift in Sources */,
+				E3A02D301C9388C800D95E0E /* Color.swift in Sources */,
+				E3A02D321C9388FE00D95E0E /* City.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,6 +217,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3A02D2E1C926D6500D95E0E /* CityTests.swift in Sources */,
 				E3A02D281C923FA900D95E0E /* DiseaseCounterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
