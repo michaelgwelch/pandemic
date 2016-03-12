@@ -33,6 +33,13 @@ class GameBoardTests: XCTestCase {
         XCTAssertEqual(board.currentCharacter, characters[characters.startIndex])
     }
 
+    func testWhenPlayerPassesTurnMovesToNextPlayer() {
+        board.executeAction(Action.Pass)
+        let character = board.currentCharacter
+        let expectedCharacter = board.characters.filter { $0.name == "mark" }.first!
+        XCTAssertEqual(expectedCharacter, character)
+    }
+
     override func tearDown() {
         Pandemic.Character.clearRoster()
     }

@@ -28,6 +28,23 @@ public class GameBoard {
     var currentCharacter:Character {
         return characters[_currentCharacterIndex]
     }
+
+    func executeAction(action:Action) {
+        switch action {
+        case .Pass:
+            switchToNextCharacter()
+        }
+    }
+
+    //// Private
+
+    private func switchToNextCharacter() {
+        if _currentCharacterIndex == characters.endIndex {
+            _currentCharacterIndex = characters.startIndex
+        } else {
+            _currentCharacterIndex = _currentCharacterIndex.successor()
+        }
+    }
 }
 
 extension Dictionary {
