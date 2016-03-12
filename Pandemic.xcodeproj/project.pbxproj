@@ -14,6 +14,15 @@
 		E3A02D2E1C926D6500D95E0E /* CityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A02D2D1C926D6500D95E0E /* CityTests.swift */; };
 		E3A02D301C9388C800D95E0E /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A02D2F1C9388C800D95E0E /* Color.swift */; };
 		E3A02D321C9388FE00D95E0E /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A02D311C9388FE00D95E0E /* City.swift */; };
+		E3EC862C1C949EAF00645A8C /* Edge.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EC86231C949EAF00645A8C /* Edge.swift */; };
+		E3EC862D1C949EAF00645A8C /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EC86241C949EAF00645A8C /* Graph.swift */; };
+		E3EC862E1C949EAF00645A8C /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EC86251C949EAF00645A8C /* Queue.swift */; };
+		E3EC862F1C949EAF00645A8C /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EC86261C949EAF00645A8C /* Search.swift */; };
+		E3EC86301C949EAF00645A8C /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EC86271C949EAF00645A8C /* Stack.swift */; };
+		E3EC86311C949EAF00645A8C /* UnweightedEdge.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EC86281C949EAF00645A8C /* UnweightedEdge.swift */; };
+		E3EC86321C949EAF00645A8C /* UnweightedGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EC86291C949EAF00645A8C /* UnweightedGraph.swift */; };
+		E3EC86331C949EAF00645A8C /* WeightedEdge.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EC862A1C949EAF00645A8C /* WeightedEdge.swift */; };
+		E3EC86341C949EAF00645A8C /* WeightedGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EC862B1C949EAF00645A8C /* WeightedGraph.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +46,15 @@
 		E3A02D2D1C926D6500D95E0E /* CityTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityTests.swift; sourceTree = "<group>"; };
 		E3A02D2F1C9388C800D95E0E /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		E3A02D311C9388FE00D95E0E /* City.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
+		E3EC86231C949EAF00645A8C /* Edge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Edge.swift; sourceTree = "<group>"; };
+		E3EC86241C949EAF00645A8C /* Graph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
+		E3EC86251C949EAF00645A8C /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
+		E3EC86261C949EAF00645A8C /* Search.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
+		E3EC86271C949EAF00645A8C /* Stack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
+		E3EC86281C949EAF00645A8C /* UnweightedEdge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnweightedEdge.swift; sourceTree = "<group>"; };
+		E3EC86291C949EAF00645A8C /* UnweightedGraph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnweightedGraph.swift; sourceTree = "<group>"; };
+		E3EC862A1C949EAF00645A8C /* WeightedEdge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeightedEdge.swift; sourceTree = "<group>"; };
+		E3EC862B1C949EAF00645A8C /* WeightedGraph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeightedGraph.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +97,7 @@
 		E3A02D0D1C923ED200D95E0E /* Pandemic */ = {
 			isa = PBXGroup;
 			children = (
+				E3EC86221C949EAF00645A8C /* Graph */,
 				E3A02D0E1C923ED200D95E0E /* Pandemic.h */,
 				E3A02D101C923ED200D95E0E /* Info.plist */,
 				E3A02D251C923F2100D95E0E /* DiseaseCounter.swift */,
@@ -97,6 +116,22 @@
 				E3A02D0C1C923ED200D95E0E /* Products */,
 			);
 			path = PandemicTests;
+			sourceTree = "<group>";
+		};
+		E3EC86221C949EAF00645A8C /* Graph */ = {
+			isa = PBXGroup;
+			children = (
+				E3EC86231C949EAF00645A8C /* Edge.swift */,
+				E3EC86241C949EAF00645A8C /* Graph.swift */,
+				E3EC86251C949EAF00645A8C /* Queue.swift */,
+				E3EC86261C949EAF00645A8C /* Search.swift */,
+				E3EC86271C949EAF00645A8C /* Stack.swift */,
+				E3EC86281C949EAF00645A8C /* UnweightedEdge.swift */,
+				E3EC86291C949EAF00645A8C /* UnweightedGraph.swift */,
+				E3EC862A1C949EAF00645A8C /* WeightedEdge.swift */,
+				E3EC862B1C949EAF00645A8C /* WeightedGraph.swift */,
+			);
+			path = Graph;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -207,9 +242,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3EC86331C949EAF00645A8C /* WeightedEdge.swift in Sources */,
 				E3A02D261C923F2100D95E0E /* DiseaseCounter.swift in Sources */,
+				E3EC862E1C949EAF00645A8C /* Queue.swift in Sources */,
+				E3EC86311C949EAF00645A8C /* UnweightedEdge.swift in Sources */,
 				E3A02D301C9388C800D95E0E /* Color.swift in Sources */,
+				E3EC862C1C949EAF00645A8C /* Edge.swift in Sources */,
+				E3EC86301C949EAF00645A8C /* Stack.swift in Sources */,
+				E3EC86321C949EAF00645A8C /* UnweightedGraph.swift in Sources */,
 				E3A02D321C9388FE00D95E0E /* City.swift in Sources */,
+				E3EC86341C949EAF00645A8C /* WeightedGraph.swift in Sources */,
+				E3EC862D1C949EAF00645A8C /* Graph.swift in Sources */,
+				E3EC862F1C949EAF00645A8C /* Search.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
