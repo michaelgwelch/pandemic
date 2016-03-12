@@ -47,12 +47,34 @@ public class City {
         counters[color]!.increase()
     }
 
-    public func outbreak(inColor color:Color) -> Bool {
+    func isOutbreakingInColor(color:Color) -> Bool {
         return counters[color]!.error
     }
 
-    public func diseaseCount(forColor color:Color) -> Int {
+    func diseaseCountForColor(color:Color) -> Int {
         return counters[color]!.value
+    }
+
+    func treatColor(color:Color) {
+        counters[color]!.decrease()
+    }
+
+    func treatAllColor(color:Color) {
+        counters[color]!.reset()
+    }
+
+    /**
+     Clears the outbreak flag.
+
+    */
+    func clearOutbreak() {
+        Color.colors.forEach { counters[$0]!.clearError() }
+    }
+
+    class func outbreakingCityWithName(name:String, color:Color) -> City {
+        let city = City(name: name, color: color, initialCount: 3)
+        city.infect()
+        return city
     }
 
 }

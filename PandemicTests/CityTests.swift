@@ -41,9 +41,9 @@ class CityTests: XCTestCase {
             city.infect()
 
             // assert
-            XCTAssertEqual(city.diseaseCount(forColor: color), 1, "The disease count for \(color) was not the expected value of 1")
+            XCTAssertEqual(city.diseaseCountForColor(color), 1, "The disease count for \(color) was not the expected value of 1")
             for otherColor in Color.colors.filter(color.notEqual) {
-                XCTAssertEqual(city.diseaseCount(forColor: otherColor), 0)
+                XCTAssertEqual(city.diseaseCountForColor(otherColor), 0)
             }
         }
 
@@ -60,9 +60,9 @@ class CityTests: XCTestCase {
         func infectAndCheckForOutbreak(color:Color) {
             let city = City(name: "", color: color, initialCount: 3)
             city.infect()
-            XCTAssertTrue(city.outbreak(inColor: color))
+            XCTAssertTrue(city.isOutbreakingInColor(color))
             for otherColor in Color.colors.filter(color.notEqual) {
-                XCTAssertFalse(city.outbreak(inColor: otherColor))
+                XCTAssertFalse(city.isOutbreakingInColor(otherColor))
             }
         }
 
@@ -76,9 +76,30 @@ class CityTests: XCTestCase {
     func assertNoDiseaseCubes(city:City) {
 
         Color.colors.forEach{
-            XCTAssertEqual(city.diseaseCount(forColor: $0), 0)
+            XCTAssertEqual(city.diseaseCountForColor($0), 0)
         }
 
     }
+
+    func testTreatCityWith3CubesThenItWillHave2() {
+        let city = City(name: "", color: .Black, initialCount: 3)
+        city.treatColor(.Black)
+        XCTAssertEqual(city.diseaseCountForColor(.Black), 2)
+
+    }
+
+    func testTreatAllInCityWith3CubesThenItWillHave0() {
+        let city = City(name: "", color: .Black, initialCount: 3)
+        city.treatAllColor(.Black)
+        XCTAssertEqual(city.diseaseCountForColor(.Black), 0)
+    }
+
+
+    func testResetOutbreakingCityThenItIsNoLongerOutbreaking() {
+        let city = City.outbreakingCityWithName("", color: .Black)
+        city.clearOutbreak()
+        XCTAssertFalse(city.isOutbreakingInColor(.Black))
+    }
+
 
 }

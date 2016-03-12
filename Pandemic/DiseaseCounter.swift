@@ -48,7 +48,7 @@ class DiseaseCounter {
         value = 0
     }
 
-    internal class func createCounterInError() -> DiseaseCounter {
+    class func createCounterInError() -> DiseaseCounter {
         let counter = DiseaseCounter(initialValue: 3)
         counter.increase()
         return counter
