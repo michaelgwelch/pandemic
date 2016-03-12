@@ -77,4 +77,7 @@ public class City {
         return city
     }
 
+    // All the cities
+    static let atlanta = City(name: "Atlanta", color: .Yellow, initialCount: 0)
+
 }
