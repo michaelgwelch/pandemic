@@ -21,6 +21,10 @@ public class GameBoard {
     func positionOfCharacter(character:Character) -> City? {
         return positions[character]
     }
+
+    var characters:[Character] {
+        return positions.keys.lazy.flatMap { [$0] }
+    }
 }
 
 extension Dictionary {

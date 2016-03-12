@@ -26,6 +26,7 @@
 		E3EC86361C949F9700645A8C /* GameBoardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EC86351C949F9700645A8C /* GameBoardTests.swift */; };
 		E3EC86381C94A10900645A8C /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EC86371C94A10900645A8C /* Character.swift */; };
 		E3EC863A1C94A2CE00645A8C /* GameBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EC86391C94A2CE00645A8C /* GameBoard.swift */; };
+		E3EC863C1C94ADDA00645A8C /* CharacterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EC863B1C94ADDA00645A8C /* CharacterTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		E3EC86351C949F9700645A8C /* GameBoardTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameBoardTests.swift; sourceTree = "<group>"; };
 		E3EC86371C94A10900645A8C /* Character.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 		E3EC86391C94A2CE00645A8C /* GameBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameBoard.swift; sourceTree = "<group>"; };
+		E3EC863B1C94ADDA00645A8C /* CharacterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharacterTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +124,7 @@
 				E3A02D271C923FA900D95E0E /* DiseaseCounterTests.swift */,
 				E3A02D2D1C926D6500D95E0E /* CityTests.swift */,
 				E3EC86351C949F9700645A8C /* GameBoardTests.swift */,
+				E3EC863B1C94ADDA00645A8C /* CharacterTests.swift */,
 				E3A02D0C1C923ED200D95E0E /* Products */,
 			);
 			path = PandemicTests;
@@ -275,6 +278,7 @@
 				E3A02D2E1C926D6500D95E0E /* CityTests.swift in Sources */,
 				E3EC86361C949F9700645A8C /* GameBoardTests.swift in Sources */,
 				E3A02D281C923FA900D95E0E /* DiseaseCounterTests.swift in Sources */,
+				E3EC863C1C94ADDA00645A8C /* CharacterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

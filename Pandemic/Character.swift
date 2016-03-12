@@ -8,26 +8,39 @@
 
 import Foundation
 
+enum Profession {
+    case Medic
+    case Dispatcher
+    case Scientist
+    case Researcher
+    case Generalist
+}
 
 struct Character {
 
-    // Can only create one of each type. Use some sort of static tracker to enforce.
+    private static var _createdChars:Set<Profession> = Set<Profession>()
 
-    // Need to implement better hashing, then just on name since names don't have to be unique
+    /**
+     Character remember what professions have been used. Clear roster clears
+     the list of used professions so a new game can be played.
+    */
+    static func clearRoster() {
+        _createdChars.removeAll()
+    }
 
     let name:String
+    let profession:Profession
 
-    private init(name:String) {
+    init?(withName name:String, andProfession profession:Profession) {
+        guard !Character._createdChars.contains(profession) else {
+            return nil
+        }
+        Character._createdChars.insert(profession)
         self.name = name
+        self.profession = profession
     }
 
-    static func medic(withName name:String) -> Character {
-        return Character(name: name)
-    }
 
-    static func dispatcher(withName name:String) -> Character {
-        return Character(name: name)
-    }
 
 }
 
@@ -35,11 +48,13 @@ extension Character : Equatable {
 }
 
 func ==(lhs:Character, rhs:Character) -> Bool {
-    return lhs.name == rhs.name
+    return lhs.name == rhs.name && lhs.profession == rhs.profession
 }
 
 extension Character : Hashable {
-    var hashValue:Int { return self.name.hashValue }
+    var hashValue:Int {
+        return self.name.hashValue + 13 * self.profession.hashValue
+    }
 }
 
 

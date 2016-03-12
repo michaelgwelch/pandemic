@@ -12,13 +12,17 @@ import XCTest
 class GameBoardTests: XCTestCase {
 
     func testSetupBoardAllPlayersInInitialCity() {
-        let characters = [Pandemic.Character.medic(withName: "tim"),
-            Pandemic.Character.dispatcher(withName: "mark")]
+        let characters = [Pandemic.Character(withName: "tim", andProfession: .Medic)!,
+            Pandemic.Character(withName: "mark", andProfession: .Dispatcher)!]
         let city = City.atlanta
         let board = GameBoard(withCharacters: characters, inCity:city)
 
         characters.forEach {
             XCTAssertTrue(board.positionOfCharacter($0)! === city)
         }
+    }
+
+    override func tearDown() {
+        Pandemic.Character.clearRoster()
     }
 }
