@@ -23,6 +23,10 @@ struct Character {
     /**
      Character remember what professions have been used. Clear roster clears
      the list of used professions so a new game can be played.
+     
+     TODO: Remove this and the static _characters.
+     Use RosterBuilder class to enforce this instead. That way we don't have
+     static vars to setup/teardown in tests. 
     */
     static func clearRoster() {
         _createdChars.removeAll()

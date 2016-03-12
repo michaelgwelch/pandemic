@@ -10,20 +10,23 @@ import Foundation
 
 public class GameBoard {
 
-    let positions:[Pandemic.Character:City]
+    private let positions:[Pandemic.Character:City]
 
     init(withCharacters characters:[Pandemic.Character], inCity city:City) {
-
         positions = [Character:City](tuples: characters.map { ($0, city) })
-
+        self.characters = characters
+        self._currentCharacterIndex = self.characters.startIndex
     }
 
     func positionOfCharacter(character:Character) -> City? {
         return positions[character]
     }
 
-    var characters:[Character] {
-        return positions.keys.lazy.flatMap { [$0] }
+    private(set) var characters:[Character]
+    private var _currentCharacterIndex:Array<Character>.Index
+
+    var currentCharacter:Character {
+        return characters[_currentCharacterIndex]
     }
 }
 

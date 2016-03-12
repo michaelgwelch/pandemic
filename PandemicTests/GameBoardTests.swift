@@ -11,15 +11,26 @@ import XCTest
 
 class GameBoardTests: XCTestCase {
 
-    func testSetupBoardAllPlayersInInitialCity() {
-        let characters = [Pandemic.Character(withName: "tim", andProfession: .Medic)!,
-            Pandemic.Character(withName: "mark", andProfession: .Dispatcher)!]
-        let city = City.atlanta
-        let board = GameBoard(withCharacters: characters, inCity:city)
+    var board:GameBoard = GameBoard(withCharacters: [], inCity: City.atlanta)
+    var startingCity = City.atlanta
+    var characters:[Pandemic.Character] = []
 
-        characters.forEach {
-            XCTAssertTrue(board.positionOfCharacter($0)! === city)
+    override func setUp() {
+        characters = [Pandemic.Character(withName: "tim", andProfession: .Medic)!,
+            Pandemic.Character(withName: "mark", andProfession: .Dispatcher)!]
+        startingCity = City.atlanta
+        board = GameBoard(withCharacters: characters, inCity:startingCity)
+    }
+
+    func testSetupBoardAllPlayersInInitialCity() {
+
+        board.characters.forEach {
+            XCTAssertTrue(board.positionOfCharacter($0)! === startingCity)
         }
+    }
+
+    func testFirstPlayerIsFirstPlayerInArray() {
+        XCTAssertEqual(board.currentCharacter, characters[characters.startIndex])
     }
 
     override func tearDown() {
