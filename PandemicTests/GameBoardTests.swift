@@ -30,13 +30,24 @@ class GameBoardTests: XCTestCase {
     }
 
     func testFirstPlayerIsFirstPlayerInArray() {
-        XCTAssertEqual(board.currentCharacter, characters[characters.startIndex])
+        XCTAssertEqual(board.currentCharacter, characters[0])
     }
 
     func testWhenPlayerPassesTurnMovesToNextPlayer() {
         board.executeAction(Action.Pass)
         let character = board.currentCharacter
-        let expectedCharacter = board.characters.filter { $0.name == "mark" }.first!
+        let expectedCharacter = board.characters[1]
+        XCTAssertEqual(expectedCharacter, character)
+    }
+
+    func testWhenLastPlayerPassesTurnMovesToFirstPlayer() {
+        // Act
+        board.executeAction(Action.Pass)
+        board.executeAction(Action.Pass)
+
+        // Assert
+        let character = board.currentCharacter
+        let expectedCharacter = board.characters[0]
         XCTAssertEqual(expectedCharacter, character)
     }
 

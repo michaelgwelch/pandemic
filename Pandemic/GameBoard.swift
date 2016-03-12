@@ -39,11 +39,10 @@ public class GameBoard {
     //// Private
 
     private func switchToNextCharacter() {
+        _currentCharacterIndex = _currentCharacterIndex.successor()
         if _currentCharacterIndex == characters.endIndex {
             _currentCharacterIndex = characters.startIndex
-        } else {
-            _currentCharacterIndex = _currentCharacterIndex.successor()
-        }
+        } 
     }
 }
 
