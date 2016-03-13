@@ -3,14 +3,35 @@
 import Cocoa
 import Pandemic
 
+extension String {
+    func left(n:Int) -> String {
+        let rangeStart = self.characters.startIndex
 
-let builder = GameBoardBuilder()
-builder.initialCity = City.riyadh
-try! builder.addPlayerWithName("tim", andProfession: .Scientist)
-try! builder.addPlayerWithName("mike", andProfession: .Generalist)
+        let rangeEnd = rangeStart.advancedBy(n, limit: self.characters.endIndex)
 
-let board = builder.createGame()
+        return self.substringWithRange(rangeStart..<rangeEnd)
+    }
+}
+
+PlayerCard.findCharByName("Bog")
+PlayerCard.findCharByName("san ")
+PlayerCard.findCharByName("sao")
 
 
-board.textualGraph
-let graph = board.textualGraph
+
+let a = "ab"
+a.left(1)
+a.left(2)
+a.left(3)
+
+
+
+let cards = PlayerCard.allCards
+let names = cards.map { $0.name }
+
+
+let abbreviations = names.map { $0.left(4) }
+abbreviations.count
+
+let uniqueAbbreviations:Set<String> = Set<String>(abbreviations)
+uniqueAbbreviations.count

@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct PlayerCard {
+public struct PlayerCard : Equatable {
     public let name:String
     public let color:Color
 
@@ -67,18 +67,26 @@ public struct PlayerCard {
     public static let tokyo = PlayerCard(name: "Tokyo", color: .Red)
     public static let washington = PlayerCard(name: "Washington", color: .Blue)
 
-    private var allCards = [PlayerCard.algiers, PlayerCard.atlanta, PlayerCard.baghdad, PlayerCard.bangkok, PlayerCard.beijing, PlayerCard.bogota, PlayerCard.buenosaires, PlayerCard.cairo, PlayerCard.chennai, PlayerCard.chicago, PlayerCard.delhi, PlayerCard.essen, PlayerCard.hochiminhcity, PlayerCard.hongkong, PlayerCard.istanbul, PlayerCard.jakarta, PlayerCard.johannesburg, PlayerCard.karachi, PlayerCard.khartoum, PlayerCard.kinshasa, PlayerCard.kolkata, PlayerCard.lagos, PlayerCard.lima, PlayerCard.london, PlayerCard.losangeles, PlayerCard.madrid, PlayerCard.manila, PlayerCard.mexicocity, PlayerCard.miami, PlayerCard.milan, PlayerCard.montreal, PlayerCard.moscow, PlayerCard.mumbai, PlayerCard.newyork, PlayerCard.osaka, PlayerCard.paris, PlayerCard.riyadh, PlayerCard.sanfrancisco, PlayerCard.santiago, PlayerCard.saopaulo, PlayerCard.seoul, PlayerCard.shanghai, PlayerCard.stpetersburg, PlayerCard.sydney, PlayerCard.taipei, PlayerCard.tehran, PlayerCard.tokyo, PlayerCard.washington]
+    public static var allCards = [PlayerCard.algiers, PlayerCard.atlanta, PlayerCard.baghdad, PlayerCard.bangkok, PlayerCard.beijing, PlayerCard.bogota, PlayerCard.buenosaires, PlayerCard.cairo, PlayerCard.chennai, PlayerCard.chicago, PlayerCard.delhi, PlayerCard.essen, PlayerCard.hochiminhcity, PlayerCard.hongkong, PlayerCard.istanbul, PlayerCard.jakarta, PlayerCard.johannesburg, PlayerCard.karachi, PlayerCard.khartoum, PlayerCard.kinshasa, PlayerCard.kolkata, PlayerCard.lagos, PlayerCard.lima, PlayerCard.london, PlayerCard.losangeles, PlayerCard.madrid, PlayerCard.manila, PlayerCard.mexicocity, PlayerCard.miami, PlayerCard.milan, PlayerCard.montreal, PlayerCard.moscow, PlayerCard.mumbai, PlayerCard.newyork, PlayerCard.osaka, PlayerCard.paris, PlayerCard.riyadh, PlayerCard.sanfrancisco, PlayerCard.santiago, PlayerCard.saopaulo, PlayerCard.seoul, PlayerCard.shanghai, PlayerCard.stpetersburg, PlayerCard.sydney, PlayerCard.taipei, PlayerCard.tehran, PlayerCard.tokyo, PlayerCard.washington]
 
 
+    public static func findCharByName(name:String) -> [PlayerCard] {
+        var candidateCards = allCards.filter {
+            let result = $0.name.lowercaseString.rangeOfString(name.lowercaseString)
+            return result != nil
+        }
+
+        if (name.lowercaseString.containsString("sao")) {
+            candidateCards.append(PlayerCard.saopaulo)
+        }
+
+        return candidateCards
+    }
 }
 
-public class PlayerCardDeck {
 
+
+
+public func ==(lhs:PlayerCard, rhs:PlayerCard) -> Bool {
+    return lhs.name == rhs.name
 }
-
-
-
-
-//public func ==(lhs:PlayerCard, rhs:PlayerCard) -> Bool {
-//    return lhs.name == rhs.name
-//}
