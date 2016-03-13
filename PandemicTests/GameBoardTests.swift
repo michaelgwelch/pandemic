@@ -75,5 +75,10 @@ class GameBoardTests: XCTestCase {
         XCTAssertEqual(board.positionOfCharacter(board.currentCharacter), City.chicago)
     }
 
+    func testDirectFlightWhenPlayerHasCard_ThenPlayerMoves() {
+
+    
+
+    }
 
 }

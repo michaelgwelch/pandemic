@@ -8,9 +8,15 @@
 
 import Foundation
 
-public protocol CityRepresentation {
+public protocol CityRepresentation : Hashable {
     var name:String { get }
     var color:Color { get }
+}
+
+extension CityRepresentation {
+    public var hashValue:Int {
+        return self.name.hashValue
+    }
 }
 
 public struct PlayerCard : Equatable {
@@ -83,7 +89,7 @@ public struct PlayerCard : Equatable {
     public static let tokyo = PlayerCard(name: "Tokyo", color: .Red)
     public static let washington = PlayerCard(name: "Washington", color: .Blue)
 
-    public static var allCards = [algiers, atlanta, baghdad, bangkok, beijing, bogota, buenosaires, cairo, chennai, chicago, delhi, essen, hochiminhcity, hongkong, istanbul, jakarta, johannesburg, karachi, khartoum, kinshasa, kolkata, lagos, lima, london, losangeles, madrid, manila, mexicocity, miami, milan, montreal, moscow, mumbai, newyork, osaka, paris, riyadh, sanfrancisco, santiago, saopaulo, seoul, shanghai, stpetersburg, sydney, taipei, tehran, tokyo, washington]
+    public static var allCards:Set<PlayerCard> = [algiers, atlanta, baghdad, bangkok, beijing, bogota, buenosaires, cairo, chennai, chicago, delhi, essen, hochiminhcity, hongkong, istanbul, jakarta, johannesburg, karachi, khartoum, kinshasa, kolkata, lagos, lima, london, losangeles, madrid, manila, mexicocity, miami, milan, montreal, moscow, mumbai, newyork, osaka, paris, riyadh, sanfrancisco, santiago, saopaulo, seoul, shanghai, stpetersburg, sydney, taipei, tehran, tokyo, washington]
 
     public static func findByName(name:String) -> [PlayerCard] {
         return allCards.findByName(name)
@@ -94,6 +100,7 @@ public struct PlayerCard : Equatable {
 extension PlayerCard : CityRepresentation {
 
 }
+
 
 public struct InfectionCard {
     public let name:String
@@ -165,7 +172,7 @@ public struct InfectionCard {
     public static let tokyo = InfectionCard(name: "Tokyo", color: .Red)
     public static let washington = InfectionCard(name: "Washington", color: .Blue)
 
-    public static var allCards = [algiers, atlanta, baghdad, bangkok, beijing, bogota, buenosaires, cairo, chennai, chicago, delhi, essen, hochiminhcity, hongkong, istanbul, jakarta, johannesburg, karachi, khartoum, kinshasa, kolkata, lagos, lima, london, losangeles, madrid, manila, mexicocity, miami, milan, montreal, moscow, mumbai, newyork, osaka, paris, riyadh, sanfrancisco, santiago, saopaulo, seoul, shanghai, stpetersburg, sydney, taipei, tehran, tokyo, washington]
+    public static var allCards:Set<InfectionCard> = [algiers, atlanta, baghdad, bangkok, beijing, bogota, buenosaires, cairo, chennai, chicago, delhi, essen, hochiminhcity, hongkong, istanbul, jakarta, johannesburg, karachi, khartoum, kinshasa, kolkata, lagos, lima, london, losangeles, madrid, manila, mexicocity, miami, milan, montreal, moscow, mumbai, newyork, osaka, paris, riyadh, sanfrancisco, santiago, saopaulo, seoul, shanghai, stpetersburg, sydney, taipei, tehran, tokyo, washington]
 
     public static func findByName(name:String) -> [InfectionCard] {
         return allCards.findByName(name)
@@ -180,6 +187,7 @@ extension InfectionCard : Equatable {
 extension InfectionCard : CityRepresentation {
 
 }
+
 
 extension SequenceType  where Generator.Element : CityRepresentation {
     public func findByName(name:String) -> [Generator.Element] {
