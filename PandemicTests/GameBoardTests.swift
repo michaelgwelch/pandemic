@@ -11,15 +11,19 @@ import XCTest
 
 class GameBoardTests: XCTestCase {
 
-    var board:GameBoard = GameBoard(withCharacters: [], inCity: City.atlanta)
+    var board:GameBoard = GameBoard()
     var startingCity = City.atlanta
     var characters:[Pandemic.Character] = []
 
     override func setUp() {
-        characters = [Pandemic.Character(withName: "tim", andProfession: .Medic),
-            Pandemic.Character(withName: "mark", andProfession: .Dispatcher)]
+        let builder = GameBoardBuilder()
+        try! builder.addPlayerWithName("tim", andProfession: .Medic)
+        try! builder.addPlayerWithName("mark", andProfession: .Dispatcher)
         startingCity = City.atlanta
-        board = GameBoard(withCharacters: characters, inCity:startingCity)
+        builder.initialCity = startingCity
+
+
+        board = builder.createGame()
     }
 
     func testSetupBoardAllPlayersInInitialCity() {
@@ -30,7 +34,8 @@ class GameBoardTests: XCTestCase {
     }
 
     func testFirstPlayerIsFirstPlayerInArray() {
-        XCTAssertEqual(board.currentCharacter, characters[0])
+        XCTAssertEqual(board.currentCharacter,
+            Pandemic.Character(withName: "tim", andProfession: .Medic))
     }
 
     func testWhenPlayerPassesTurnMovesToNextPlayer() throws  {

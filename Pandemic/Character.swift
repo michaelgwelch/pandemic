@@ -8,44 +8,45 @@
 
 import Foundation
 
+private let _professions:Set<Profession> = [.Medic, .Dispatcher, .Researcher, .Scientist,
+    .Generalist]
+
 public enum Profession {
     case Medic
     case Dispatcher
     case Scientist
     case Researcher
     case Generalist
+
+    static var professions:Set<Profession> {
+        return _professions
+    }
+    
 }
 
-public class RosterBuilder {
-    private var professions:Set<Profession> = []
+class RosterBuilder {
+    private var usedProfessions:Set<Profession> = []
     private(set) var characters:[Character] = []
-    public func addPlayerWithCharacterName(name:String, andProfession profession:Profession) throws {
-        guard !professions.contains(profession) else {
+    func addPlayerWithCharacterName(name:String, andProfession profession:Profession) throws {
+        guard !usedProfessions.contains(profession) else {
             throw RosterError.ProfessionAlreadyInUse
         }
-        professions.insert(profession)
+        usedProfessions.insert(profession)
         characters.append(Character(withName: name, andProfession: profession))
+    }
+
+    var remainingProfessions:Set<Profession> {
+        return Profession.professions.subtract(usedProfessions)
     }
 
 }
 
-public enum RosterError : ErrorType {
+enum RosterError : ErrorType {
     case ProfessionAlreadyInUse
 }
-/*
-public class GameBoardBuilder {
-
-var characters:[Character] = []
-
-public func addPlayerWithCharacterName(name:String, andProfession profession:Profession) {
-characters.append(Character(withName: name, andProfession: profession))
-}
 
 
-}
-*/
-
-struct Character {
+public struct Character {
 
 
     let name:String
@@ -64,12 +65,12 @@ struct Character {
 extension Character : Equatable {
 }
 
-func ==(lhs:Character, rhs:Character) -> Bool {
+public func ==(lhs:Character, rhs:Character) -> Bool {
     return lhs.name == rhs.name && lhs.profession == rhs.profession
 }
 
 extension Character : Hashable {
-    var hashValue:Int {
+    public var hashValue:Int {
         return self.name.hashValue + 13 * self.profession.hashValue
     }
 }

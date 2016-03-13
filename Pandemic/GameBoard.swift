@@ -7,7 +7,7 @@
 //
 
 import Foundation
-private enum OpenOrBlocked {
+public enum OpenOrBlocked {
     case Open
     case Blocked
 }
@@ -21,13 +21,13 @@ extension OpenOrBlocked : Summable {
 
 }
 
-private func +(lhs:OpenOrBlocked, rhs:OpenOrBlocked) -> OpenOrBlocked {
+public func +(lhs:OpenOrBlocked, rhs:OpenOrBlocked) -> OpenOrBlocked {
     if lhs == .Blocked || rhs == .Blocked {
         return .Blocked
     }
     return .Open
 }
-private func <(lhs:OpenOrBlocked, rhs:OpenOrBlocked) -> Bool {
+public func <(lhs:OpenOrBlocked, rhs:OpenOrBlocked) -> Bool {
     if lhs == .Open {
         return rhs == .Blocked
     }
@@ -36,16 +36,39 @@ private func <(lhs:OpenOrBlocked, rhs:OpenOrBlocked) -> Bool {
 }
 
 
+public class GameBoardBuilder {
+
+    public init() {
+        
+    }
+    let rosterBuilder = RosterBuilder()
+    public var initialCity = City.atlanta
+
+    public func addPlayerWithName(name:String, andProfession profession:Profession) throws {
+        try rosterBuilder.addPlayerWithCharacterName(name, andProfession: profession)
+    }
+
+    public func createGame() -> GameBoard {
+        return GameBoard(withCharacters: rosterBuilder.characters, inCity: initialCity)
+    }
+
+
+}
+
+
 
 public class GameBoard {
 
 
-    private var positions:[Pandemic.Character:Int]
+    private(set) public var positions:[Pandemic.Character:Int]
 
     private let graph:WeightedGraph<City,OpenOrBlocked>
 
+    convenience init() {
+        self.init(withCharacters: [], inCity:City.atlanta)
+    }
 
-    init(withCharacters characters:[Pandemic.Character], inCity city:City) {
+    private init(withCharacters characters:[Pandemic.Character], inCity city:City) {
 
         graph = GameBoard.createPandemicMap()
         let indexOfCity = graph.indexOfVertex(city)!
@@ -53,9 +76,6 @@ public class GameBoard {
         positions = [Character:Int](tuples: characters.map { ($0, indexOfCity) })
         self.characters = characters
         self._currentCharacterIndex = self.characters.startIndex
-
-
-
 
     }
 
@@ -81,6 +101,9 @@ public class GameBoard {
         try action.execute(self)
     }
 
+    public var textualGraph:String {
+        return graph.description
+    }
 
     private static func createPandemicMap() -> WeightedGraph<City,OpenOrBlocked> {
 

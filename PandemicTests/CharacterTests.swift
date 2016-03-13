@@ -11,6 +11,15 @@ import XCTest
 @testable import Pandemic
 
 class RosterBuilderTests : XCTestCase {
+
+    func test_remainingProfessions_InitiallyHasAllProfessions() {
+        let rosterBuilder = RosterBuilder()
+        let expectedProfessions:Set<Profession> = [.Medic,
+            .Dispatcher, .Scientist, .Researcher, .Generalist]
+
+        XCTAssertEqual(expectedProfessions, rosterBuilder.remainingProfessions)
+    }
+
     func testCanOnlyHaveOneInstanceOfEachProfession() throws {
         let rosterBuilder = RosterBuilder()
         try rosterBuilder.addPlayerWithCharacterName("Margaret", andProfession: .Scientist)
@@ -40,11 +49,10 @@ class CharacterTests : XCTestCase {
 
 
     func testHashValuesWithSameNameDoNotColllide() {
-        let players = [Pandemic.Character(withName: "Tim", andProfession: .Medic),
+        let players:Set<Pandemic.Character> = [Pandemic.Character(withName: "Tim", andProfession: .Medic),
             Pandemic.Character(withName: "Tim", andProfession: .Dispatcher)]
-        let board = GameBoard(withCharacters: players, inCity: City.atlanta)
 
-        XCTAssertEqual(board.characters.count, 2)
+        XCTAssertEqual(players.count, 2)
     }
 
 
