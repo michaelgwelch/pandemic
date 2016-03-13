@@ -83,7 +83,8 @@ public class City : Equatable {
     public static let baghdad = City(name: "Baghdad", color: .Black)
     public static let bangkok = City(name: "Bangkok", color: .Red)
     public static let beijing = City(name: "Beijing", color: .Red)
-    public static let bogota = City(name: "Bogota", color: .Yellow)
+    public static let bogotá = bogota
+    public static let bogota = City(name: "Bogotá", color: .Yellow)
     public static let buenosaires = City(name: "Buenos Aires", color: .Yellow)
     public static let cairo = City(name: "Cairo", color: .Black)
     public static let chennai = City(name: "Chennai", color: .Black)
@@ -117,7 +118,8 @@ public class City : Equatable {
     public static let riyadh = City(name: "Riyadh", color: .Black)
     public static let sanfrancisco = City(name: "San Francisco", color: .Blue)
     public static let santiago = City(name: "Santiago", color: .Yellow)
-    public static let saopaulo = City(name: "Sao Paulo", color: .Yellow)
+    public static let sãopaulo = saopaulo
+    public static let saopaulo = City(name: "São Paulo", color: .Yellow)
     public static let seoul = City(name: "Seoul", color: .Red)
     public static let shanghai = City(name: "Shanghai", color: .Red)
     public static let stpetersburg = City(name: "St Petersburg", color: .Blue)
@@ -127,6 +129,11 @@ public class City : Equatable {
     public static let tokyo = City(name: "Tokyo", color: .Red)
     public static let washington = City(name: "Washington", color: .Blue)
 
+    public static var allCities = [algiers, atlanta, baghdad, bangkok, beijing, bogota, buenosaires, cairo, chennai, chicago, delhi, essen, hochiminhcity, hongkong, istanbul, jakarta, johannesburg, karachi, khartoum, kinshasa, kolkata, lagos, lima, london, losangeles, madrid, manila, mexicocity, miami, milan, montreal, moscow, mumbai, newyork, osaka, paris, riyadh, sanfrancisco, santiago, saopaulo, seoul, shanghai, stpetersburg, sydney, taipei, tehran, tokyo, washington]
+
+    public static func findByName(name:String) -> [City] {
+        return allCities.findByName(name)
+    }
 }
 
 extension City : CustomStringConvertible {
@@ -139,6 +146,10 @@ extension City : CustomStringConvertible {
         }
         return self.name
     }
+}
+
+extension City : CityRepresentation {
+    
 }
 
 public func ==(lhs:City, rhs:City) -> Bool {
