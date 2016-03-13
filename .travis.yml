@@ -1,0 +1,7 @@
+language: objective-c
+xcode_project: Pandemic.xcodeproj
+xcode_schema: Pandemic
+osx_image: xcode7
+script:
+- xcodebuild clean build test -project Pandemic.xcodeproj -scheme Pandemic
+
