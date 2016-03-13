@@ -129,6 +129,18 @@ public class City : Equatable {
 
 }
 
+extension City : CustomStringConvertible {
+    public var description:String {
+        if (self.name == "Bogota") {
+            return "Bogotá"
+        }
+        if (self.name == "Sao Paulo") {
+            return "São Paulo"
+        }
+        return self.name
+    }
+}
+
 public func ==(lhs:City, rhs:City) -> Bool {
     return lhs === rhs
 }
