@@ -18,7 +18,7 @@ class DiseaseCounterTests: XCTestCase {
         let counter = DiseaseCounter()
 
         // act
-        counter.increase()
+        counter.increment()
 
         // assert
         XCTAssertEqual(counter.value, 1)
@@ -29,7 +29,7 @@ class DiseaseCounterTests: XCTestCase {
         let counter = DiseaseCounter(initialValue: 3)
         
         // act
-        counter.increase()
+        counter.increment()
 
         // assert
         XCTAssertEqual(counter.value, 3)
@@ -41,7 +41,7 @@ class DiseaseCounterTests: XCTestCase {
 //        var counter = Disease(initialValue: 3, outbreakMonitor: { outbreakDetected = true })
 //
 //        // act
-//        counter.increaseCount()
+//        counter.incrementCount()
 //
 //        // assert
 //        XCTAssertTrue(outbreakDetected)
@@ -52,7 +52,7 @@ class DiseaseCounterTests: XCTestCase {
         let counter = DiseaseCounter(initialValue: 3)
 
         // act
-        counter.decrease()
+        counter.decrement()
 
         // assert
         XCTAssertEqual(counter.value, 2)
@@ -63,7 +63,7 @@ class DiseaseCounterTests: XCTestCase {
         let counter = DiseaseCounter()
 
         // act
-        counter.decrease()
+        counter.decrement()
 
         // assert
         XCTAssertEqual(counter.value, 0)
@@ -102,7 +102,7 @@ class DiseaseCounterTests: XCTestCase {
         let counter = DiseaseCounter(initialValue: 3)
 
         // act
-        counter.increase()
+        counter.increment()
 
         // assert
         XCTAssertTrue(counter.error)
@@ -110,7 +110,7 @@ class DiseaseCounterTests: XCTestCase {
 
     func testClearErrorOnCity() {
         // arrange
-        let counter = DiseaseCounter.createCounterInError()
+        let counter = DiseaseCounter._createCounterInError()
 
         // act
         counter.clearError()

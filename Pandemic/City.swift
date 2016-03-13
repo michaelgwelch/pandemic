@@ -44,7 +44,7 @@ public class City : Equatable {
     }
 
     func infect() {
-        counters[color]!.increase()
+        counters[color]!.increment()
     }
 
     func isOutbreakingInColor(color:Color) -> Bool {
@@ -56,7 +56,7 @@ public class City : Equatable {
     }
 
     func treatColor(color:Color) {
-        counters[color]!.decrease()
+        counters[color]!.decrement()
     }
 
     func treatAllColor(color:Color) {
