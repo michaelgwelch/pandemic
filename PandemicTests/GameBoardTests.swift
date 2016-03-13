@@ -39,7 +39,7 @@ class GameBoardTests: XCTestCase {
     }
 
     func testWhenPlayerPassesTurnMovesToNextPlayer() throws  {
-        try board.executeAction(Action.pass)
+        try board.executeAction(BaseAction.pass)
         let character = board.currentCharacter
         let expectedCharacter = board.characters[1]
         XCTAssertEqual(expectedCharacter, character)
@@ -47,8 +47,8 @@ class GameBoardTests: XCTestCase {
 
     func testWhenLastPlayerPassesTurnMovesToFirstPlayer() throws {
         // Act
-        try board.executeAction(Action.pass)
-        try board.executeAction(Action.pass)
+        try board.executeAction(BaseAction.pass)
+        try board.executeAction(BaseAction.pass)
 
         // Assert
         let character = board.currentCharacter
@@ -58,7 +58,7 @@ class GameBoardTests: XCTestCase {
 
     func testWhenPlayerIsInAtlantaHeCanDriveToMiami() throws {
         // Act
-        try board.executeAction(Action.driveOrFerryToCity("Miami"))
+        try board.executeAction(BaseAction.driveOrFerryToCity("Miami"))
 
         // Assert
         XCTAssertTrue(board.positionOfCharacter(board.currentCharacter)! == City.miami)
@@ -66,10 +66,10 @@ class GameBoardTests: XCTestCase {
 
     func testWhenPlayerIsInAtlantaHeCanDriveFromAtlantToChicagoThruMiamiWashingtonAndMontreal() throws {
         // Act
-        try board.executeAction(Action.driveOrFerryToCity("Miami"))
-        try board.executeAction(Action.driveOrFerryToCity("Washington"))
-        try board.executeAction(Action.driveOrFerryToCity("Montreal"))
-        try board.executeAction(Action.driveOrFerryToCity("Chicago"))
+        try board.executeAction(BaseAction.driveOrFerryToCity("Miami"))
+        try board.executeAction(BaseAction.driveOrFerryToCity("Washington"))
+        try board.executeAction(BaseAction.driveOrFerryToCity("Montreal"))
+        try board.executeAction(BaseAction.driveOrFerryToCity("Chicago"))
 
         // Assert
         XCTAssertEqual(board.positionOfCharacter(board.currentCharacter), City.chicago)

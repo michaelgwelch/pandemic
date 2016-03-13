@@ -97,7 +97,7 @@ public class GameBoard {
         return characters[_currentCharacterIndex]
     }
 
-    func executeAction(action:CanTakeAction) throws {
+    func executeAction(action:Action) throws {
         try action.execute(self)
     }
 
@@ -219,14 +219,14 @@ extension Dictionary {
 // Actions below
 /////
 
-protocol CanTakeAction {
+protocol Action {
     func execute(board:GameBoard) throws
 }
 
 
-class Action : CanTakeAction {
-    static let pass:CanTakeAction = PassAction()
-    static func driveOrFerryToCity(cityName:String) -> CanTakeAction {
+class BaseAction : Action {
+    static let pass:Action = PassAction()
+    static func driveOrFerryToCity(cityName:String) -> Action {
         return DriveOrFerryAction(toCityName: cityName)
     }
 
@@ -238,7 +238,7 @@ class Action : CanTakeAction {
 
 
 
-class PassAction : Action {
+class PassAction : BaseAction {
     override func execute(board: GameBoard) {
         board._currentCharacterIndex = board._currentCharacterIndex.successor()
         if board._currentCharacterIndex == board.characters.endIndex {
@@ -247,7 +247,7 @@ class PassAction : Action {
     }
 }
 
-class DriveOrFerryAction : Action {
+class DriveOrFerryAction : BaseAction {
     let cityName:String
     init(toCityName:String) {
         cityName = toCityName
