@@ -89,7 +89,7 @@ public class City : Equatable, Hashable {
     public static var allCards:Set<City> = [algiers, atlanta, baghdad, bangkok, beijing, bogotá, buenosaires, cairo, chennai, chicago, delhi, essen, hochiminhcity, hongkong, istanbul, jakarta, johannesburg, karachi, khartoum, kinshasa, kolkata, lagos, lima, london, losangeles, madrid, manila, mexicocity, miami, milan, montreal, moscow, mumbai, newyork, osaka, paris, riyadh, sanfrancisco, santiago, sãopaulo, seoul, shanghai, stpetersburg, sydney, taipei, tehran, tokyo, washington]
 
     /**
-     Finds all cards with names that contain the specified portion of a name.
+     Finds all City values with names that contain the specified portion of a name.
      
      - returns: All cities whose names contain the string `portionOfName` anywhere
      in their name.
