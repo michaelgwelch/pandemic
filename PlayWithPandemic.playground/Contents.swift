@@ -3,6 +3,12 @@
 import Cocoa
 import Pandemic
 
+"são".lowercaseString
+PlayerCard.saopaulo.name.lowercaseString
+PlayerCard.saopaulo.name.lowercaseString.rangeOfString("são")
+PlayerCard.allCards.findByName("são")
+
+
 extension String {
     func left(n:Int) -> String {
         let rangeStart = self.characters.startIndex
@@ -13,9 +19,9 @@ extension String {
     }
 }
 
-PlayerCard.findCharByName("Bog")
-PlayerCard.findCharByName("san ")
-PlayerCard.findCharByName("sao")
+//PlayerCard.findCharByName("Bog")
+//PlayerCard.findCharByName("san ")
+//PlayerCard.findCharByName("sao")
 
 
 

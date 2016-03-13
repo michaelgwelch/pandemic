@@ -12,15 +12,33 @@ import XCTest
 class PlayerCardTests: XCTestCase {
 
     func testCanFindSanFrancisco() {
-        let actualCity = PlayerCard.findCharByName("san ").first!
+        let actualCity = PlayerCard.findByName("san ").first!
 
         XCTAssertEqual(PlayerCard.sanfrancisco, actualCity)
     }
 
     func testCanFindByAnyMatchingSubstring() {
-        let actualCity = PlayerCard.findCharByName("anti").first!
+        let actualCity = PlayerCard.findByName("anti").first!
 
         XCTAssertEqual(PlayerCard.santiago, actualCity)
+    }
+
+    func testCanFindSáoPaulo() {
+        let actualCity = PlayerCard.findByName("sao").first!
+
+        XCTAssertEqual(PlayerCard.saopaulo, actualCity)
+
+
+        let actualCity2 = PlayerCard.findByName("são").first!
+        XCTAssertEqual(PlayerCard.saopaulo, actualCity2)
+    }
+
+    func testCanFindBogotá() {
+        var actualCity = PlayerCard.findByName("bogota").first!
+        XCTAssertEqual(PlayerCard.bogota, actualCity)
+
+        actualCity = PlayerCard.findByName("gotá").first!
+        XCTAssertEqual(PlayerCard.bogota, actualCity)
     }
 
 }

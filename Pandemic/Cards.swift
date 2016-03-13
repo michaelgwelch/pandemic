@@ -8,6 +8,11 @@
 
 import Foundation
 
+public protocol CityRepresentation {
+    var name:String { get }
+    var color:Color { get }
+}
+
 public struct PlayerCard : Equatable {
     public let name:String
     public let color:Color
@@ -23,7 +28,13 @@ public struct PlayerCard : Equatable {
     public static let baghdad = PlayerCard(name: "Baghdad", color: .Black)
     public static let bangkok = PlayerCard(name: "Bangkok", color: .Red)
     public static let beijing = PlayerCard(name: "Beijing", color: .Red)
+
+    /**
+     An alias for PlayerCard.bogotá for convenience. It returns the exact same
+     instance of PlayerCard
+    */
     public static let bogota = PlayerCard(name: "Bogotá", color: .Yellow)
+    public static let bogotá = bogota
     public static let buenosaires = PlayerCard(name: "Buenos Aires", color: .Yellow)
     public static let cairo = PlayerCard(name: "Cairo", color: .Black)
     public static let chennai = PlayerCard(name: "Chennai", color: .Black)
@@ -57,7 +68,12 @@ public struct PlayerCard : Equatable {
     public static let riyadh = PlayerCard(name: "Riyadh", color: .Black)
     public static let sanfrancisco = PlayerCard(name: "San Francisco", color: .Blue)
     public static let santiago = PlayerCard(name: "Santiago", color: .Yellow)
+
+    /**
+     An alias for PlayerCard.sãopaulo for convenience.
+    */
     public static let saopaulo = PlayerCard(name: "São Paulo", color: .Yellow)
+    public static let sãopaulo = saopaulo
     public static let seoul = PlayerCard(name: "Seoul", color: .Red)
     public static let shanghai = PlayerCard(name: "Shanghai", color: .Red)
     public static let stpetersburg = PlayerCard(name: "St Petersburg", color: .Blue)
@@ -69,18 +85,34 @@ public struct PlayerCard : Equatable {
 
     public static var allCards = [PlayerCard.algiers, PlayerCard.atlanta, PlayerCard.baghdad, PlayerCard.bangkok, PlayerCard.beijing, PlayerCard.bogota, PlayerCard.buenosaires, PlayerCard.cairo, PlayerCard.chennai, PlayerCard.chicago, PlayerCard.delhi, PlayerCard.essen, PlayerCard.hochiminhcity, PlayerCard.hongkong, PlayerCard.istanbul, PlayerCard.jakarta, PlayerCard.johannesburg, PlayerCard.karachi, PlayerCard.khartoum, PlayerCard.kinshasa, PlayerCard.kolkata, PlayerCard.lagos, PlayerCard.lima, PlayerCard.london, PlayerCard.losangeles, PlayerCard.madrid, PlayerCard.manila, PlayerCard.mexicocity, PlayerCard.miami, PlayerCard.milan, PlayerCard.montreal, PlayerCard.moscow, PlayerCard.mumbai, PlayerCard.newyork, PlayerCard.osaka, PlayerCard.paris, PlayerCard.riyadh, PlayerCard.sanfrancisco, PlayerCard.santiago, PlayerCard.saopaulo, PlayerCard.seoul, PlayerCard.shanghai, PlayerCard.stpetersburg, PlayerCard.sydney, PlayerCard.taipei, PlayerCard.tehran, PlayerCard.tokyo, PlayerCard.washington]
 
+    public static func findByName(name:String) -> [PlayerCard] {
+        return allCards.findByName(name)
+    }
 
-    public static func findCharByName(name:String) -> [PlayerCard] {
-        var candidateCards = allCards.filter {
+}
+
+extension PlayerCard : CityRepresentation {
+
+}
+
+extension SequenceType  where Generator.Element : CityRepresentation {
+    public func findByName(name:String) -> [Generator.Element] {
+        
+
+        var candidates = self.filter {
             let result = $0.name.lowercaseString.rangeOfString(name.lowercaseString)
             return result != nil
         }
 
         if (name.lowercaseString.containsString("sao")) {
-            candidateCards.append(PlayerCard.saopaulo)
+            candidates.appendContentsOf(self.findByName("são"))
         }
 
-        return candidateCards
+        if (name.lowercaseString.containsString("ota")) {
+            candidates.appendContentsOf(self.findByName("otá"))
+        }
+
+        return candidates
     }
 }
 
