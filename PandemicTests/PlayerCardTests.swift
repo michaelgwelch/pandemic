@@ -42,3 +42,37 @@ class PlayerCardTests: XCTestCase {
     }
 
 }
+
+class InfectionCardTests: XCTestCase {
+
+    func testCanFindSanFrancisco() {
+        let actualCity = InfectionCard.findByName("san ").first!
+
+        XCTAssertEqual(InfectionCard.sanfrancisco, actualCity)
+    }
+
+    func testCanFindByAnyMatchingSubstring() {
+        let actualCity = InfectionCard.findByName("anti").first!
+
+        XCTAssertEqual(InfectionCard.santiago, actualCity)
+    }
+
+    func testCanFindSáoPaulo() {
+        let actualCity = InfectionCard.findByName("sao").first!
+
+        XCTAssertEqual(InfectionCard.saopaulo, actualCity)
+
+
+        let actualCity2 = InfectionCard.findByName("são").first!
+        XCTAssertEqual(InfectionCard.saopaulo, actualCity2)
+    }
+
+    func testCanFindBogotá() {
+        var actualCity = InfectionCard.findByName("bogota").first!
+        XCTAssertEqual(InfectionCard.bogota, actualCity)
+
+        actualCity = InfectionCard.findByName("gotá").first!
+        XCTAssertEqual(InfectionCard.bogota, actualCity)
+    }
+    
+}
