@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class City {
+public class City : Equatable {
     let name:String
     let color:Color
     let counters:[Color:DiseaseCounter]
@@ -80,5 +80,12 @@ public class City {
     // All the cities
     static let atlanta = City(name: "Atlanta", color: .Blue, initialCount: 0)
     static let miami = City(name: "Miami", color: .Yellow, initialCount: 0)
+    static let washington = City(name: "Washington", color: .Blue)
+    static let montreal = City(name: "Montreal", color: .Blue)
+    static let chicago = City(name: "Chicago", color: .Blue)
 
+}
+
+public func ==(lhs:City, rhs:City) -> Bool {
+    return lhs === rhs
 }

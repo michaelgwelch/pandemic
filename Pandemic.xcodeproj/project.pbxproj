@@ -27,7 +27,6 @@
 		E3EC86381C94A10900645A8C /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EC86371C94A10900645A8C /* Character.swift */; };
 		E3EC863A1C94A2CE00645A8C /* GameBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EC86391C94A2CE00645A8C /* GameBoard.swift */; };
 		E3EC863C1C94ADDA00645A8C /* CharacterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EC863B1C94ADDA00645A8C /* CharacterTests.swift */; };
-		E3EC863E1C94CD4B00645A8C /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EC863D1C94CD4B00645A8C /* Action.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,7 +63,6 @@
 		E3EC86371C94A10900645A8C /* Character.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 		E3EC86391C94A2CE00645A8C /* GameBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameBoard.swift; sourceTree = "<group>"; };
 		E3EC863B1C94ADDA00645A8C /* CharacterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharacterTests.swift; sourceTree = "<group>"; };
-		E3EC863D1C94CD4B00645A8C /* Action.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,7 +113,6 @@
 				E3A02D311C9388FE00D95E0E /* City.swift */,
 				E3EC86371C94A10900645A8C /* Character.swift */,
 				E3EC86391C94A2CE00645A8C /* GameBoard.swift */,
-				E3EC863D1C94CD4B00645A8C /* Action.swift */,
 			);
 			path = Pandemic;
 			sourceTree = "<group>";
@@ -270,7 +267,6 @@
 				E3EC863A1C94A2CE00645A8C /* GameBoard.swift in Sources */,
 				E3EC86341C949EAF00645A8C /* WeightedGraph.swift in Sources */,
 				E3EC862D1C949EAF00645A8C /* Graph.swift in Sources */,
-				E3EC863E1C94CD4B00645A8C /* Action.swift in Sources */,
 				E3EC862F1C949EAF00645A8C /* Search.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

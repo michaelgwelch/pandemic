@@ -25,7 +25,7 @@ class GameBoardTests: XCTestCase {
     func testSetupBoardAllPlayersInInitialCity() {
 
         board.characters.forEach {
-            XCTAssertTrue(board.positionOfCharacter($0)! === startingCity)
+            XCTAssertTrue(board.positionOfCharacter($0)! == startingCity)
         }
     }
 
@@ -33,17 +33,17 @@ class GameBoardTests: XCTestCase {
         XCTAssertEqual(board.currentCharacter, characters[0])
     }
 
-    func testWhenPlayerPassesTurnMovesToNextPlayer() {
-        board.executeAction(Action.pass)
+    func testWhenPlayerPassesTurnMovesToNextPlayer() throws  {
+        try board.executeAction(Action.pass)
         let character = board.currentCharacter
         let expectedCharacter = board.characters[1]
         XCTAssertEqual(expectedCharacter, character)
     }
 
-    func testWhenLastPlayerPassesTurnMovesToFirstPlayer() {
+    func testWhenLastPlayerPassesTurnMovesToFirstPlayer() throws {
         // Act
-        board.executeAction(Action.pass)
-        board.executeAction(Action.pass)
+        try board.executeAction(Action.pass)
+        try board.executeAction(Action.pass)
 
         // Assert
         let character = board.currentCharacter
@@ -51,12 +51,23 @@ class GameBoardTests: XCTestCase {
         XCTAssertEqual(expectedCharacter, character)
     }
 
-    func testWhenPlayerIsInAtlantaHeCanDriveToMiami() {
+    func testWhenPlayerIsInAtlantaHeCanDriveToMiami() throws {
         // Act
-        board.executeAction(Action.driveOrFerryToCity("Miami"))
+        try board.executeAction(Action.driveOrFerryToCity("Miami"))
 
         // Assert
-        XCTAssertTrue(board.positionOfCharacter(board.currentCharacter)! === City.miami)
+        XCTAssertTrue(board.positionOfCharacter(board.currentCharacter)! == City.miami)
+    }
+
+    func testWhenPlayerIsInAtlantaHeCanDriveFromAtlantToChicagoThruMiamiWashingtonAndMontreal() throws {
+        // Act
+        try board.executeAction(Action.driveOrFerryToCity("Miami"))
+        try board.executeAction(Action.driveOrFerryToCity("Washington"))
+        try board.executeAction(Action.driveOrFerryToCity("Montreal"))
+        try board.executeAction(Action.driveOrFerryToCity("Chicago"))
+
+        // Assert
+        XCTAssertEqual(board.positionOfCharacter(board.currentCharacter), City.chicago)
     }
 
     override func tearDown() {
