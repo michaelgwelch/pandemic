@@ -3,41 +3,35 @@
 import Cocoa
 import Pandemic
 
-"são".lowercaseString
-PlayerCard.saopaulo.name.lowercaseString
-PlayerCard.saopaulo.name.lowercaseString.rangeOfString("são")
-PlayerCard.allCards.findByName("são")
+let builder = GameEngineBuilder()
+try! builder.addPlayerWithName("tim", andProfession: .Medic)
+try! builder.addPlayerWithName("mark", andProfession: .Scientist)
+
+let engine = builder.createGame()
+print (engine.debugDescription)
+
+try! engine.driveOrFerryToCity("Miami")
+print(engine.debugDescription)
+
+try! engine.driveOrFerryToCity("Bog")
+print(engine.debugDescription)
+
+try! engine.driveOrFerryToCity("paulo")
+print(engine.debugDescription)
+
+try! engine.driveOrFerryToCity("lagos")
+print(engine.debugDescription)
+
+try! engine.driveOrFerryToCity("chicago")
+print(engine.debugDescription)
+
+try! engine.driveOrFerryToCity("san ")
+print(engine.debugDescription)
+
+try! engine.driveOrFerryToCity("tokyo")
+print(engine.debugDescription)
+
+try! engine.driveOrFerryToCity("osaka")
+print(engine.debugDescription)
 
 
-extension String {
-    func left(n:Int) -> String {
-        let rangeStart = self.characters.startIndex
-
-        let rangeEnd = rangeStart.advancedBy(n, limit: self.characters.endIndex)
-
-        return self.substringWithRange(rangeStart..<rangeEnd)
-    }
-}
-
-//PlayerCard.findCharByName("Bog")
-//PlayerCard.findCharByName("san ")
-//PlayerCard.findCharByName("sao")
-
-
-
-let a = "ab"
-a.left(1)
-a.left(2)
-a.left(3)
-
-
-
-let cards = PlayerCard.allCards
-let names = cards.map { $0.name }
-
-
-let abbreviations = names.map { $0.left(4) }
-abbreviations.count
-
-let uniqueAbbreviations:Set<String> = Set<String>(abbreviations)
-uniqueAbbreviations.count

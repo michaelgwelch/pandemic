@@ -36,27 +36,12 @@ public func <(lhs:OpenOrBlocked, rhs:OpenOrBlocked) -> Bool {
 }
 
 
-public class GameBoardBuilder {
-
-    public init() {
-        
-    }
-    let rosterBuilder = RosterBuilder()
-    public var initialCity = GameBoardCity.atlanta
-
-    public func addPlayerWithName(name:String, andProfession profession:Profession) throws {
-        try rosterBuilder.addPlayerWithCharacterName(name, andProfession: profession)
-    }
-
-    public func createGame() -> GameBoard {
-        return GameBoard(withCharacters: rosterBuilder.characters, inCity: initialCity)
-    }
-
-
-}
 
 
 
+/**
+ Represents everything visible on the Pandemic Board
+*/
 public class GameBoard {
 
 
@@ -68,37 +53,32 @@ public class GameBoard {
         self.init(withCharacters: [], inCity:GameBoardCity.atlanta)
     }
 
-    private init(withCharacters characters:[Pandemic.Character], inCity city:GameBoardCity) {
+    init(withCharacters characters:[Pandemic.Character], inCity city:GameBoardCity) {
 
         graph = GameBoard.createPandemicMap()
         let indexOfCity = graph.indexOfVertex(city)!
 
         positions = [Character:Int](tuples: characters.map { ($0, indexOfCity) })
-        self.characters = characters
-        self._currentCharacterIndex = self.characters.startIndex
 
     }
 
-    // TODO: Change this to return GameBoardCity. The Controller that we create
-    // can validate that all methods input by user are valid before calling
-    // into GameBoard.
-    func positionOfCharacter(character:Character) -> GameBoardCity? {
+    func positionOfCharacter(character:Character) -> GameBoardCity {
         return graph[positions[character]!]
     }
 
-    private var vertexOfCurrentCharacter:Int {
-        return positions[currentCharacter]!
-    }
+    func driveOrFerryCharacter(character:Character, toCity city:GameBoardCity) throws {
+        let currentCity = positionOfCharacter(character)
+        let routesOut = graph.edgesForVertex(currentCity) ?? []
+        let route = routesOut.filter { edge in
+            let edgeDestinationCity = graph.vertexAtIndex(edge.v)
+            return edgeDestinationCity.city == city.city
+            }.first
 
-    private(set) var characters:[Character]
-    private var _currentCharacterIndex:Array<Character>.Index
+        guard route != nil else {
+            throw ExecutionError.DriveOrFerryCityUnreachable(to: city.city.name, from: currentCity.city.name)
+        }
 
-    var currentCharacter:Character {
-        return characters[_currentCharacterIndex]
-    }
-
-    func executeAction(action:Action) throws {
-        try action.execute(self)
+        positions[character] = route!.v
     }
 
     public var textualGraph:String {
@@ -215,64 +195,6 @@ extension Dictionary {
 
 
 
-///////////////
-// Actions below
-/////
-
-protocol Action {
-    func execute(board:GameBoard) throws
-}
-
-
-class BaseAction : Action {
-    static let pass:Action = PassAction()
-    static func driveOrFerryToCity(cityName:String) -> Action {
-        return DriveOrFerryAction(toCityName: cityName)
-    }
-
-    func execute(board: GameBoard) throws {
-        //nop
-    }
-
-}
-
-
-
-class PassAction : BaseAction {
-    override func execute(board: GameBoard) {
-        board._currentCharacterIndex = board._currentCharacterIndex.successor()
-        if board._currentCharacterIndex == board.characters.endIndex {
-            board._currentCharacterIndex = board.characters.startIndex
-        }
-    }
-}
-
-class DriveOrFerryAction : BaseAction {
-    let cityName:String
-    init(toCityName:String) {
-        cityName = toCityName
-    }
-    override func execute(board: GameBoard) throws {
-        let currentCity = board.graph.vertexAtIndex(board.vertexOfCurrentCharacter)
-
-        let routesOut = board.graph.edgesForIndex(board.vertexOfCurrentCharacter)
-        let route = routesOut.filter { edge in
-            let edgeDestinationCity = board.graph.vertexAtIndex(edge.v)
-            return edgeDestinationCity.city.name == self.cityName
-            }.first
-
-        guard route != nil else {
-            throw ExecutionError.DriveOrFerryCityUnreachable(to: cityName, from: currentCity.city.name)
-        }
-
-
-        board.positions[board.currentCharacter] = route!.v
-    }
-}
-
-enum ExecutionError : ErrorType {
-    case DriveOrFerryCityUnreachable(to:String, from:String)
-}
 extension SequenceType {
     func first(includeElement: (Self.Generator.Element) -> Bool) -> Self.Generator.Element {
         return self.filter(includeElement).first!
