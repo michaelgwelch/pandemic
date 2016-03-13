@@ -12,13 +12,13 @@ import XCTest
 class PlayerTests: XCTestCase {
 
     func testDefaultPlayerHasNoCards() {
-        let player = Player()
+        let player = Player(playingCharacter: Pandemic.Character(withName: "tim", andProfession: .Medic))
         XCTAssertTrue(player.cards == [])
     }
 
     func testDealPlayerACard_ThenItHasThatCard() {
 
-        let player = Player()
+        let player = Player(playingCharacter: Pandemic.Character(withName: "mark", andProfession: .Scientist))
         player.dealCard(PlayerCard.santiago)
 
         XCTAssertTrue(player.cards.contains(PlayerCard.santiago))

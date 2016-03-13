@@ -36,27 +36,12 @@ public func <(lhs:OpenOrBlocked, rhs:OpenOrBlocked) -> Bool {
 }
 
 
-public class GameBoardBuilder {
-
-    public init() {
-        
-    }
-    let rosterBuilder = RosterBuilder()
-    public var initialCity = GameBoardCity.atlanta
-
-    public func addPlayerWithName(name:String, andProfession profession:Profession) throws {
-        try rosterBuilder.addPlayerWithCharacterName(name, andProfession: profession)
-    }
-
-    public func createGame() -> GameBoard {
-        return GameBoard(withCharacters: rosterBuilder.characters, inCity: initialCity)
-    }
-
-
-}
 
 
 
+/**
+ Represents everything visible on the Pandemic Board
+*/
 public class GameBoard {
 
 
@@ -68,7 +53,7 @@ public class GameBoard {
         self.init(withCharacters: [], inCity:GameBoardCity.atlanta)
     }
 
-    private init(withCharacters characters:[Pandemic.Character], inCity city:GameBoardCity) {
+    init(withCharacters characters:[Pandemic.Character], inCity city:GameBoardCity) {
 
         graph = GameBoard.createPandemicMap()
         let indexOfCity = graph.indexOfVertex(city)!
