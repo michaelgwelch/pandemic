@@ -40,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E37B97791C950AEA00B11EC7 /* PlayWithPandemic.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = PlayWithPandemic.playground; sourceTree = "<group>"; };
 		E3A02D0B1C923ED200D95E0E /* Pandemic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pandemic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3A02D0E1C923ED200D95E0E /* Pandemic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Pandemic.h; sourceTree = "<group>"; };
 		E3A02D101C923ED200D95E0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -87,6 +88,7 @@
 		E3A02D011C923ED100D95E0E = {
 			isa = PBXGroup;
 			children = (
+				E37B97791C950AEA00B11EC7 /* PlayWithPandemic.playground */,
 				E3A02D0D1C923ED200D95E0E /* Pandemic */,
 				E3A02D191C923ED200D95E0E /* PandemicTests */,
 			);
