@@ -1,5 +1,5 @@
 //
-//  GameBoard.swift
+//  GameEngineTests.swift
 //  Pandemic
 //
 //  Created by Michael Welch on 3/12/16.
@@ -9,7 +9,9 @@
 import XCTest
 @testable import Pandemic
 
-class GameBoardTests: XCTestCase {
+/// - todo: These tests are now a mishmash of GameBoard and GameEngine. Should
+/// straightend out
+class GameEngineTests: XCTestCase {
 
     var engine:GameEngine = GameEngineBuilder().createGame()
     var startingCity = GameBoardCity.atlanta
