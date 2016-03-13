@@ -12,14 +12,14 @@ import XCTest
 class GameBoardTests: XCTestCase {
 
     var board:GameBoard = GameBoard()
-    var startingCity = City.atlanta
+    var startingCity = GameBoardCity.atlanta
     var characters:[Pandemic.Character] = []
 
     override func setUp() {
         let builder = GameBoardBuilder()
         try! builder.addPlayerWithName("tim", andProfession: .Medic)
         try! builder.addPlayerWithName("mark", andProfession: .Dispatcher)
-        startingCity = City.atlanta
+        startingCity = GameBoardCity.atlanta
         builder.initialCity = startingCity
 
 
@@ -61,7 +61,7 @@ class GameBoardTests: XCTestCase {
         try board.executeAction(BaseAction.driveOrFerryToCity("Miami"))
 
         // Assert
-        XCTAssertTrue(board.positionOfCharacter(board.currentCharacter)! == City.miami)
+        XCTAssertTrue(board.positionOfCharacter(board.currentCharacter)! == GameBoardCity.miami)
     }
 
     func testWhenPlayerIsInAtlantaHeCanDriveFromAtlantToChicagoThruMiamiWashingtonAndMontreal() throws {
@@ -72,7 +72,7 @@ class GameBoardTests: XCTestCase {
         try board.executeAction(BaseAction.driveOrFerryToCity("Chicago"))
 
         // Assert
-        XCTAssertEqual(board.positionOfCharacter(board.currentCharacter), City.chicago)
+        XCTAssertEqual(board.positionOfCharacter(board.currentCharacter), GameBoardCity.chicago)
     }
 
     func testDirectFlightWhenPlayerHasCard_ThenPlayerMoves() {

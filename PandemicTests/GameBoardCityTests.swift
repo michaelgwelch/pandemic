@@ -1,5 +1,5 @@
 //
-//  CityTests.swift
+//  GameBoardCityTests.swift
 //  Pandemic
 //
 //  Created by Michael Welch on 3/10/16.
@@ -8,7 +8,7 @@
 
 import XCTest
 @testable import Pandemic
-class CityTests: XCTestCase {
+class GameBoardCityTests: XCTestCase {
 
 
     // Test cases
@@ -24,7 +24,7 @@ class CityTests: XCTestCase {
     func testCreateCity() {
 
         // act
-        let city = City(name: "Mexico City", color: Color.Yellow)
+        let city = GameBoardCity(name: "Mexico City", color: Color.Yellow)
 
         // assert
         assertNoDiseaseCubes(city)
@@ -35,7 +35,7 @@ class CityTests: XCTestCase {
     func testInfectCityWithDefaultColor() {
         func infectCity(withCityColor color:Color) {
             // arrange
-            let city = City(name: "doesn't matter", color: color)
+            let city = GameBoardCity(name: "doesn't matter", color: color)
 
             // act
             city.infect()
@@ -58,7 +58,7 @@ class CityTests: XCTestCase {
     func testCityWithThreeCubesWillOutbreakIfInfected() {
 
         func infectAndCheckForOutbreak(color:Color) {
-            let city = City(name: "", color: color, initialCount: 3)
+            let city = GameBoardCity(name: "", color: color, initialCount: 3)
             city.infect()
             XCTAssertTrue(city.isOutbreakingInColor(color))
             for otherColor in Color.colors.filter(color.notEqual) {
@@ -73,7 +73,7 @@ class CityTests: XCTestCase {
     }
 
 
-    func assertNoDiseaseCubes(city:City) {
+    func assertNoDiseaseCubes(city:GameBoardCity) {
 
         Color.colors.forEach{
             XCTAssertEqual(city.diseaseCountForColor($0), 0)
@@ -82,21 +82,21 @@ class CityTests: XCTestCase {
     }
 
     func testTreatCityWith3CubesThenItWillHave2() {
-        let city = City(name: "", color: .Black, initialCount: 3)
+        let city = GameBoardCity(name: "", color: .Black, initialCount: 3)
         city.treatColor(.Black)
         XCTAssertEqual(city.diseaseCountForColor(.Black), 2)
 
     }
 
     func testTreatAllInCityWith3CubesThenItWillHave0() {
-        let city = City(name: "", color: .Black, initialCount: 3)
+        let city = GameBoardCity(name: "", color: .Black, initialCount: 3)
         city.treatAllColor(.Black)
         XCTAssertEqual(city.diseaseCountForColor(.Black), 0)
     }
 
 
     func testResetOutbreakingCityThenItIsNoLongerOutbreaking() {
-        let city = City.outbreakingCityWithName("", color: .Black)
+        let city = GameBoardCity.outbreakingCityWithName("", color: .Black)
         city.clearOutbreak()
         XCTAssertFalse(city.isOutbreakingInColor(.Black))
     }

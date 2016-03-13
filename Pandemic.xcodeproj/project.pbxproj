@@ -15,9 +15,9 @@
 		E3A02D161C923ED200D95E0E /* Pandemic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3A02D0B1C923ED200D95E0E /* Pandemic.framework */; };
 		E3A02D261C923F2100D95E0E /* DiseaseCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A02D251C923F2100D95E0E /* DiseaseCounter.swift */; };
 		E3A02D281C923FA900D95E0E /* DiseaseCounterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A02D271C923FA900D95E0E /* DiseaseCounterTests.swift */; };
-		E3A02D2E1C926D6500D95E0E /* CityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A02D2D1C926D6500D95E0E /* CityTests.swift */; };
+		E3A02D2E1C926D6500D95E0E /* GameBoardCityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A02D2D1C926D6500D95E0E /* GameBoardCityTests.swift */; };
 		E3A02D301C9388C800D95E0E /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A02D2F1C9388C800D95E0E /* Color.swift */; };
-		E3A02D321C9388FE00D95E0E /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A02D311C9388FE00D95E0E /* City.swift */; };
+		E3A02D321C9388FE00D95E0E /* GameBoardCity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A02D311C9388FE00D95E0E /* GameBoardCity.swift */; };
 		E3EC862C1C949EAF00645A8C /* Edge.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EC86231C949EAF00645A8C /* Edge.swift */; };
 		E3EC862D1C949EAF00645A8C /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EC86241C949EAF00645A8C /* Graph.swift */; };
 		E3EC862E1C949EAF00645A8C /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EC86251C949EAF00645A8C /* Queue.swift */; };
@@ -56,9 +56,9 @@
 		E3A02D1C1C923ED200D95E0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E3A02D251C923F2100D95E0E /* DiseaseCounter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiseaseCounter.swift; sourceTree = "<group>"; };
 		E3A02D271C923FA900D95E0E /* DiseaseCounterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiseaseCounterTests.swift; sourceTree = "<group>"; };
-		E3A02D2D1C926D6500D95E0E /* CityTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityTests.swift; sourceTree = "<group>"; };
+		E3A02D2D1C926D6500D95E0E /* GameBoardCityTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameBoardCityTests.swift; sourceTree = "<group>"; };
 		E3A02D2F1C9388C800D95E0E /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
-		E3A02D311C9388FE00D95E0E /* City.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
+		E3A02D311C9388FE00D95E0E /* GameBoardCity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameBoardCity.swift; sourceTree = "<group>"; };
 		E3EC86231C949EAF00645A8C /* Edge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Edge.swift; sourceTree = "<group>"; };
 		E3EC86241C949EAF00645A8C /* Graph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
 		E3EC86251C949EAF00645A8C /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
@@ -120,7 +120,7 @@
 				E3A02D101C923ED200D95E0E /* Info.plist */,
 				E3A02D251C923F2100D95E0E /* DiseaseCounter.swift */,
 				E3A02D2F1C9388C800D95E0E /* Color.swift */,
-				E3A02D311C9388FE00D95E0E /* City.swift */,
+				E3A02D311C9388FE00D95E0E /* GameBoardCity.swift */,
 				E3EC86371C94A10900645A8C /* Character.swift */,
 				E3EC86391C94A2CE00645A8C /* GameBoard.swift */,
 				E37B977A1C95BDA000B11EC7 /* Cards.swift */,
@@ -134,7 +134,7 @@
 			children = (
 				E3A02D1C1C923ED200D95E0E /* Info.plist */,
 				E3A02D271C923FA900D95E0E /* DiseaseCounterTests.swift */,
-				E3A02D2D1C926D6500D95E0E /* CityTests.swift */,
+				E3A02D2D1C926D6500D95E0E /* GameBoardCityTests.swift */,
 				E3EC86351C949F9700645A8C /* GameBoardTests.swift */,
 				E3EC863B1C94ADDA00645A8C /* CharacterTests.swift */,
 				E3A02D0C1C923ED200D95E0E /* Products */,
@@ -279,7 +279,7 @@
 				E3EC862C1C949EAF00645A8C /* Edge.swift in Sources */,
 				E3EC86301C949EAF00645A8C /* Stack.swift in Sources */,
 				E3EC86321C949EAF00645A8C /* UnweightedGraph.swift in Sources */,
-				E3A02D321C9388FE00D95E0E /* City.swift in Sources */,
+				E3A02D321C9388FE00D95E0E /* GameBoardCity.swift in Sources */,
 				E3EC863A1C94A2CE00645A8C /* GameBoard.swift in Sources */,
 				E3EC86341C949EAF00645A8C /* WeightedGraph.swift in Sources */,
 				E3EC862D1C949EAF00645A8C /* Graph.swift in Sources */,
@@ -292,7 +292,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E37B977D1C95CA8400B11EC7 /* PlayerCardTests.swift in Sources */,
-				E3A02D2E1C926D6500D95E0E /* CityTests.swift in Sources */,
+				E3A02D2E1C926D6500D95E0E /* GameBoardCityTests.swift in Sources */,
 				E3EC86361C949F9700645A8C /* GameBoardTests.swift in Sources */,
 				E3A02D281C923FA900D95E0E /* DiseaseCounterTests.swift in Sources */,
 				E37B977F1C95E3C300B11EC7 /* PlayerTests.swift in Sources */,
