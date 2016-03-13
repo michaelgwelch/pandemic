@@ -21,7 +21,6 @@ extension OpenOrBlocked : Summable {
 
 }
 
-
 private func +(lhs:OpenOrBlocked, rhs:OpenOrBlocked) -> OpenOrBlocked {
     if lhs == .Blocked || rhs == .Blocked {
         return .Blocked

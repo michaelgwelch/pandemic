@@ -16,8 +16,8 @@ class GameBoardTests: XCTestCase {
     var characters:[Pandemic.Character] = []
 
     override func setUp() {
-        characters = [Pandemic.Character(withName: "tim", andProfession: .Medic)!,
-            Pandemic.Character(withName: "mark", andProfession: .Dispatcher)!]
+        characters = [Pandemic.Character(withName: "tim", andProfession: .Medic),
+            Pandemic.Character(withName: "mark", andProfession: .Dispatcher)]
         startingCity = City.atlanta
         board = GameBoard(withCharacters: characters, inCity:startingCity)
     }
@@ -70,7 +70,5 @@ class GameBoardTests: XCTestCase {
         XCTAssertEqual(board.positionOfCharacter(board.currentCharacter), City.chicago)
     }
 
-    override func tearDown() {
-        Pandemic.Character.clearRoster()
-    }
+
 }

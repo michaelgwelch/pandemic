@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum Profession {
+public enum Profession {
     case Medic
     case Dispatcher
     case Scientist
@@ -16,30 +16,43 @@ enum Profession {
     case Generalist
 }
 
+public class RosterBuilder {
+    private var professions:Set<Profession> = []
+    private(set) var characters:[Character] = []
+    public func addPlayerWithCharacterName(name:String, andProfession profession:Profession) throws {
+        guard !professions.contains(profession) else {
+            throw RosterError.ProfessionAlreadyInUse
+        }
+        professions.insert(profession)
+        characters.append(Character(withName: name, andProfession: profession))
+    }
+
+}
+
+public enum RosterError : ErrorType {
+    case ProfessionAlreadyInUse
+}
+/*
+public class GameBoardBuilder {
+
+var characters:[Character] = []
+
+public func addPlayerWithCharacterName(name:String, andProfession profession:Profession) {
+characters.append(Character(withName: name, andProfession: profession))
+}
+
+
+}
+*/
+
 struct Character {
 
-    private static var _createdChars:Set<Profession> = Set<Profession>()
-
-    /**
-     Character remember what professions have been used. Clear roster clears
-     the list of used professions so a new game can be played.
-     
-     TODO: Remove this and the static _characters.
-     Use RosterBuilder class to enforce this instead. That way we don't have
-     static vars to setup/teardown in tests. 
-    */
-    static func clearRoster() {
-        _createdChars.removeAll()
-    }
 
     let name:String
     let profession:Profession
 
-    init?(withName name:String, andProfession profession:Profession) {
-        guard !Character._createdChars.contains(profession) else {
-            return nil
-        }
-        Character._createdChars.insert(profession)
+    init(withName name:String, andProfession profession:Profession) {
+
         self.name = name
         self.profession = profession
     }
