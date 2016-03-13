@@ -20,7 +20,7 @@ public protocol HasCity {
  Represents a city in the game of Pandemic, and as such has a
  name, and a color
 */
-public class City : Equatable, Hashable {
+public struct City : Equatable, Hashable {
     /// The name of the city
     public let name:String
 
@@ -111,6 +111,12 @@ public class City : Equatable, Hashable {
 extension City : HasCity {
     public var city:City {
         return self
+    }
+}
+
+extension City : CustomStringConvertible {
+    public var description:String {
+        return self.name
     }
 }
 
