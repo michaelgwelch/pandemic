@@ -8,15 +8,19 @@
 
 import Foundation
 
-
+/**
+ Each value of PlayerCard represents one player card. Each card "depicts"
+ one city.
+*/
 public struct PlayerCard : Equatable, Hashable {
+    /// The city depicted on this card
     public let city:City
 
     public var hashValue:Int {
         return city.hashValue
     }
 
-    init(city:City) {
+    private init(city:City) {
         self.city = city
     }
 
@@ -72,6 +76,20 @@ public struct PlayerCard : Equatable, Hashable {
 
     public static var allCards:Set<PlayerCard> = [algiers, atlanta, baghdad, bangkok, beijing, bogotá, buenosaires, cairo, chennai, chicago, delhi, essen, hochiminhcity, hongkong, istanbul, jakarta, johannesburg, karachi, khartoum, kinshasa, kolkata, lagos, lima, london, losangeles, madrid, manila, mexicocity, miami, milan, montreal, moscow, mumbai, newyork, osaka, paris, riyadh, sanfrancisco, santiago, sãopaulo, seoul, shanghai, stpetersburg, sydney, taipei, tehran, tokyo, washington]
 
+    /**
+     Finds all PlayerCard values with names that contain the specified portion of a name.
+
+     - returns: All PlayerCards whose names contain the string `portionOfName` anywhere
+     in their name.
+
+     - remark: It is sufficient to pass just the first 4 characters of any name
+     to ensure uniquenss and to return only one PlayerCard. For example the following
+     code will ensure `myCard` gets the value `City.santiago`.
+
+     ````
+     let myCard = PlayerCard.findByName("sant").first!
+     ````
+     */
     public static func findByName(name:String) -> [PlayerCard] {
         return allCards.findByName(name)
     }
@@ -82,7 +100,17 @@ extension PlayerCard : HasCity {
 
 }
 
+extension PlayerCard : CustomStringConvertible {
+    public var description:String {
+        return self.city.name
+    }
+}
 
+
+/**
+ Each value of InfectionCard represents one infection card from the Pandemic
+ infection deck
+*/
 public struct InfectionCard : Equatable, Hashable {
     public let city:City
 
@@ -90,7 +118,7 @@ public struct InfectionCard : Equatable, Hashable {
         return city.hashValue
     }
 
-    init(city:City) {
+    private init(city:City) {
         self.city = city
     }
 
@@ -154,6 +182,12 @@ public struct InfectionCard : Equatable, Hashable {
 
 extension InfectionCard : HasCity {
 
+}
+
+extension InfectionCard : CustomStringConvertible {
+    public var description:String {
+        return self.city.name
+    }
 }
 
 
