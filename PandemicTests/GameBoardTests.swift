@@ -28,51 +28,51 @@ class GameBoardTests: XCTestCase {
 
     func testSetupBoardAllPlayersInInitialCity() {
 
-        engine.board.characters.forEach {
-            XCTAssertTrue(engine.board.positionOfCharacter($0)! == startingCity)
+        engine.board.positions.forEach { tuple in
+            XCTAssertTrue(engine.board.positionOfCharacter(tuple.0) == startingCity)
         }
     }
 
     func testFirstPlayerIsFirstPlayerInArray() {
-        XCTAssertEqual(engine.board.currentCharacter,
+        XCTAssertEqual(engine.currentPlayer.character,
             Pandemic.Character(withName: "tim", andProfession: .Medic))
     }
 
     func testWhenPlayerPassesTurnMovesToNextPlayer() throws  {
-        try engine.board.executeAction(BaseAction.pass)
-        let character = engine.board.currentCharacter
-        let expectedCharacter = engine.board.characters[1]
+        try BaseAction.pass.execute(engine)
+        let character = engine.currentPlayer.character
+        let expectedCharacter = engine.players[1].character
         XCTAssertEqual(expectedCharacter, character)
     }
 
     func testWhenLastPlayerPassesTurnMovesToFirstPlayer() throws {
         // Act
-        try engine.board.executeAction(BaseAction.pass)
-        try engine.board.executeAction(BaseAction.pass)
+        try BaseAction.pass.execute(engine)
+        try BaseAction.pass.execute(engine)
 
         // Assert
-        let character = engine.board.currentCharacter
-        let expectedCharacter = engine.board.characters[0]
+        let character = engine.currentPlayer.character
+        let expectedCharacter = engine.players[0].character
         XCTAssertEqual(expectedCharacter, character)
     }
 
     func testWhenPlayerIsInAtlantaHeCanDriveToMiami() throws {
         // Act
-        try engine.board.executeAction(BaseAction.driveOrFerryToCity("Miami"))
+        try BaseAction.driveOrFerryToCity("Miami").execute(engine)
 
         // Assert
-        XCTAssertTrue(engine.board.positionOfCharacter(engine.board.currentCharacter)! == GameBoardCity.miami)
+        XCTAssertTrue(engine.board.positionOfCharacter(engine.currentPlayer.character) == GameBoardCity.miami)
     }
 
     func testWhenPlayerIsInAtlantaHeCanDriveFromAtlantToChicagoThruMiamiWashingtonAndMontreal() throws {
         // Act
-        try engine.board.executeAction(BaseAction.driveOrFerryToCity("Miami"))
-        try engine.board.executeAction(BaseAction.driveOrFerryToCity("Washington"))
-        try engine.board.executeAction(BaseAction.driveOrFerryToCity("Montreal"))
-        try engine.board.executeAction(BaseAction.driveOrFerryToCity("Chicago"))
+        try BaseAction.driveOrFerryToCity("Miami").execute(engine)
+        try BaseAction.driveOrFerryToCity("Wash").execute(engine)
+        try BaseAction.driveOrFerryToCity("Mont").execute(engine)
+        try BaseAction.driveOrFerryToCity("Chicago").execute(engine)
 
         // Assert
-        XCTAssertEqual(engine.board.positionOfCharacter(engine.board.currentCharacter), GameBoardCity.chicago)
+        XCTAssertEqual(engine.board.positionOfCharacter(engine.currentPlayer.character), GameBoardCity.chicago)
     }
 
     func testDirectFlightWhenPlayerHasCard_ThenPlayerMoves() {
