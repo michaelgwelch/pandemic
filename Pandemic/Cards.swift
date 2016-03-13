@@ -8,88 +8,69 @@
 
 import Foundation
 
-public protocol CityRepresentation : Hashable {
-    var name:String { get }
-    var color:Color { get }
-}
 
-extension CityRepresentation {
+public struct PlayerCard : Equatable, Hashable {
+    public let city:City
+
     public var hashValue:Int {
-        return self.name.hashValue
+        return city.hashValue
     }
-}
 
-public struct PlayerCard : Equatable {
-    public let name:String
-    public let color:Color
-
-    init(name:String, color:Color) {
-        self.name = name
-        self.color = color
+    init(city:City) {
+        self.city = city
     }
 
     // All the player cards
-    public static let algiers = PlayerCard(name: "Algiers", color: .Black)
-    public static let atlanta = PlayerCard(name: "Atlanta", color: .Blue)
-    public static let baghdad = PlayerCard(name: "Baghdad", color: .Black)
-    public static let bangkok = PlayerCard(name: "Bangkok", color: .Red)
-    public static let beijing = PlayerCard(name: "Beijing", color: .Red)
+    public static let algiers = PlayerCard(city: City.algiers)
+    public static let atlanta = PlayerCard(city: City.atlanta)
+    public static let baghdad = PlayerCard(city: City.baghdad)
+    public static let bangkok = PlayerCard(city: City.bangkok)
+    public static let beijing = PlayerCard(city: City.beijing)
+    public static let bogotá = PlayerCard(city: City.bogotá)
+    public static let buenosaires = PlayerCard(city: City.buenosaires)
+    public static let cairo = PlayerCard(city: City.cairo)
+    public static let chennai = PlayerCard(city: City.chennai)
+    public static let chicago = PlayerCard(city: City.chicago)
+    public static let delhi = PlayerCard(city: City.delhi)
+    public static let essen = PlayerCard(city: City.essen)
+    public static let hochiminhcity = PlayerCard(city: City.hochiminhcity)
+    public static let hongkong = PlayerCard(city: City.hongkong)
+    public static let istanbul = PlayerCard(city: City.istanbul)
+    public static let jakarta = PlayerCard(city: City.jakarta)
+    public static let johannesburg = PlayerCard(city: City.johannesburg)
+    public static let karachi = PlayerCard(city: City.karachi)
+    public static let khartoum = PlayerCard(city: City.khartoum)
+    public static let kinshasa = PlayerCard(city: City.kinshasa)
+    public static let kolkata = PlayerCard(city: City.kolkata)
+    public static let lagos = PlayerCard(city: City.lagos)
+    public static let lima = PlayerCard(city: City.lima)
+    public static let london = PlayerCard(city: City.london)
+    public static let losangeles = PlayerCard(city: City.losangeles)
+    public static let madrid = PlayerCard(city: City.madrid)
+    public static let manila = PlayerCard(city: City.manila)
+    public static let mexicocity = PlayerCard(city: City.mexicocity)
+    public static let miami = PlayerCard(city: City.miami)
+    public static let milan = PlayerCard(city: City.milan)
+    public static let montreal = PlayerCard(city: City.montreal)
+    public static let moscow = PlayerCard(city: City.moscow)
+    public static let mumbai = PlayerCard(city: City.mumbai)
+    public static let newyork = PlayerCard(city: City.newyork)
+    public static let osaka = PlayerCard(city: City.osaka)
+    public static let paris = PlayerCard(city: City.paris)
+    public static let riyadh = PlayerCard(city: City.riyadh)
+    public static let sanfrancisco = PlayerCard(city: City.sanfrancisco)
+    public static let santiago = PlayerCard(city: City.santiago)
+    public static let sãopaulo = PlayerCard(city: City.sãopaulo)
+    public static let seoul = PlayerCard(city: City.seoul)
+    public static let shanghai = PlayerCard(city: City.shanghai)
+    public static let stpetersburg = PlayerCard(city: City.stpetersburg)
+    public static let sydney = PlayerCard(city: City.sydney)
+    public static let taipei = PlayerCard(city: City.taipei)
+    public static let tehran = PlayerCard(city: City.tehran)
+    public static let tokyo = PlayerCard(city: City.tokyo)
+    public static let washington = PlayerCard(city: City.washington)
 
-    /**
-     An alias for PlayerCard.bogotá for convenience. It returns the exact same
-     instance of PlayerCard
-    */
-    public static let bogota = PlayerCard(name: "Bogotá", color: .Yellow)
-    public static let bogotá = bogota
-    public static let buenosaires = PlayerCard(name: "Buenos Aires", color: .Yellow)
-    public static let cairo = PlayerCard(name: "Cairo", color: .Black)
-    public static let chennai = PlayerCard(name: "Chennai", color: .Black)
-    public static let chicago = PlayerCard(name: "Chicago", color: .Blue)
-    public static let delhi = PlayerCard(name: "Delhi", color: .Black)
-    public static let essen = PlayerCard(name: "Essen", color: .Blue)
-    public static let hochiminhcity = PlayerCard(name: "Ho Chi Minh City", color: .Red)
-    public static let hongkong = PlayerCard(name: "Hong Kong", color: .Red)
-    public static let istanbul = PlayerCard(name: "Istanbul", color: .Black)
-    public static let jakarta = PlayerCard(name: "Jakarta", color: .Red)
-    public static let johannesburg = PlayerCard(name: "Johannesburg", color: .Yellow)
-    public static let karachi = PlayerCard(name: "Karachi", color: .Black)
-    public static let khartoum = PlayerCard(name: "Khartoum", color: .Yellow)
-    public static let kinshasa = PlayerCard(name: "Kinshasa", color: .Yellow)
-    public static let kolkata = PlayerCard(name: "Kolkata", color: .Black)
-    public static let lagos = PlayerCard(name: "Lagos", color: .Yellow)
-    public static let lima = PlayerCard(name: "Lima", color: .Yellow)
-    public static let london = PlayerCard(name: "London", color: .Blue)
-    public static let losangeles = PlayerCard(name: "Los Angeles", color: .Yellow)
-    public static let madrid = PlayerCard(name: "Madrid", color: .Blue)
-    public static let manila = PlayerCard(name: "Manila", color: .Red)
-    public static let mexicocity = PlayerCard(name: "Mexico City", color: .Yellow)
-    public static let miami = PlayerCard(name: "Miami", color: .Yellow)
-    public static let milan = PlayerCard(name: "Milan", color: .Blue)
-    public static let montreal = PlayerCard(name: "Montreal", color: .Blue)
-    public static let moscow = PlayerCard(name: "Moscow", color: .Black)
-    public static let mumbai = PlayerCard(name: "Mumbai", color: .Black)
-    public static let newyork = PlayerCard(name: "New York", color: .Blue)
-    public static let osaka = PlayerCard(name: "Osaka", color: .Red)
-    public static let paris = PlayerCard(name: "Paris", color: .Blue)
-    public static let riyadh = PlayerCard(name: "Riyadh", color: .Black)
-    public static let sanfrancisco = PlayerCard(name: "San Francisco", color: .Blue)
-    public static let santiago = PlayerCard(name: "Santiago", color: .Yellow)
-
-    /**
-     An alias for PlayerCard.sãopaulo for convenience.
-    */
-    public static let saopaulo = PlayerCard(name: "São Paulo", color: .Yellow)
-    public static let sãopaulo = saopaulo
-    public static let seoul = PlayerCard(name: "Seoul", color: .Red)
-    public static let shanghai = PlayerCard(name: "Shanghai", color: .Red)
-    public static let stpetersburg = PlayerCard(name: "St Petersburg", color: .Blue)
-    public static let sydney = PlayerCard(name: "Sydney", color: .Red)
-    public static let taipei = PlayerCard(name: "Taipei", color: .Red)
-    public static let tehran = PlayerCard(name: "Tehran", color: .Black)
-    public static let tokyo = PlayerCard(name: "Tokyo", color: .Red)
-    public static let washington = PlayerCard(name: "Washington", color: .Blue)
-
-    public static var allCards:Set<PlayerCard> = [algiers, atlanta, baghdad, bangkok, beijing, bogota, buenosaires, cairo, chennai, chicago, delhi, essen, hochiminhcity, hongkong, istanbul, jakarta, johannesburg, karachi, khartoum, kinshasa, kolkata, lagos, lima, london, losangeles, madrid, manila, mexicocity, miami, milan, montreal, moscow, mumbai, newyork, osaka, paris, riyadh, sanfrancisco, santiago, saopaulo, seoul, shanghai, stpetersburg, sydney, taipei, tehran, tokyo, washington]
+    public static var allCards:Set<PlayerCard> = [algiers, atlanta, baghdad, bangkok, beijing, bogotá, buenosaires, cairo, chennai, chicago, delhi, essen, hochiminhcity, hongkong, istanbul, jakarta, johannesburg, karachi, khartoum, kinshasa, kolkata, lagos, lima, london, losangeles, madrid, manila, mexicocity, miami, milan, montreal, moscow, mumbai, newyork, osaka, paris, riyadh, sanfrancisco, santiago, sãopaulo, seoul, shanghai, stpetersburg, sydney, taipei, tehran, tokyo, washington]
 
     public static func findByName(name:String) -> [PlayerCard] {
         return allCards.findByName(name)
@@ -97,82 +78,73 @@ public struct PlayerCard : Equatable {
 
 }
 
-extension PlayerCard : CityRepresentation {
+extension PlayerCard : HasCity {
 
 }
 
 
-public struct InfectionCard {
-    public let name:String
-    public let color:Color
+public struct InfectionCard : Equatable, Hashable {
+    public let city:City
 
-    init(name:String, color:Color) {
-        self.name = name
-        self.color = color
+    public var hashValue:Int {
+        return city.hashValue
     }
 
-    // All the player cards
-    public static let algiers = InfectionCard(name: "Algiers", color: .Black)
-    public static let atlanta = InfectionCard(name: "Atlanta", color: .Blue)
-    public static let baghdad = InfectionCard(name: "Baghdad", color: .Black)
-    public static let bangkok = InfectionCard(name: "Bangkok", color: .Red)
-    public static let beijing = InfectionCard(name: "Beijing", color: .Red)
+    init(city:City) {
+        self.city = city
+    }
 
-    /**
-     An alias for InfectionCard.bogotá for convenience. It returns the exact same
-     instance of InfectionCard
-     */
-    public static let bogota = InfectionCard(name: "Bogotá", color: .Yellow)
-    public static let bogotá = bogota
-    public static let buenosaires = InfectionCard(name: "Buenos Aires", color: .Yellow)
-    public static let cairo = InfectionCard(name: "Cairo", color: .Black)
-    public static let chennai = InfectionCard(name: "Chennai", color: .Black)
-    public static let chicago = InfectionCard(name: "Chicago", color: .Blue)
-    public static let delhi = InfectionCard(name: "Delhi", color: .Black)
-    public static let essen = InfectionCard(name: "Essen", color: .Blue)
-    public static let hochiminhcity = InfectionCard(name: "Ho Chi Minh City", color: .Red)
-    public static let hongkong = InfectionCard(name: "Hong Kong", color: .Red)
-    public static let istanbul = InfectionCard(name: "Istanbul", color: .Black)
-    public static let jakarta = InfectionCard(name: "Jakarta", color: .Red)
-    public static let johannesburg = InfectionCard(name: "Johannesburg", color: .Yellow)
-    public static let karachi = InfectionCard(name: "Karachi", color: .Black)
-    public static let khartoum = InfectionCard(name: "Khartoum", color: .Yellow)
-    public static let kinshasa = InfectionCard(name: "Kinshasa", color: .Yellow)
-    public static let kolkata = InfectionCard(name: "Kolkata", color: .Black)
-    public static let lagos = InfectionCard(name: "Lagos", color: .Yellow)
-    public static let lima = InfectionCard(name: "Lima", color: .Yellow)
-    public static let london = InfectionCard(name: "London", color: .Blue)
-    public static let losangeles = InfectionCard(name: "Los Angeles", color: .Yellow)
-    public static let madrid = InfectionCard(name: "Madrid", color: .Blue)
-    public static let manila = InfectionCard(name: "Manila", color: .Red)
-    public static let mexicocity = InfectionCard(name: "Mexico City", color: .Yellow)
-    public static let miami = InfectionCard(name: "Miami", color: .Yellow)
-    public static let milan = InfectionCard(name: "Milan", color: .Blue)
-    public static let montreal = InfectionCard(name: "Montreal", color: .Blue)
-    public static let moscow = InfectionCard(name: "Moscow", color: .Black)
-    public static let mumbai = InfectionCard(name: "Mumbai", color: .Black)
-    public static let newyork = InfectionCard(name: "New York", color: .Blue)
-    public static let osaka = InfectionCard(name: "Osaka", color: .Red)
-    public static let paris = InfectionCard(name: "Paris", color: .Blue)
-    public static let riyadh = InfectionCard(name: "Riyadh", color: .Black)
-    public static let sanfrancisco = InfectionCard(name: "San Francisco", color: .Blue)
-    public static let santiago = InfectionCard(name: "Santiago", color: .Yellow)
+    // All the infection cards
+    public static let algiers = InfectionCard(city: City.algiers)
+    public static let atlanta = InfectionCard(city: City.atlanta)
+    public static let baghdad = InfectionCard(city: City.baghdad)
+    public static let bangkok = InfectionCard(city: City.bangkok)
+    public static let beijing = InfectionCard(city: City.beijing)
+    public static let bogotá = InfectionCard(city: City.bogotá)
+    public static let buenosaires = InfectionCard(city: City.buenosaires)
+    public static let cairo = InfectionCard(city: City.cairo)
+    public static let chennai = InfectionCard(city: City.chennai)
+    public static let chicago = InfectionCard(city: City.chicago)
+    public static let delhi = InfectionCard(city: City.delhi)
+    public static let essen = InfectionCard(city: City.essen)
+    public static let hochiminhcity = InfectionCard(city: City.hochiminhcity)
+    public static let hongkong = InfectionCard(city: City.hongkong)
+    public static let istanbul = InfectionCard(city: City.istanbul)
+    public static let jakarta = InfectionCard(city: City.jakarta)
+    public static let johannesburg = InfectionCard(city: City.johannesburg)
+    public static let karachi = InfectionCard(city: City.karachi)
+    public static let khartoum = InfectionCard(city: City.khartoum)
+    public static let kinshasa = InfectionCard(city: City.kinshasa)
+    public static let kolkata = InfectionCard(city: City.kolkata)
+    public static let lagos = InfectionCard(city: City.lagos)
+    public static let lima = InfectionCard(city: City.lima)
+    public static let london = InfectionCard(city: City.london)
+    public static let losangeles = InfectionCard(city: City.losangeles)
+    public static let madrid = InfectionCard(city: City.madrid)
+    public static let manila = InfectionCard(city: City.manila)
+    public static let mexicocity = InfectionCard(city: City.mexicocity)
+    public static let miami = InfectionCard(city: City.miami)
+    public static let milan = InfectionCard(city: City.milan)
+    public static let montreal = InfectionCard(city: City.montreal)
+    public static let moscow = InfectionCard(city: City.moscow)
+    public static let mumbai = InfectionCard(city: City.mumbai)
+    public static let newyork = InfectionCard(city: City.newyork)
+    public static let osaka = InfectionCard(city: City.osaka)
+    public static let paris = InfectionCard(city: City.paris)
+    public static let riyadh = InfectionCard(city: City.riyadh)
+    public static let sanfrancisco = InfectionCard(city: City.sanfrancisco)
+    public static let santiago = InfectionCard(city: City.santiago)
+    public static let sãopaulo = InfectionCard(city: City.sãopaulo)
+    public static let seoul = InfectionCard(city: City.seoul)
+    public static let shanghai = InfectionCard(city: City.shanghai)
+    public static let stpetersburg = InfectionCard(city: City.stpetersburg)
+    public static let sydney = InfectionCard(city: City.sydney)
+    public static let taipei = InfectionCard(city: City.taipei)
+    public static let tehran = InfectionCard(city: City.tehran)
+    public static let tokyo = InfectionCard(city: City.tokyo)
+    public static let washington = InfectionCard(city: City.washington)
 
-    /**
-     An alias for InfectionCard.sãopaulo for convenience.
-     */
-    public static let saopaulo = InfectionCard(name: "São Paulo", color: .Yellow)
-    public static let sãopaulo = saopaulo
-    public static let seoul = InfectionCard(name: "Seoul", color: .Red)
-    public static let shanghai = InfectionCard(name: "Shanghai", color: .Red)
-    public static let stpetersburg = InfectionCard(name: "St Petersburg", color: .Blue)
-    public static let sydney = InfectionCard(name: "Sydney", color: .Red)
-    public static let taipei = InfectionCard(name: "Taipei", color: .Red)
-    public static let tehran = InfectionCard(name: "Tehran", color: .Black)
-    public static let tokyo = InfectionCard(name: "Tokyo", color: .Red)
-    public static let washington = InfectionCard(name: "Washington", color: .Blue)
-
-    public static var allCards:Set<InfectionCard> = [algiers, atlanta, baghdad, bangkok, beijing, bogota, buenosaires, cairo, chennai, chicago, delhi, essen, hochiminhcity, hongkong, istanbul, jakarta, johannesburg, karachi, khartoum, kinshasa, kolkata, lagos, lima, london, losangeles, madrid, manila, mexicocity, miami, milan, montreal, moscow, mumbai, newyork, osaka, paris, riyadh, sanfrancisco, santiago, saopaulo, seoul, shanghai, stpetersburg, sydney, taipei, tehran, tokyo, washington]
+    public static var allCards:Set<InfectionCard> = [algiers, atlanta, baghdad, bangkok, beijing, bogotá, buenosaires, cairo, chennai, chicago, delhi, essen, hochiminhcity, hongkong, istanbul, jakarta, johannesburg, karachi, khartoum, kinshasa, kolkata, lagos, lima, london, losangeles, madrid, manila, mexicocity, miami, milan, montreal, moscow, mumbai, newyork, osaka, paris, riyadh, sanfrancisco, santiago, sãopaulo, seoul, shanghai, stpetersburg, sydney, taipei, tehran, tokyo, washington]
 
     public static func findByName(name:String) -> [InfectionCard] {
         return allCards.findByName(name)
@@ -180,21 +152,17 @@ public struct InfectionCard {
 
 }
 
-extension InfectionCard : Equatable {
-
-}
-
-extension InfectionCard : CityRepresentation {
+extension InfectionCard : HasCity {
 
 }
 
 
-extension SequenceType  where Generator.Element : CityRepresentation {
+extension SequenceType  where Generator.Element : HasCity {
     public func findByName(name:String) -> [Generator.Element] {
         
 
         var candidates = self.filter {
-            let result = $0.name.lowercaseString.rangeOfString(name.lowercaseString)
+            let result = $0.city.name.lowercaseString.rangeOfString(name.lowercaseString)
             return result != nil
         }
 
@@ -212,9 +180,9 @@ extension SequenceType  where Generator.Element : CityRepresentation {
 
 
 public func ==(lhs:InfectionCard, rhs:InfectionCard) -> Bool {
-    return lhs.name == rhs.name
+    return lhs.city == rhs.city
 }
 
 public func ==(lhs:PlayerCard, rhs:PlayerCard) -> Bool {
-    return lhs.name == rhs.name
+    return lhs.city == rhs.city
 }

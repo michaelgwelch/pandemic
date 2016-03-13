@@ -26,19 +26,19 @@ class PlayerCardTests: XCTestCase {
     func testCanFindSáoPaulo() {
         let actualCity = PlayerCard.findByName("sao").first!
 
-        XCTAssertEqual(PlayerCard.saopaulo, actualCity)
+        XCTAssertEqual(PlayerCard.sãopaulo, actualCity)
 
 
         let actualCity2 = PlayerCard.findByName("são").first!
-        XCTAssertEqual(PlayerCard.saopaulo, actualCity2)
+        XCTAssertEqual(PlayerCard.sãopaulo, actualCity2)
     }
 
     func testCanFindBogotá() {
         var actualCity = PlayerCard.findByName("bogota").first!
-        XCTAssertEqual(PlayerCard.bogota, actualCity)
+        XCTAssertEqual(PlayerCard.bogotá, actualCity)
 
         actualCity = PlayerCard.findByName("gotá").first!
-        XCTAssertEqual(PlayerCard.bogota, actualCity)
+        XCTAssertEqual(PlayerCard.bogotá, actualCity)
     }
 
 }
@@ -60,19 +60,19 @@ class InfectionCardTests: XCTestCase {
     func testCanFindSáoPaulo() {
         let actualCity = InfectionCard.findByName("sao").first!
 
-        XCTAssertEqual(InfectionCard.saopaulo, actualCity)
+        XCTAssertEqual(InfectionCard.sãopaulo, actualCity)
 
 
         let actualCity2 = InfectionCard.findByName("são").first!
-        XCTAssertEqual(InfectionCard.saopaulo, actualCity2)
+        XCTAssertEqual(InfectionCard.sãopaulo, actualCity2)
     }
 
     func testCanFindBogotá() {
         var actualCity = InfectionCard.findByName("bogota").first!
-        XCTAssertEqual(InfectionCard.bogota, actualCity)
+        XCTAssertEqual(InfectionCard.bogotá, actualCity)
 
         actualCity = InfectionCard.findByName("gotá").first!
-        XCTAssertEqual(InfectionCard.bogota, actualCity)
+        XCTAssertEqual(InfectionCard.bogotá, actualCity)
     }
     
 }

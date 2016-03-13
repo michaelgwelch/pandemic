@@ -114,7 +114,7 @@ public class GameBoard {
         let baghdadIndex = graph.addVertex(GameBoardCity.baghdad)
         let bangkokIndex = graph.addVertex(GameBoardCity.bangkok)
         let beijingIndex = graph.addVertex(GameBoardCity.beijing)
-        let bogotaIndex = graph.addVertex(GameBoardCity.bogota)
+        let bogotaIndex = graph.addVertex(GameBoardCity.bogotá)
         let buenosairesIndex = graph.addVertex(GameBoardCity.buenosaires)
         let cairoIndex = graph.addVertex(GameBoardCity.cairo)
         let chennaiIndex = graph.addVertex(GameBoardCity.chennai)
@@ -148,7 +148,7 @@ public class GameBoard {
         let riyadhIndex = graph.addVertex(GameBoardCity.riyadh)
         let sanfranciscoIndex = graph.addVertex(GameBoardCity.sanfrancisco)
         let santiagoIndex = graph.addVertex(GameBoardCity.santiago)
-        let saopauloIndex = graph.addVertex(GameBoardCity.saopaulo)
+        let saopauloIndex = graph.addVertex(GameBoardCity.sãopaulo)
         let seoulIndex = graph.addVertex(GameBoardCity.seoul)
         let shanghaiIndex = graph.addVertex(GameBoardCity.shanghai)
         let stpetersburgIndex = graph.addVertex(GameBoardCity.stpetersburg)
@@ -258,11 +258,11 @@ class DriveOrFerryAction : BaseAction {
         let routesOut = board.graph.edgesForIndex(board.vertexOfCurrentCharacter)
         let route = routesOut.filter { edge in
             let edgeDestinationCity = board.graph.vertexAtIndex(edge.v)
-            return edgeDestinationCity.name == self.cityName
+            return edgeDestinationCity.city.name == self.cityName
             }.first
 
         guard route != nil else {
-            throw ExecutionError.DriveOrFerryCityUnreachable(to: cityName, from: currentCity.name)
+            throw ExecutionError.DriveOrFerryCityUnreachable(to: cityName, from: currentCity.city.name)
         }
 
 

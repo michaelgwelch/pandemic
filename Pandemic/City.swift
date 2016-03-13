@@ -8,9 +8,17 @@
 
 import Foundation
 
-public struct City : Equatable {
+public protocol HasCity {
+    var city:City { get }
+}
+
+public struct City : Equatable, Hashable {
     public let name:String
     public let color:Color
+
+    public var hashValue:Int {
+        return name.hashValue
+    }
 
     init(name:String, color:Color) {
         self.name = name
@@ -86,8 +94,10 @@ public struct City : Equatable {
 
 }
 
-extension City : CityRepresentation {
-
+extension City : HasCity {
+    public var city:City {
+        return self
+    }
 }
 
 public func ==(lhs:City, rhs:City) -> Bool {
