@@ -7,28 +7,43 @@
 //
 
 import Foundation
-private struct NoWeight : Comparable, Summable {
-    private init() {}
-    static let value:NoWeight = NoWeight()
+private enum OpenOrBlocked {
+    case Open
+    case Blocked
 }
 
-private func +(lhs: NoWeight, rhs: NoWeight) -> NoWeight {
-    return lhs
+
+extension OpenOrBlocked : Comparable {
+
 }
-private func <(lhs:NoWeight, rhs:NoWeight) -> Bool {
+
+extension OpenOrBlocked : Summable {
+
+}
+
+
+private func +(lhs:OpenOrBlocked, rhs:OpenOrBlocked) -> OpenOrBlocked {
+    if lhs == .Blocked || rhs == .Blocked {
+        return .Blocked
+    }
+    return .Open
+}
+private func <(lhs:OpenOrBlocked, rhs:OpenOrBlocked) -> Bool {
+    if lhs == .Open {
+        return rhs == .Blocked
+    }
+
     return false
 }
 
-private func ==(lhs:NoWeight, rhs:NoWeight) -> Bool {
-    return true
-}
+
 
 public class GameBoard {
 
 
     private var positions:[Pandemic.Character:Int]
 
-    private let graph:WeightedGraph<City,NoWeight>
+    private let graph:WeightedGraph<City,OpenOrBlocked>
 
 
     init(withCharacters characters:[Pandemic.Character], inCity city:City) {
@@ -68,9 +83,9 @@ public class GameBoard {
     }
 
 
-    private static func createPandemicMap() -> WeightedGraph<City,NoWeight> {
+    private static func createPandemicMap() -> WeightedGraph<City,OpenOrBlocked> {
 
-        let graph = WeightedGraph<City,NoWeight>()
+        let graph = WeightedGraph<City,OpenOrBlocked>()
 
         let algiersIndex = graph.addVertex(City.algiers)
         let atlantaIndex = graph.addVertex(City.atlanta)
@@ -122,7 +137,7 @@ public class GameBoard {
         let washingtonIndex = graph.addVertex(City.washington)
 
         func addEdges(from: Int, to:[Int]) {
-            to.forEach { graph.addEdge(from, to: $0, weight: NoWeight.value) }
+            to.forEach { graph.addEdge(from, to: $0, weight: .Open) }
         }
 
         addEdges(algiersIndex, to:[cairoIndex, istanbulIndex, madridIndex, parisIndex])
@@ -196,7 +211,7 @@ class Action : CanTakeAction {
     func execute(board: GameBoard) throws {
         //nop
     }
-    
+
 }
 
 
@@ -222,7 +237,7 @@ class DriveOrFerryAction : Action {
         let route = routesOut.filter { edge in
             let edgeDestinationCity = board.graph.vertexAtIndex(edge.v)
             return edgeDestinationCity.name == self.cityName
-        }.first
+            }.first
 
         guard route != nil else {
             throw ExecutionError.DriveOrFerryCityUnreachable(to: cityName, from: currentCity.name)
