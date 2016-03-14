@@ -9,11 +9,12 @@
 import Foundation
 
 /**
-Instances of conforming types have a `city` property which
- can be used to uniquely idenfify them in the context of Pandemic.
+Instances of conforming types have a name and color property which
+ are used to distinguish each city.
 */
-public protocol HasCity {
-    var city:City { get }
+public protocol CityInfo {
+    var name:String { get }
+    var color:Color { get }
 }
 
 /**
@@ -108,10 +109,8 @@ public struct City : Equatable, Hashable {
 
 }
 
-extension City : HasCity {
-    public var city:City {
-        return self
-    }
+extension City : CityInfo {
+
 }
 
 extension City : CustomStringConvertible {

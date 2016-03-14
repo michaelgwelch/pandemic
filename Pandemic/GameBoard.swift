@@ -58,7 +58,7 @@ public class GameBoard {
 
         graph = GameBoard.createPandemicMap()
         allCities = graph.vertices.map { $0 as GameBoardCity }
-        let indexOfCity = graph.indexOf { $0.city == city }!
+        let indexOfCity = graph.indexOf { $0.name == city.name }!
 
         positions = [Character:Int](tuples: characters.map { ($0, indexOfCity) })
 
@@ -73,11 +73,11 @@ public class GameBoard {
         let routesOut = graph.edgesForVertex(currentCity) ?? []
         let route = routesOut.filter { edge in
             let edgeDestinationCity = graph.vertexAtIndex(edge.v)
-            return edgeDestinationCity.city == city.city
+            return edgeDestinationCity.name == city.name
             }.first
 
         guard route != nil else {
-            throw ExecutionError.DriveOrFerryCityUnreachable(to: city.city.name, from: currentCity.city.name)
+            throw ExecutionError.DriveOrFerryCityUnreachable(to: city.name, from: currentCity.name)
         }
 
         positions[character] = route!.v

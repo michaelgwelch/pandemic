@@ -41,8 +41,8 @@ class GameBoardCityTests: XCTestCase {
             city.infect()
 
             // assert
-            XCTAssertEqual(city.diseaseCountForColor(city.city.color), 1, "The disease count for \(city.city.name) was not the expected value of 1")
-            for otherColor in Color.colors.filter(city.city.color.notEqual) {
+            XCTAssertEqual(city.diseaseCountForColor(city.color), 1, "The disease count for \(city.name) was not the expected value of 1")
+            for otherColor in Color.colors.filter(city.color.notEqual) {
                 XCTAssertEqual(city.diseaseCountForColor(otherColor), 0)
             }
         }

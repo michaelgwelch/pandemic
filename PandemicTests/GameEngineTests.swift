@@ -31,7 +31,7 @@ class GameEngineTests: XCTestCase {
     func testSetupBoardAllPlayersInInitialCity() {
 
         engine.board.positions.forEach { tuple in
-            XCTAssertTrue(engine.board.positionOfCharacter(tuple.0).city == startingCity)
+            XCTAssertTrue(engine.board.positionOfCharacter(tuple.0).name == startingCity.name)
         }
     }
 
@@ -63,7 +63,7 @@ class GameEngineTests: XCTestCase {
         try BaseAction.driveOrFerryToCity("Miami").execute(engine)
 
         // Assert
-        XCTAssertTrue(engine.board.positionOfCharacter(engine.currentPlayer.character).city == City.miami)
+        XCTAssertTrue(engine.board.positionOfCharacter(engine.currentPlayer.character).name == City.miami.name)
     }
 
     func testWhenPlayerIsInAtlantaHeCanDriveFromAtlantToChicagoThruMiamiWashingtonAndMontreal() throws {
@@ -74,7 +74,7 @@ class GameEngineTests: XCTestCase {
         try BaseAction.driveOrFerryToCity("Chicago").execute(engine)
 
         // Assert
-        XCTAssertEqual(engine.board.positionOfCharacter(engine.currentPlayer.character).city, City.chicago)
+        XCTAssertEqual(engine.board.positionOfCharacter(engine.currentPlayer.character).name, City.chicago.name)
     }
 
     func testDirectFlightWhenPlayerHasCard_ThenPlayerMoves() {

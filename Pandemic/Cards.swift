@@ -96,8 +96,13 @@ public struct PlayerCard : Equatable, Hashable {
 
 }
 
-extension PlayerCard : HasCity {
-
+extension PlayerCard : CityInfo {
+    public var name:String {
+        return city.name
+    }
+    public var color:Color {
+        return city.color
+    }
 }
 
 extension PlayerCard : CustomStringConvertible {
@@ -180,8 +185,13 @@ public struct InfectionCard : Equatable, Hashable {
 
 }
 
-extension InfectionCard : HasCity {
-
+extension InfectionCard : CityInfo {
+    public var name:String {
+        return city.name
+    }
+    public var color:Color {
+        return city.color
+    }
 }
 
 extension InfectionCard : CustomStringConvertible {
@@ -191,12 +201,12 @@ extension InfectionCard : CustomStringConvertible {
 }
 
 
-extension SequenceType  where Generator.Element : HasCity {
+extension SequenceType  where Generator.Element : CityInfo {
     public func findByName(name:String) -> [Generator.Element] {
         
 
         var candidates = self.filter {
-            let result = $0.city.name.lowercaseString.rangeOfString(name.lowercaseString)
+            let result = $0.name.lowercaseString.rangeOfString(name.lowercaseString)
             return result != nil
         }
 

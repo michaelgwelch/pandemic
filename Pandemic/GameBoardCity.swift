@@ -62,7 +62,7 @@ public class GameBoardCityFactory {
 }
 
 public class GameBoardCity : Equatable {
-    public let city:City
+    private let city:City
     let counters:[Color:DiseaseCounter]
 
     convenience init(city:City) {
@@ -136,8 +136,13 @@ extension GameBoardCity : CustomStringConvertible {
     }
 }
 
-extension GameBoardCity : HasCity {
-
+extension GameBoardCity : CityInfo {
+    public var name:String {
+        return city.name
+    }
+    public var color:Color {
+        return city.color
+    }
 }
 
 public func ==(lhs:GameBoardCity, rhs:GameBoardCity) -> Bool {
