@@ -35,7 +35,7 @@ public class GameEngine {
     private(set) public var actionNumber:Int
 
     public let players:[Player]
-    private(set) public var currentPlayerIndex:Int
+    private var currentPlayerIndex:Int
     public var currentPlayer:Player {
         return players[currentPlayerIndex]
     }
