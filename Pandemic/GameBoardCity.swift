@@ -8,6 +8,59 @@
 
 import Foundation
 
+public class GameBoardCityFactory {
+
+    public let algiers = { () in GameBoardCity(city: City.algiers) }
+    public let atlanta = { () in GameBoardCity(city: City.atlanta) }
+    public let baghdad = { () in GameBoardCity(city: City.baghdad) }
+    public let bangkok = { () in GameBoardCity(city: City.bangkok) }
+    public let beijing = { () in GameBoardCity(city: City.beijing) }
+    public let bogotá = { () in GameBoardCity(city: City.bogotá) }
+    public let buenosaires = { () in GameBoardCity(city: City.buenosaires) }
+    public let cairo = { () in GameBoardCity(city: City.cairo) }
+    public let chennai = { () in GameBoardCity(city: City.chennai) }
+    public let chicago = { () in GameBoardCity(city: City.chicago) }
+    public let delhi = { () in GameBoardCity(city: City.delhi) }
+    public let essen = { () in GameBoardCity(city: City.essen) }
+    public let hochiminhcity = { () in GameBoardCity(city: City.hochiminhcity) }
+    public let hongkong = { () in GameBoardCity(city: City.hongkong) }
+    public let istanbul = { () in GameBoardCity(city: City.istanbul) }
+    public let jakarta = { () in GameBoardCity(city: City.jakarta) }
+    public let johannesburg = { () in GameBoardCity(city: City.johannesburg) }
+    public let karachi = { () in GameBoardCity(city: City.karachi) }
+    public let khartoum = { () in GameBoardCity(city: City.khartoum) }
+    public let kinshasa = { () in GameBoardCity(city: City.kinshasa) }
+    public let kolkata = { () in GameBoardCity(city: City.kolkata) }
+    public let lagos = { () in GameBoardCity(city: City.lagos) }
+    public let lima = { () in GameBoardCity(city: City.lima) }
+    public let london = { () in GameBoardCity(city: City.london) }
+    public let losangeles = { () in GameBoardCity(city: City.losangeles) }
+    public let madrid = { () in GameBoardCity(city: City.madrid) }
+    public let manila = { () in GameBoardCity(city: City.manila) }
+    public let mexicocity = { () in GameBoardCity(city: City.mexicocity) }
+    public let miami = { () in GameBoardCity(city: City.miami) }
+    public let milan = { () in GameBoardCity(city: City.milan) }
+    public let montreal = { () in GameBoardCity(city: City.montreal) }
+    public let moscow = { () in GameBoardCity(city: City.moscow) }
+    public let mumbai = { () in GameBoardCity(city: City.mumbai) }
+    public let newyork = { () in GameBoardCity(city: City.newyork) }
+    public let osaka = { () in GameBoardCity(city: City.osaka) }
+    public let paris = { () in GameBoardCity(city: City.paris) }
+    public let riyadh = { () in GameBoardCity(city: City.riyadh) }
+    public let sanfrancisco = { () in GameBoardCity(city: City.sanfrancisco) }
+    public let santiago = { () in GameBoardCity(city: City.santiago) }
+    public let sãopaulo = { () in GameBoardCity(city: City.sãopaulo) }
+    public let seoul = { () in GameBoardCity(city: City.seoul) }
+    public let shanghai = { () in GameBoardCity(city: City.shanghai) }
+    public let stpetersburg = { () in GameBoardCity(city: City.stpetersburg) }
+    public let sydney = { () in GameBoardCity(city: City.sydney) }
+    public let taipei = { () in GameBoardCity(city: City.taipei) }
+    public let tehran = { () in GameBoardCity(city: City.tehran) }
+    public let tokyo = { () in GameBoardCity(city: City.tokyo) }
+    public let washington = { () in GameBoardCity(city: City.washington) }
+
+}
+
 public class GameBoardCity : Equatable {
     public let city:City
     let counters:[Color:DiseaseCounter]
@@ -75,61 +128,6 @@ public class GameBoardCity : Equatable {
         return city
     }
 
-    // All the cities
-    public static let algiers = GameBoardCity(city: City.algiers)
-    public static let atlanta = GameBoardCity(city: City.atlanta)
-    public static let baghdad = GameBoardCity(city: City.baghdad)
-    public static let bangkok = GameBoardCity(city: City.bangkok)
-    public static let beijing = GameBoardCity(city: City.beijing)
-    public static let bogotá = GameBoardCity(city: City.bogotá)
-    public static let buenosaires = GameBoardCity(city: City.buenosaires)
-    public static let cairo = GameBoardCity(city: City.cairo)
-    public static let chennai = GameBoardCity(city: City.chennai)
-    public static let chicago = GameBoardCity(city: City.chicago)
-    public static let delhi = GameBoardCity(city: City.delhi)
-    public static let essen = GameBoardCity(city: City.essen)
-    public static let hochiminhcity = GameBoardCity(city: City.hochiminhcity)
-    public static let hongkong = GameBoardCity(city: City.hongkong)
-    public static let istanbul = GameBoardCity(city: City.istanbul)
-    public static let jakarta = GameBoardCity(city: City.jakarta)
-    public static let johannesburg = GameBoardCity(city: City.johannesburg)
-    public static let karachi = GameBoardCity(city: City.karachi)
-    public static let khartoum = GameBoardCity(city: City.khartoum)
-    public static let kinshasa = GameBoardCity(city: City.kinshasa)
-    public static let kolkata = GameBoardCity(city: City.kolkata)
-    public static let lagos = GameBoardCity(city: City.lagos)
-    public static let lima = GameBoardCity(city: City.lima)
-    public static let london = GameBoardCity(city: City.london)
-    public static let losangeles = GameBoardCity(city: City.losangeles)
-    public static let madrid = GameBoardCity(city: City.madrid)
-    public static let manila = GameBoardCity(city: City.manila)
-    public static let mexicocity = GameBoardCity(city: City.mexicocity)
-    public static let miami = GameBoardCity(city: City.miami)
-    public static let milan = GameBoardCity(city: City.milan)
-    public static let montreal = GameBoardCity(city: City.montreal)
-    public static let moscow = GameBoardCity(city: City.moscow)
-    public static let mumbai = GameBoardCity(city: City.mumbai)
-    public static let newyork = GameBoardCity(city: City.newyork)
-    public static let osaka = GameBoardCity(city: City.osaka)
-    public static let paris = GameBoardCity(city: City.paris)
-    public static let riyadh = GameBoardCity(city: City.riyadh)
-    public static let sanfrancisco = GameBoardCity(city: City.sanfrancisco)
-    public static let santiago = GameBoardCity(city: City.santiago)
-    public static let sãopaulo = GameBoardCity(city: City.sãopaulo)
-    public static let seoul = GameBoardCity(city: City.seoul)
-    public static let shanghai = GameBoardCity(city: City.shanghai)
-    public static let stpetersburg = GameBoardCity(city: City.stpetersburg)
-    public static let sydney = GameBoardCity(city: City.sydney)
-    public static let taipei = GameBoardCity(city: City.taipei)
-    public static let tehran = GameBoardCity(city: City.tehran)
-    public static let tokyo = GameBoardCity(city: City.tokyo)
-    public static let washington = GameBoardCity(city: City.washington)
-
-    public static var allCities = [algiers, atlanta, baghdad, bangkok, beijing, bogotá, buenosaires, cairo, chennai, chicago, delhi, essen, hochiminhcity, hongkong, istanbul, jakarta, johannesburg, karachi, khartoum, kinshasa, kolkata, lagos, lima, london, losangeles, madrid, manila, mexicocity, miami, milan, montreal, moscow, mumbai, newyork, osaka, paris, riyadh, sanfrancisco, santiago, sãopaulo, seoul, shanghai, stpetersburg, sydney, taipei, tehran, tokyo, washington]
-
-    public static func findByName(name:String) -> [GameBoardCity] {
-        return allCities.findByName(name)
-    }
 }
 
 extension GameBoardCity : CustomStringConvertible {

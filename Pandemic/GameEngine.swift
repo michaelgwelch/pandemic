@@ -14,7 +14,7 @@ public class GameEngineBuilder {
 
     }
     let rosterBuilder = RosterBuilder()
-    public var initialCity = GameBoardCity.atlanta
+    public var initialCity = City.atlanta
 
     public func addPlayerWithName(name:String, andProfession profession:Profession) throws {
         try rosterBuilder.addPlayerWithCharacterName(name, andProfession: profession)
@@ -130,7 +130,7 @@ class DriveOrFerryAction : BaseAction {
     }
     override func execute(engine: GameEngine) throws {
 
-        let destinationCity = GameBoardCity.findByName(cityName).first!
+        let destinationCity = engine.board.findCityByName(cityName).first!
         try engine.board.driveOrFerryCharacter(engine.currentPlayer.character, toCity:destinationCity)
 
     }

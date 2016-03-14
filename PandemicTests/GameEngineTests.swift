@@ -14,14 +14,14 @@ import XCTest
 class GameEngineTests: XCTestCase {
 
     var engine:GameEngine = GameEngineBuilder().createGame()
-    var startingCity = GameBoardCity.atlanta
+    var startingCity = City.atlanta
     var characters:[Pandemic.Character] = []
 
     override func setUp() {
         let builder = GameEngineBuilder()
         try! builder.addPlayerWithName("tim", andProfession: .Medic)
         try! builder.addPlayerWithName("mark", andProfession: .Dispatcher)
-        startingCity = GameBoardCity.atlanta
+        startingCity = City.atlanta
         builder.initialCity = startingCity
 
 
@@ -31,7 +31,7 @@ class GameEngineTests: XCTestCase {
     func testSetupBoardAllPlayersInInitialCity() {
 
         engine.board.positions.forEach { tuple in
-            XCTAssertTrue(engine.board.positionOfCharacter(tuple.0) == startingCity)
+            XCTAssertTrue(engine.board.positionOfCharacter(tuple.0).city == startingCity)
         }
     }
 
@@ -63,7 +63,7 @@ class GameEngineTests: XCTestCase {
         try BaseAction.driveOrFerryToCity("Miami").execute(engine)
 
         // Assert
-        XCTAssertTrue(engine.board.positionOfCharacter(engine.currentPlayer.character) == GameBoardCity.miami)
+        XCTAssertTrue(engine.board.positionOfCharacter(engine.currentPlayer.character).city == City.miami)
     }
 
     func testWhenPlayerIsInAtlantaHeCanDriveFromAtlantToChicagoThruMiamiWashingtonAndMontreal() throws {
@@ -74,7 +74,7 @@ class GameEngineTests: XCTestCase {
         try BaseAction.driveOrFerryToCity("Chicago").execute(engine)
 
         // Assert
-        XCTAssertEqual(engine.board.positionOfCharacter(engine.currentPlayer.character), GameBoardCity.chicago)
+        XCTAssertEqual(engine.board.positionOfCharacter(engine.currentPlayer.character).city, City.chicago)
     }
 
     func testDirectFlightWhenPlayerHasCard_ThenPlayerMoves() {
