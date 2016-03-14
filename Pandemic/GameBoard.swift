@@ -48,15 +48,17 @@ public class GameBoard {
     private(set) public var positions:[Pandemic.Character:Int]
 
     private let graph:WeightedGraph<GameBoardCity,OpenOrBlocked>
+    private let allCities:[GameBoardCity]
 
     convenience init() {
-        self.init(withCharacters: [], inCity:GameBoardCity.atlanta)
+        self.init(withCharacters: [], inCity:City.atlanta)
     }
 
-    init(withCharacters characters:[Pandemic.Character], inCity city:GameBoardCity) {
+    init(withCharacters characters:[Pandemic.Character], inCity city:City) {
 
         graph = GameBoard.createPandemicMap()
-        let indexOfCity = graph.indexOfVertex(city)!
+        allCities = graph.vertices.map { $0 as GameBoardCity }
+        let indexOfCity = graph.indexOf { $0.city == city }!
 
         positions = [Character:Int](tuples: characters.map { ($0, indexOfCity) })
 
@@ -89,54 +91,56 @@ public class GameBoard {
 
         let graph = WeightedGraph<GameBoardCity,OpenOrBlocked>()
 
-        let algiersIndex = graph.addVertex(GameBoardCity.algiers)
-        let atlantaIndex = graph.addVertex(GameBoardCity.atlanta)
-        let baghdadIndex = graph.addVertex(GameBoardCity.baghdad)
-        let bangkokIndex = graph.addVertex(GameBoardCity.bangkok)
-        let beijingIndex = graph.addVertex(GameBoardCity.beijing)
-        let bogotaIndex = graph.addVertex(GameBoardCity.bogotá)
-        let buenosairesIndex = graph.addVertex(GameBoardCity.buenosaires)
-        let cairoIndex = graph.addVertex(GameBoardCity.cairo)
-        let chennaiIndex = graph.addVertex(GameBoardCity.chennai)
-        let chicagoIndex = graph.addVertex(GameBoardCity.chicago)
-        let delhiIndex = graph.addVertex(GameBoardCity.delhi)
-        let essenIndex = graph.addVertex(GameBoardCity.essen)
-        let hochiminhcityIndex = graph.addVertex(GameBoardCity.hochiminhcity)
-        let hongkongIndex = graph.addVertex(GameBoardCity.hongkong)
-        let istanbulIndex = graph.addVertex(GameBoardCity.istanbul)
-        let jakartaIndex = graph.addVertex(GameBoardCity.jakarta)
-        let johannesburgIndex = graph.addVertex(GameBoardCity.johannesburg)
-        let karachiIndex = graph.addVertex(GameBoardCity.karachi)
-        let khartoumIndex = graph.addVertex(GameBoardCity.khartoum)
-        let kinshasaIndex = graph.addVertex(GameBoardCity.kinshasa)
-        let kolkataIndex = graph.addVertex(GameBoardCity.kolkata)
-        let lagosIndex = graph.addVertex(GameBoardCity.lagos)
-        let limaIndex = graph.addVertex(GameBoardCity.lima)
-        let londonIndex = graph.addVertex(GameBoardCity.london)
-        let losangelesIndex = graph.addVertex(GameBoardCity.losangeles)
-        let madridIndex = graph.addVertex(GameBoardCity.madrid)
-        let manilaIndex = graph.addVertex(GameBoardCity.manila)
-        let mexicocityIndex = graph.addVertex(GameBoardCity.mexicocity)
-        let miamiIndex = graph.addVertex(GameBoardCity.miami)
-        let milanIndex = graph.addVertex(GameBoardCity.milan)
-        let montrealIndex = graph.addVertex(GameBoardCity.montreal)
-        let moscowIndex = graph.addVertex(GameBoardCity.moscow)
-        let mumbaiIndex = graph.addVertex(GameBoardCity.mumbai)
-        let newyorkIndex = graph.addVertex(GameBoardCity.newyork)
-        let osakaIndex = graph.addVertex(GameBoardCity.osaka)
-        let parisIndex = graph.addVertex(GameBoardCity.paris)
-        let riyadhIndex = graph.addVertex(GameBoardCity.riyadh)
-        let sanfranciscoIndex = graph.addVertex(GameBoardCity.sanfrancisco)
-        let santiagoIndex = graph.addVertex(GameBoardCity.santiago)
-        let saopauloIndex = graph.addVertex(GameBoardCity.sãopaulo)
-        let seoulIndex = graph.addVertex(GameBoardCity.seoul)
-        let shanghaiIndex = graph.addVertex(GameBoardCity.shanghai)
-        let stpetersburgIndex = graph.addVertex(GameBoardCity.stpetersburg)
-        let sydneyIndex = graph.addVertex(GameBoardCity.sydney)
-        let taipeiIndex = graph.addVertex(GameBoardCity.taipei)
-        let tehranIndex = graph.addVertex(GameBoardCity.tehran)
-        let tokyoIndex = graph.addVertex(GameBoardCity.tokyo)
-        let washingtonIndex = graph.addVertex(GameBoardCity.washington)
+        let factory = GameBoardCityFactory()
+
+        let algiersIndex = graph.addVertex(factory.algiers())
+        let atlantaIndex = graph.addVertex(factory.atlanta())
+        let baghdadIndex = graph.addVertex(factory.baghdad())
+        let bangkokIndex = graph.addVertex(factory.bangkok())
+        let beijingIndex = graph.addVertex(factory.beijing())
+        let bogotaIndex = graph.addVertex(factory.bogotá())
+        let buenosairesIndex = graph.addVertex(factory.buenosaires())
+        let cairoIndex = graph.addVertex(factory.cairo())
+        let chennaiIndex = graph.addVertex(factory.chennai())
+        let chicagoIndex = graph.addVertex(factory.chicago())
+        let delhiIndex = graph.addVertex(factory.delhi())
+        let essenIndex = graph.addVertex(factory.essen())
+        let hochiminhcityIndex = graph.addVertex(factory.hochiminhcity())
+        let hongkongIndex = graph.addVertex(factory.hongkong())
+        let istanbulIndex = graph.addVertex(factory.istanbul())
+        let jakartaIndex = graph.addVertex(factory.jakarta())
+        let johannesburgIndex = graph.addVertex(factory.johannesburg())
+        let karachiIndex = graph.addVertex(factory.karachi())
+        let khartoumIndex = graph.addVertex(factory.khartoum())
+        let kinshasaIndex = graph.addVertex(factory.kinshasa())
+        let kolkataIndex = graph.addVertex(factory.kolkata())
+        let lagosIndex = graph.addVertex(factory.lagos())
+        let limaIndex = graph.addVertex(factory.lima())
+        let londonIndex = graph.addVertex(factory.london())
+        let losangelesIndex = graph.addVertex(factory.losangeles())
+        let madridIndex = graph.addVertex(factory.madrid())
+        let manilaIndex = graph.addVertex(factory.manila())
+        let mexicocityIndex = graph.addVertex(factory.mexicocity())
+        let miamiIndex = graph.addVertex(factory.miami())
+        let milanIndex = graph.addVertex(factory.milan())
+        let montrealIndex = graph.addVertex(factory.montreal())
+        let moscowIndex = graph.addVertex(factory.moscow())
+        let mumbaiIndex = graph.addVertex(factory.mumbai())
+        let newyorkIndex = graph.addVertex(factory.newyork())
+        let osakaIndex = graph.addVertex(factory.osaka())
+        let parisIndex = graph.addVertex(factory.paris())
+        let riyadhIndex = graph.addVertex(factory.riyadh())
+        let sanfranciscoIndex = graph.addVertex(factory.sanfrancisco())
+        let santiagoIndex = graph.addVertex(factory.santiago())
+        let saopauloIndex = graph.addVertex(factory.sãopaulo())
+        let seoulIndex = graph.addVertex(factory.seoul())
+        let shanghaiIndex = graph.addVertex(factory.shanghai())
+        let stpetersburgIndex = graph.addVertex(factory.stpetersburg())
+        let sydneyIndex = graph.addVertex(factory.sydney())
+        let taipeiIndex = graph.addVertex(factory.taipei())
+        let tehranIndex = graph.addVertex(factory.tehran())
+        let tokyoIndex = graph.addVertex(factory.tokyo())
+        let washingtonIndex = graph.addVertex(factory.washington())
 
         func addEdges(from: Int, to:[Int]) {
             to.forEach { graph.addEdge(from, to: $0, weight: .Open) }
@@ -180,6 +184,11 @@ public class GameBoard {
         addEdges(shanghaiIndex, to:[taipeiIndex, tokyoIndex])
 
         return graph
+    }
+
+
+    public func findCityByName(name:String) -> [GameBoardCity] {
+        return allCities.findByName(name)
     }
 }
 
