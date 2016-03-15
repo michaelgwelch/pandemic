@@ -7,6 +7,46 @@
 //
 
 import Foundation
+import GameplayKit
+
+private class Box<T> {
+    private let value:T
+    init(_ value:T) {
+        self.value = value
+    }
+}
+
+private func shuffle<T>(cards:[T]) -> [T] {
+    let random = GKMersenneTwisterRandomSource()
+    let boxedCards = cards.map { Box($0) }
+    let shuffled = random.arrayByShufflingObjectsInArray(boxedCards)
+
+    return shuffled.map { ($0 as! Box<T>).value }
+}
+
+public struct PlayerCardDeck {
+    public let cards:[PlayerCard]
+
+    private init(_ cards:[PlayerCard]) {
+        self.cards = cards
+    }
+
+    public static func shuffledDeck() -> PlayerCardDeck {
+        return PlayerCardDeck(shuffle(PlayerCard.allCards))
+    }
+}
+
+public struct InfectionCardDeck {
+    public let cards:[InfectionCard]
+
+    private init(_ cards:[InfectionCard]) {
+        self.cards = cards
+    }
+
+    public static func shuffledDeck() -> InfectionCardDeck {
+        return InfectionCardDeck(shuffle(InfectionCard.allCards))
+    }
+}
 
 /**
  Each value of PlayerCard represents one player card. Each card "depicts"
@@ -74,7 +114,7 @@ public struct PlayerCard : Equatable, Hashable {
     public static let tokyo = PlayerCard(city: City.tokyo)
     public static let washington = PlayerCard(city: City.washington)
 
-    public static var allCards:Set<PlayerCard> = [algiers, atlanta, baghdad, bangkok, beijing, bogotá, buenosaires, cairo, chennai, chicago, delhi, essen, hochiminhcity, hongkong, istanbul, jakarta, johannesburg, karachi, khartoum, kinshasa, kolkata, lagos, lima, london, losangeles, madrid, manila, mexicocity, miami, milan, montreal, moscow, mumbai, newyork, osaka, paris, riyadh, sanfrancisco, santiago, sãopaulo, seoul, shanghai, stpetersburg, sydney, taipei, tehran, tokyo, washington]
+    public static let allCards:[PlayerCard] = [algiers, atlanta, baghdad, bangkok, beijing, bogotá, buenosaires, cairo, chennai, chicago, delhi, essen, hochiminhcity, hongkong, istanbul, jakarta, johannesburg, karachi, khartoum, kinshasa, kolkata, lagos, lima, london, losangeles, madrid, manila, mexicocity, miami, milan, montreal, moscow, mumbai, newyork, osaka, paris, riyadh, sanfrancisco, santiago, sãopaulo, seoul, shanghai, stpetersburg, sydney, taipei, tehran, tokyo, washington]
 
     /**
      Finds all PlayerCard values with names that contain the specified portion of a name.
@@ -177,7 +217,7 @@ public struct InfectionCard : Equatable, Hashable {
     public static let tokyo = InfectionCard(city: City.tokyo)
     public static let washington = InfectionCard(city: City.washington)
 
-    public static var allCards:Set<InfectionCard> = [algiers, atlanta, baghdad, bangkok, beijing, bogotá, buenosaires, cairo, chennai, chicago, delhi, essen, hochiminhcity, hongkong, istanbul, jakarta, johannesburg, karachi, khartoum, kinshasa, kolkata, lagos, lima, london, losangeles, madrid, manila, mexicocity, miami, milan, montreal, moscow, mumbai, newyork, osaka, paris, riyadh, sanfrancisco, santiago, sãopaulo, seoul, shanghai, stpetersburg, sydney, taipei, tehran, tokyo, washington]
+    public static let allCards:[InfectionCard] = [algiers, atlanta, baghdad, bangkok, beijing, bogotá, buenosaires, cairo, chennai, chicago, delhi, essen, hochiminhcity, hongkong, istanbul, jakarta, johannesburg, karachi, khartoum, kinshasa, kolkata, lagos, lima, london, losangeles, madrid, manila, mexicocity, miami, milan, montreal, moscow, mumbai, newyork, osaka, paris, riyadh, sanfrancisco, santiago, sãopaulo, seoul, shanghai, stpetersburg, sydney, taipei, tehran, tokyo, washington]
 
     public static func findByName(name:String) -> [InfectionCard] {
         return allCards.findByName(name)
