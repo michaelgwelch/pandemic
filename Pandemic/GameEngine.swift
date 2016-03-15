@@ -33,7 +33,7 @@ public class GameEngineBuilder {
 
     public func createGame() -> GameEngine? {
         // TODO: Check correct number of cubes and players
-        guard initialInfectionsCompleted else {
+        guard initialInfectionsCompleted && validNumberOfPlayers else {
             return nil
         }
 
@@ -58,6 +58,10 @@ public class GameEngineBuilder {
             && initialInfections.filter { $0.1 == 3 }.count == 3
             && initialInfections.filter { $0.1 == 2 }.count == 3
             && initialInfections.filter { $0.1 == 1 }.count == 3
+    }
+
+    private var validNumberOfPlayers:Bool {
+        return rosterBuilder.validNumberOfPlayers
     }
 
 }

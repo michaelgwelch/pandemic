@@ -39,6 +39,10 @@ class RosterBuilder {
         return Profession.professions.subtract(usedProfessions)
     }
 
+    var validNumberOfPlayers:Bool {
+        return characters.count > 1 && characters.count < 5
+    }
+
 }
 
 enum RosterError : ErrorType {
