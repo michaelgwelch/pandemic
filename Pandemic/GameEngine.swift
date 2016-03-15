@@ -26,6 +26,17 @@ public class GameEngineBuilder {
         initialInfections[city] = count
     }
 
+    public func dealCard(card:PlayerCard, toPlayerWithName name:String) throws {
+
+        let player = rosterBuilder.players.filter { $0.characterName == name }.first
+        guard player != nil else {
+            throw GameError.UnknownPlayerName(name)
+        }
+
+        player?.dealCard(card)
+    
+    }
+
     public func diseaseCubesForCity(city:City) -> Int {
         let count = initialInfections[city]
         return count ?? 0
@@ -48,8 +59,8 @@ public class GameEngineBuilder {
      testing purposes, where one might want to test invalid conditions.
     */
     func createGameEngine() -> GameEngine {
-        let players = rosterBuilder.characters.map { Player(playingCharacter: $0) }
-        let board = GameBoard(withCharacters: rosterBuilder.characters, inCity: initialCity)
+        let players = rosterBuilder.players
+        let board = GameBoard(withCharacters: rosterBuilder.players.map { $0.character }, inCity: initialCity)
         return GameEngine(withPlayers: players, andBoard: board)
     }
 
@@ -120,9 +131,9 @@ extension GameEngine : CustomDebugStringConvertible {
         guard players.count > 1 else {
             return "Invalid configuration of game engine. Less than 2 Players."
         }
-        var description = "Turn \(turnNumber) Actions Taken \(actionNumber): The current player is \(currentPlayer.character.name)\n"
+        var description = "Turn \(turnNumber) Actions Taken \(actionNumber): The current player is \(currentPlayer.characterName)\n"
         players.forEach { player in
-            let characterAndPosition = "\(player.character.name) the \(player.character.profession) is located in \(board.positionOfCharacter(player.character))"
+            let characterAndPosition = "\(player.characterName) the \(player.characterProfession) is located in \(board.positionOfCharacter(player.character))"
             description += characterAndPosition + "\n"
         }
         return description
@@ -177,6 +188,3 @@ class DriveOrFerryAction : BaseAction {
     }
 }
 
-enum ExecutionError : ErrorType {
-    case DriveOrFerryCityUnreachable(to:String, from:String)
-}

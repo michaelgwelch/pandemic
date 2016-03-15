@@ -77,7 +77,7 @@ public class GameBoard {
             }.first
 
         guard route != nil else {
-            throw ExecutionError.DriveOrFerryCityUnreachable(to: city.name, from: currentCity.name)
+            throw GameError.DriveOrFerryCityUnreachable(to: city.name, from: currentCity.name)
         }
 
         positions[character] = route!.v

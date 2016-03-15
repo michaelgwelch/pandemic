@@ -26,13 +26,20 @@ public enum Profession {
 
 class RosterBuilder {
     private var usedProfessions:Set<Profession> = []
-    private(set) var characters:[Character] = []
+    private(set) var players:[Player] = []
     func addPlayerWithCharacterName(name:String, andProfession profession:Profession) throws {
         guard !usedProfessions.contains(profession) else {
-            throw RosterError.ProfessionAlreadyInUse
+            let existingPlayer = players.first { $0.characterProfession == profession }
+            throw GameError.ProfessionAlreadyInUse(existingPlayer.character)
+        }
+        guard (players.filter { $0.characterName == name }).count == 0 else {
+            let existingPlayer = players.first { $0.characterName == name }
+            throw GameError.PlayerNameAlreadyInUse(existingPlayer.character)
         }
         usedProfessions.insert(profession)
-        characters.append(Character(withName: name, andProfession: profession))
+        let character = Character(withName: name, andProfession: profession)
+
+        players.append(Player(playingCharacter: character))
     }
 
     var remainingProfessions:Set<Profession> {
@@ -40,13 +47,9 @@ class RosterBuilder {
     }
 
     var validNumberOfPlayers:Bool {
-        return characters.count > 1 && characters.count < 5
+        return players.count > 1 && players.count < 5
     }
 
-}
-
-enum RosterError : ErrorType {
-    case ProfessionAlreadyInUse
 }
 
 

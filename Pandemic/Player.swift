@@ -15,6 +15,14 @@ public class Player {
     public let character:Character
     private(set) public var cards:Set<PlayerCard> = []
 
+    public var characterName:String {
+        return character.name
+    }
+
+    public var characterProfession:Profession {
+        return character.profession
+    }
+
 
     init(playingCharacter:Character) {
         self.character = playingCharacter

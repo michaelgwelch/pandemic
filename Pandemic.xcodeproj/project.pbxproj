@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E32BA6551C98D28300F054F1 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32BA6541C98D28300F054F1 /* Errors.swift */; };
 		E37B977B1C95BDA000B11EC7 /* Cards.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37B977A1C95BDA000B11EC7 /* Cards.swift */; };
 		E37B977D1C95CA8400B11EC7 /* PlayerCardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37B977C1C95CA8400B11EC7 /* PlayerCardTests.swift */; };
 		E37B977F1C95E3C300B11EC7 /* PlayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37B977E1C95E3C300B11EC7 /* PlayerTests.swift */; };
@@ -46,6 +47,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E32BA6541C98D28300F054F1 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		E37B97791C950AEA00B11EC7 /* PlayWithPandemic.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = PlayWithPandemic.playground; sourceTree = "<group>"; };
 		E37B977A1C95BDA000B11EC7 /* Cards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cards.swift; sourceTree = "<group>"; };
 		E37B977C1C95CA8400B11EC7 /* PlayerCardTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerCardTests.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 				E37B97801C95E40A00B11EC7 /* Player.swift */,
 				E37B97821C95F9C000B11EC7 /* City.swift */,
 				E37B97841C9619E300B11EC7 /* GameEngine.swift */,
+				E32BA6541C98D28300F054F1 /* Errors.swift */,
 			);
 			path = Pandemic;
 			sourceTree = "<group>";
@@ -285,6 +288,7 @@
 				E3A02D301C9388C800D95E0E /* Color.swift in Sources */,
 				E3EC862C1C949EAF00645A8C /* Edge.swift in Sources */,
 				E37B97831C95F9C000B11EC7 /* City.swift in Sources */,
+				E32BA6551C98D28300F054F1 /* Errors.swift in Sources */,
 				E3EC86301C949EAF00645A8C /* Stack.swift in Sources */,
 				E3EC86321C949EAF00645A8C /* UnweightedGraph.swift in Sources */,
 				E3A02D321C9388FE00D95E0E /* GameBoardCity.swift in Sources */,
