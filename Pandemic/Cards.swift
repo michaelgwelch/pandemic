@@ -7,37 +7,25 @@
 //
 
 import Foundation
-//import GameplayKit
-
-private class Box<T> {
-    private let value:T
-    init(_ value:T) {
-        self.value = value
-    }
-}
-
-
-// Shuffle using GameplayKit
-//private func shuffle<T>(cards:[T]) -> [T] {
-//    let random = GKMersenneTwisterRandomSource()
-//    let boxedCards = cards.map { Box($0) }
-//    let shuffled = random.arrayByShufflingObjectsInArray(boxedCards)
-//
-//    return shuffled.map { ($0 as! Box<T>).value }
-//}
 
 private extension Array {
-    mutating func swap(m:UInt32, _ n:UInt32) {
+    mutating func swap(m:Int, _ n:Int) {
         let temp = self[Int(m)]
         self[Int(m)] = self[Int(n)]
         self[Int(n)] = temp
     }
 }
 
+private func random(upperBound:Int) -> Int {
+    assert(upperBound < Int(UInt32.max), "random called with too large of an upper bound. limit it to UInt32.max")
+    return Int(arc4random_uniform(UInt32(upperBound)))
+}
+
 private func shuffle<T>(cards:[T]) -> [T] {
     var shuffledDeck = cards
-    for var index:UInt32 = UInt32(cards.count-1); index > 0; index = index - 1 {
-        let n = arc4random_uniform(index + 1)
+    let numberOfCards = cards.count
+    for index in (1..<numberOfCards).reverse() {
+        let n = random(index + 1)
         shuffledDeck.swap(index, n)
     }
     return shuffledDeck

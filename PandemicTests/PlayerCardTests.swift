@@ -74,5 +74,11 @@ class InfectionCardTests: XCTestCase {
         actualCity = InfectionCard.findByName("gotá").first!
         XCTAssertEqual(InfectionCard.bogotá, actualCity)
     }
+
+    func testPerformance() {
+        self.measureBlock {
+            PlayerCardDeck.shuffledDeck()
+        }
+    }
     
 }
