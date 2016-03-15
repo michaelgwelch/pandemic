@@ -14,16 +14,50 @@ public class GameEngineBuilder {
 
     }
     let rosterBuilder = RosterBuilder()
+
     public var initialCity = City.atlanta
+    private var initialInfections:[City:Int] = [:]
 
     public func addPlayerWithName(name:String, andProfession profession:Profession) throws {
         try rosterBuilder.addPlayerWithCharacterName(name, andProfession: profession)
     }
 
-    public func createGame() -> GameEngine {
+    public func infectCity(city:City, withQuantityOfCubes count:Int) {
+        initialInfections[city] = count
+    }
+
+    public func diseaseCubesForCity(city:City) -> Int {
+        let count = initialInfections[city]
+        return count ?? 0
+    }
+
+    public func createGame() -> GameEngine? {
+        // TODO: Check correct number of cubes and players
+        guard initialInfectionsCompleted else {
+            return nil
+        }
+
+
+        return createGameEngine()
+    }
+
+
+    /**
+     Creates a game engine without checking any Pandemic game setup rules.
+     - warning: If called by code outside this framework, it should only be for
+     testing purposes, where one might want to test invalid conditions.
+    */
+    func createGameEngine() -> GameEngine {
         let players = rosterBuilder.characters.map { Player(playingCharacter: $0) }
         let board = GameBoard(withCharacters: rosterBuilder.characters, inCity: initialCity)
         return GameEngine(withPlayers: players, andBoard: board)
+    }
+
+    private var initialInfectionsCompleted:Bool {
+        return initialInfections.count == 9
+            && initialInfections.filter { $0.1 == 3 }.count == 3
+            && initialInfections.filter { $0.1 == 2 }.count == 3
+            && initialInfections.filter { $0.1 == 1 }.count == 3
     }
 
 }
@@ -79,6 +113,9 @@ public class GameEngine {
 extension GameEngine : CustomDebugStringConvertible {
 
     public var debugDescription:String {
+        guard players.count > 1 else {
+            return "Invalid configuration of game engine. Less than 2 Players."
+        }
         var description = "Turn \(turnNumber) Actions Taken \(actionNumber): The current player is \(currentPlayer.character.name)\n"
         players.forEach { player in
             let characterAndPosition = "\(player.character.name) the \(player.character.profession) is located in \(board.positionOfCharacter(player.character))"

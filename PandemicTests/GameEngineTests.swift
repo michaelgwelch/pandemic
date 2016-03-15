@@ -13,7 +13,7 @@ import XCTest
 /// straightend out
 class GameEngineTests: XCTestCase {
 
-    var engine:GameEngine = GameEngineBuilder().createGame()
+    var engine:GameEngine = GameEngineBuilder().createGameEngine()
     var startingCity = City.atlanta
     var characters:[Pandemic.Character] = []
 
@@ -25,7 +25,7 @@ class GameEngineTests: XCTestCase {
         builder.initialCity = startingCity
 
 
-        engine = builder.createGame()
+        engine = builder.createGameEngine()
     }
 
     func testSetupBoardAllPlayersInInitialCity() {
@@ -80,6 +80,50 @@ class GameEngineTests: XCTestCase {
     func testDirectFlightWhenPlayerHasCard_ThenPlayerMoves() {
 
     
+
+    }
+
+}
+
+public class GameEngineBuilderTests : XCTestCase {
+
+
+    func testInfectCityWithThreeCubes() {
+        let builder = GameEngineBuilder()
+        builder.infectCity(City.miami, withQuantityOfCubes:3)
+        XCTAssertEqual(3, builder.diseaseCubesForCity(City.miami))
+    }
+
+    func testCreateGameReturnsNilIfInitialInfectionsNotDoneCorrectly() {
+        // arrange
+        let builder = GameEngineBuilder()
+        try! builder.addPlayerWithName("Mark", andProfession: .Scientist)
+        try! builder.addPlayerWithName("Mike", andProfession: .Generalist)
+        let engine = builder.createGame()
+
+        XCTAssertNil(engine)
+    }
+
+    func testCreateGameReturnsEngineIfInitialInfectionsDoneCorrectly() {
+        // arrange
+        let builder = GameEngineBuilder()
+        try! builder.addPlayerWithName("Mark", andProfession: .Scientist)
+        try! builder.addPlayerWithName("Mike", andProfession: .Generalist)
+        builder.infectCity(City.montreal, withQuantityOfCubes: 3)
+        builder.infectCity(City.jakarta, withQuantityOfCubes: 3)
+        builder.infectCity(City.atlanta, withQuantityOfCubes: 3)
+        builder.infectCity(City.baghdad, withQuantityOfCubes: 2)
+        builder.infectCity(City.newyork, withQuantityOfCubes: 2)
+        builder.infectCity(City.miami, withQuantityOfCubes: 2)
+        builder.infectCity(City.hochiminhcity, withQuantityOfCubes: 1)
+        builder.infectCity(City.chennai, withQuantityOfCubes: 1)
+        builder.infectCity(City.santiago, withQuantityOfCubes: 1)
+        let engine = builder.createGame()
+
+        XCTAssertNotNil(engine)
+    }
+
+    func testEnforceTwoToFourPlayersBeforeGameCanBeCreate() {
 
     }
 
