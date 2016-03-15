@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import GameplayKit
+//import GameplayKit
 
 private class Box<T> {
     private let value:T
@@ -16,12 +16,31 @@ private class Box<T> {
     }
 }
 
-private func shuffle<T>(cards:[T]) -> [T] {
-    let random = GKMersenneTwisterRandomSource()
-    let boxedCards = cards.map { Box($0) }
-    let shuffled = random.arrayByShufflingObjectsInArray(boxedCards)
 
-    return shuffled.map { ($0 as! Box<T>).value }
+// Shuffle using GameplayKit
+//private func shuffle<T>(cards:[T]) -> [T] {
+//    let random = GKMersenneTwisterRandomSource()
+//    let boxedCards = cards.map { Box($0) }
+//    let shuffled = random.arrayByShufflingObjectsInArray(boxedCards)
+//
+//    return shuffled.map { ($0 as! Box<T>).value }
+//}
+
+private extension Array {
+    mutating func swap(m:UInt32, _ n:UInt32) {
+        let temp = self[Int(m)]
+        self[Int(m)] = self[Int(n)]
+        self[Int(n)] = temp
+    }
+}
+
+private func shuffle<T>(cards:[T]) -> [T] {
+    var shuffledDeck = cards
+    for var index:UInt32 = UInt32(cards.count-1); index > 0; index = index - 1 {
+        let n = arc4random_uniform(index + 1)
+        shuffledDeck.swap(index, n)
+    }
+    return shuffledDeck
 }
 
 public struct PlayerCardDeck {
