@@ -41,14 +41,6 @@ class PlayerCardTests: XCTestCase {
         XCTAssertEqual(PlayerCard.bogotá, actualCity)
     }
 
-    func testPerformanceOfShuffle() {
-        // This is an example of a performance test case.
-        self.measureBlock {
-            PlayerCardDeck.shuffledDeck()
-        }
-    }
-
-
 }
 
 class InfectionCardTests: XCTestCase {
