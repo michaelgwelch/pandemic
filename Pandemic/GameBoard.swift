@@ -83,6 +83,12 @@ public class GameBoard {
         positions[character] = route!.v
     }
 
+    public func infectedCities() -> [GameBoardCity] {
+        return graph.vertices.filter {
+            $0.counters.contains { (_, counter) in counter.value > 0 }
+        }
+    }
+
     public var textualGraph:String {
         return graph.description
     }

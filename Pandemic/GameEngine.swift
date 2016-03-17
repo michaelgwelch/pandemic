@@ -121,7 +121,14 @@ public class GameEngine {
         incrementActionNumber()
     }
 
-    
+    public func infectedCities() -> [GameBoardCity] {
+        return board.infectedCities()
+    }
+
+//    public func cardsForPlayerWithName(name:String) -> [PlayerCard] {
+//
+//    }
+//    
 
 }
 
