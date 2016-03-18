@@ -1,5 +1,5 @@
 //
-//  PlayerCard.swift
+//  Cards.swift
 //  Pandemic
 //
 //  Created by Michael Welch on 3/13/16.
@@ -7,14 +7,6 @@
 //
 
 import Foundation
-
-private extension Array {
-    mutating func swap(m:Int, _ n:Int) {
-        let temp = self[Int(m)]
-        self[Int(m)] = self[Int(n)]
-        self[Int(n)] = temp
-    }
-}
 
 private func random(upperBound:Int) -> Int {
     assert(upperBound < Int(UInt32.max), "random called with too large of an upper bound. limit it to UInt32.max")
@@ -26,22 +18,83 @@ private func shuffle<T>(cards:[T]) -> [T] {
     let numberOfCards = cards.count
     for index in (1..<numberOfCards).reverse() {
         let n = random(index + 1)
-        shuffledDeck.swap(index, n)
+        swap(&shuffledDeck[index], &shuffledDeck[n])
     }
     return shuffledDeck
 }
 
 public struct PlayerCardDeck {
-    public let cards:[PlayerCard]
+    private var remainingCards:[PlayerCard]
+    public var discardPile:[PlayerCard]
+    public var cardsInUse:[PlayerCard]
 
-    private init(_ cards:[PlayerCard]) {
-        self.cards = cards
+    public func searchDiscardPileForCityWithName(name:String) -> [CityCard] {
+        let sequence = (discardPile.filter { $0.isCityCard }).map { (card:PlayerCard) -> CityCard in
+            if case .City(let cityCard) = card {
+                return cityCard
+            } else {
+                assert(true, "Entered a can't happen condition")
+                return CityCard.algiers
+            }
+        }
+        return sequence.findCityByName(name)
     }
 
-    public static func shuffledDeck() -> PlayerCardDeck {
-        return PlayerCardDeck(shuffle(PlayerCard.allCards))
+    /**
+     Prepares a deck to deal from with no event cards.
+    */
+    public init() {
+        self.init(withEventCards: [])
+    }
+    /**
+     Prepares a deck to deal from. Includes the specified event cards
+    */
+    public init(withEventCards eventCards:[EventCard]) {
+        var cards = CityCard.allCards.map { PlayerCard.City($0) }
+        cards.appendContentsOf( eventCards.map { PlayerCard.Event($0) })
+        shuffle(cards)
+
+        remainingCards = cards
+        discardPile = []
+        cardsInUse = []
+    }
+
+    mutating private func deal(numberOfPlayers:Int) throws -> [[PlayerCard]] {
+        guard numberOfPlayers > 1 && numberOfPlayers < 5 else {
+            throw ArgumentError.OutOfRange("numberOfPlayers")
+        }
+
+        var hands:[[PlayerCard]] = [[PlayerCard]]()
+        let handSize:Int
+        if numberOfPlayers == 2 {
+            handSize = 4
+        } else if numberOfPlayers == 3 {
+            handSize = 3
+        } else if numberOfPlayers == 4 {
+            handSize = 4
+        } else {
+            // can't happen
+            handSize = 0
+        }
+
+        for _ in 0..<numberOfPlayers {
+            hands.append(remainingCards.popFirst(handSize))
+        }
+
+        return hands
+
     }
 }
+
+extension Array {
+    public mutating func popFirst(n:Int) -> [Element] {
+        let result = self.prefix(n)
+        self.removeFirst(n)
+        return Array<Element>(result)
+    }
+}
+
+
 
 public struct InfectionCardDeck {
     public let cards:[InfectionCard]
@@ -55,11 +108,98 @@ public struct InfectionCardDeck {
     }
 }
 
+public enum PlayerCard : Equatable {
+    case Epidemic
+    case Event(EventCard)
+    case City(CityCard)
+}
+
+extension PlayerCard {
+    public var isCityCard:Bool {
+        if case City(_) = self {
+            return true
+        }
+        return false
+    }
+
+    public var isEventCard:Bool {
+        if case Event(_) = self {
+            return true
+        } else {
+            return false
+        }
+    }
+
+    public var cityCard:CityCard? {
+        if case .City(let cityCard) = self {
+            return cityCard
+        } else {
+            return nil
+        }
+    }
+
+    public var eventCard:EventCard? {
+        if case .Event(let eventCard) = self {
+            return eventCard
+        } else {
+            return nil
+        }
+    }
+
+    public var isEpidemic:Bool {
+        if case .Epidemic = self {
+            return true
+        } else {
+            return false
+        }
+    }
+}
+
+extension PlayerCard : CustomStringConvertible {
+    public var description:String {
+        switch self {
+        case .Epidemic:
+            return "Epidemic"
+        case .Event(let eventCard):
+            return eventCard.rawValue
+        case .City(let cityCard):
+            return cityCard.description
+        }
+    }
+}
+
+public func ==(lhs:PlayerCard, rhs:PlayerCard) -> Bool {
+    switch lhs {
+    case .Epidemic:
+        return rhs.isEpidemic
+    case .City(let cityCard):
+        return cityCard == rhs.cityCard
+    case .Event(let eventCard):
+        return eventCard == rhs.eventCard
+    }
+
+}
+
+
+public enum EventCard : String {
+    case LocalInitiative
+    case BorrowedTime
+    case RemoteOutpost
+    case FlexibleAidPackage
+    case Airlift
+    case OneQuietNight
+    case Forecase
+    case GovernmentGrant
+    case ResilientPopulations
+    case RemoteTreatment
+    case NewAssignment
+}
+
 /**
- Each value of PlayerCard represents one player card. Each card "depicts"
+ Each value of CityCard represents one player card. Each card "depicts"
  one city.
 */
-public struct PlayerCard : Equatable, Hashable {
+public struct CityCard : Equatable, Hashable {
     /// The city depicted on this card
     public let city:City
 
@@ -72,78 +212,79 @@ public struct PlayerCard : Equatable, Hashable {
     }
 
     // All the player cards
-    public static let algiers = PlayerCard(city: City.algiers)
-    public static let atlanta = PlayerCard(city: City.atlanta)
-    public static let baghdad = PlayerCard(city: City.baghdad)
-    public static let bangkok = PlayerCard(city: City.bangkok)
-    public static let beijing = PlayerCard(city: City.beijing)
-    public static let bogotá = PlayerCard(city: City.bogotá)
-    public static let buenosaires = PlayerCard(city: City.buenosaires)
-    public static let cairo = PlayerCard(city: City.cairo)
-    public static let chennai = PlayerCard(city: City.chennai)
-    public static let chicago = PlayerCard(city: City.chicago)
-    public static let delhi = PlayerCard(city: City.delhi)
-    public static let essen = PlayerCard(city: City.essen)
-    public static let hochiminhcity = PlayerCard(city: City.hochiminhcity)
-    public static let hongkong = PlayerCard(city: City.hongkong)
-    public static let istanbul = PlayerCard(city: City.istanbul)
-    public static let jakarta = PlayerCard(city: City.jakarta)
-    public static let johannesburg = PlayerCard(city: City.johannesburg)
-    public static let karachi = PlayerCard(city: City.karachi)
-    public static let khartoum = PlayerCard(city: City.khartoum)
-    public static let kinshasa = PlayerCard(city: City.kinshasa)
-    public static let kolkata = PlayerCard(city: City.kolkata)
-    public static let lagos = PlayerCard(city: City.lagos)
-    public static let lima = PlayerCard(city: City.lima)
-    public static let london = PlayerCard(city: City.london)
-    public static let losangeles = PlayerCard(city: City.losangeles)
-    public static let madrid = PlayerCard(city: City.madrid)
-    public static let manila = PlayerCard(city: City.manila)
-    public static let mexicocity = PlayerCard(city: City.mexicocity)
-    public static let miami = PlayerCard(city: City.miami)
-    public static let milan = PlayerCard(city: City.milan)
-    public static let montreal = PlayerCard(city: City.montreal)
-    public static let moscow = PlayerCard(city: City.moscow)
-    public static let mumbai = PlayerCard(city: City.mumbai)
-    public static let newyork = PlayerCard(city: City.newyork)
-    public static let osaka = PlayerCard(city: City.osaka)
-    public static let paris = PlayerCard(city: City.paris)
-    public static let riyadh = PlayerCard(city: City.riyadh)
-    public static let sanfrancisco = PlayerCard(city: City.sanfrancisco)
-    public static let santiago = PlayerCard(city: City.santiago)
-    public static let sãopaulo = PlayerCard(city: City.sãopaulo)
-    public static let seoul = PlayerCard(city: City.seoul)
-    public static let shanghai = PlayerCard(city: City.shanghai)
-    public static let stpetersburg = PlayerCard(city: City.stpetersburg)
-    public static let sydney = PlayerCard(city: City.sydney)
-    public static let taipei = PlayerCard(city: City.taipei)
-    public static let tehran = PlayerCard(city: City.tehran)
-    public static let tokyo = PlayerCard(city: City.tokyo)
-    public static let washington = PlayerCard(city: City.washington)
+    public static let algiers = CityCard(city: City.algiers)
+    public static let atlanta = CityCard(city: City.atlanta)
+    public static let baghdad = CityCard(city: City.baghdad)
+    public static let bangkok = CityCard(city: City.bangkok)
+    public static let beijing = CityCard(city: City.beijing)
+    public static let bogotá = CityCard(city: City.bogotá)
+    public static let buenosaires = CityCard(city: City.buenosaires)
+    public static let cairo = CityCard(city: City.cairo)
+    public static let chennai = CityCard(city: City.chennai)
+    public static let chicago = CityCard(city: City.chicago)
+    public static let delhi = CityCard(city: City.delhi)
+    public static let essen = CityCard(city: City.essen)
+    public static let hochiminhcity = CityCard(city: City.hochiminhcity)
+    public static let hongkong = CityCard(city: City.hongkong)
+    public static let istanbul = CityCard(city: City.istanbul)
+    public static let jakarta = CityCard(city: City.jakarta)
+    public static let johannesburg = CityCard(city: City.johannesburg)
+    public static let karachi = CityCard(city: City.karachi)
+    public static let khartoum = CityCard(city: City.khartoum)
+    public static let kinshasa = CityCard(city: City.kinshasa)
+    public static let kolkata = CityCard(city: City.kolkata)
+    public static let lagos = CityCard(city: City.lagos)
+    public static let lima = CityCard(city: City.lima)
+    public static let london = CityCard(city: City.london)
+    public static let losangeles = CityCard(city: City.losangeles)
+    public static let madrid = CityCard(city: City.madrid)
+    public static let manila = CityCard(city: City.manila)
+    public static let mexicocity = CityCard(city: City.mexicocity)
+    public static let miami = CityCard(city: City.miami)
+    public static let milan = CityCard(city: City.milan)
+    public static let montreal = CityCard(city: City.montreal)
+    public static let moscow = CityCard(city: City.moscow)
+    public static let mumbai = CityCard(city: City.mumbai)
+    public static let newyork = CityCard(city: City.newyork)
+    public static let osaka = CityCard(city: City.osaka)
+    public static let paris = CityCard(city: City.paris)
+    public static let riyadh = CityCard(city: City.riyadh)
+    public static let sanfrancisco = CityCard(city: City.sanfrancisco)
+    public static let santiago = CityCard(city: City.santiago)
+    public static let sãopaulo = CityCard(city: City.sãopaulo)
+    public static let seoul = CityCard(city: City.seoul)
+    public static let shanghai = CityCard(city: City.shanghai)
+    public static let stpetersburg = CityCard(city: City.stpetersburg)
+    public static let sydney = CityCard(city: City.sydney)
+    public static let taipei = CityCard(city: City.taipei)
+    public static let tehran = CityCard(city: City.tehran)
+    public static let tokyo = CityCard(city: City.tokyo)
+    public static let washington = CityCard(city: City.washington)
 
-    public static let allCards:[PlayerCard] = [algiers, atlanta, baghdad, bangkok, beijing, bogotá, buenosaires, cairo, chennai, chicago, delhi, essen, hochiminhcity, hongkong, istanbul, jakarta, johannesburg, karachi, khartoum, kinshasa, kolkata, lagos, lima, london, losangeles, madrid, manila, mexicocity, miami, milan, montreal, moscow, mumbai, newyork, osaka, paris, riyadh, sanfrancisco, santiago, sãopaulo, seoul, shanghai, stpetersburg, sydney, taipei, tehran, tokyo, washington]
+    public static let allCards:[CityCard] = [algiers, atlanta, baghdad, bangkok, beijing, bogotá, buenosaires, cairo, chennai, chicago, delhi, essen, hochiminhcity, hongkong, istanbul, jakarta, johannesburg, karachi, khartoum, kinshasa, kolkata, lagos, lima, london, losangeles, madrid, manila, mexicocity, miami, milan, montreal, moscow, mumbai, newyork, osaka, paris, riyadh, sanfrancisco, santiago, sãopaulo, seoul, shanghai, stpetersburg, sydney, taipei, tehran, tokyo, washington]
 
     /**
-     Finds all PlayerCard values with names that contain the specified portion of a name.
+     Finds all CityCard values with names that contain the specified portion of a name.
 
-     - returns: All PlayerCards whose names contain the string `portionOfName` anywhere
+     - returns: All CityCards whose names contain the string `portionOfName` anywhere
      in their name.
 
      - remark: It is sufficient to pass just the first 4 characters of any name
-     to ensure uniquenss and to return only one PlayerCard. For example the following
+     to ensure uniquenss and to return only one CityCard. For example the following
      code will ensure `myCard` gets the value `City.santiago`.
 
      ````
-     let myCard = PlayerCard.findByName("sant").first!
+     let myCard = CityCard.findByName("sant").first!
      ````
      */
-    public static func findByName(name:String) -> [PlayerCard] {
-        return allCards.findByName(name)
+    public static func findByName(name:String) -> [CityCard] {
+        return allCards.findCityByName(name)
     }
 
 }
 
-extension PlayerCard : CityInfo {
+
+extension CityCard : CityInfo {
     public var name:String {
         return city.name
     }
@@ -152,10 +293,8 @@ extension PlayerCard : CityInfo {
     }
 }
 
-extension PlayerCard : CustomStringConvertible {
-    public var description:String {
-        return self.city.name
-    }
+extension CityCard : CustomStringConvertible {
+    
 }
 
 
@@ -227,7 +366,7 @@ public struct InfectionCard : Equatable, Hashable {
     public static let allCards:[InfectionCard] = [algiers, atlanta, baghdad, bangkok, beijing, bogotá, buenosaires, cairo, chennai, chicago, delhi, essen, hochiminhcity, hongkong, istanbul, jakarta, johannesburg, karachi, khartoum, kinshasa, kolkata, lagos, lima, london, losangeles, madrid, manila, mexicocity, miami, milan, montreal, moscow, mumbai, newyork, osaka, paris, riyadh, sanfrancisco, santiago, sãopaulo, seoul, shanghai, stpetersburg, sydney, taipei, tehran, tokyo, washington]
 
     public static func findByName(name:String) -> [InfectionCard] {
-        return allCards.findByName(name)
+        return allCards.findCityByName(name)
     }
 
 }
@@ -242,14 +381,18 @@ extension InfectionCard : CityInfo {
 }
 
 extension InfectionCard : CustomStringConvertible {
+
+}
+
+extension CityInfo {
     public var description:String {
-        return self.city.name
+        return "\(self.name), \(color)"
     }
 }
 
 
 extension SequenceType  where Generator.Element : CityInfo {
-    public func findByName(name:String) -> [Generator.Element] {
+    public func findCityByName(name:String) -> [Generator.Element] {
         
 
         var candidates = self.filter {
@@ -258,11 +401,11 @@ extension SequenceType  where Generator.Element : CityInfo {
         }
 
         if (name.lowercaseString.containsString("sao")) {
-            candidates.appendContentsOf(self.findByName("são"))
+            candidates.appendContentsOf(self.findCityByName("são"))
         }
 
         if (name.lowercaseString.containsString("ota")) {
-            candidates.appendContentsOf(self.findByName("otá"))
+            candidates.appendContentsOf(self.findCityByName("otá"))
         }
 
         return candidates
@@ -274,6 +417,6 @@ public func ==(lhs:InfectionCard, rhs:InfectionCard) -> Bool {
     return lhs.city == rhs.city
 }
 
-public func ==(lhs:PlayerCard, rhs:PlayerCard) -> Bool {
+public func ==(lhs:CityCard, rhs:CityCard) -> Bool {
     return lhs.city == rhs.city
 }

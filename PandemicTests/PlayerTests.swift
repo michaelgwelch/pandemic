@@ -19,9 +19,9 @@ class PlayerTests: XCTestCase {
     func testDealPlayerACard_ThenItHasThatCard() {
 
         let player = Player(playingCharacter: Pandemic.Character(withName: "mark", andProfession: .Scientist))
-        player.dealCard(PlayerCard.santiago)
+        player.dealCard(PlayerCard.City(CityCard.santiago))
 
-        XCTAssertTrue(player.cards.contains(PlayerCard.santiago))
+        XCTAssertTrue(player.cards.contains(PlayerCard.City(CityCard.santiago)))
 
     }
 

@@ -18,3 +18,7 @@ public enum GameError : ErrorType {
     case DriveOrFerryCityUnreachable(to:String, from:String)
 }
 
+public enum ArgumentError : ErrorType {
+    case OutOfRange(String)
+}
+

@@ -194,7 +194,7 @@ public class GameBoard {
 
 
     public func findCityByName(name:String) -> [GameBoardCity] {
-        return allCities.findByName(name)
+        return allCities.findCityByName(name)
     }
 }
 
