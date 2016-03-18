@@ -13,7 +13,7 @@ public class Player {
 
     let handLimit:Int
     public let character:Character
-    private(set) public var cards:Set<PlayerCard> = []
+    private(set) public var cards:[PlayerCard] = []
 
     public var characterName:String {
         return character.name
@@ -30,6 +30,6 @@ public class Player {
     }
 
     func dealCard(card:PlayerCard) {
-        cards.insert(card)
+        cards.append(card)
     }
 }

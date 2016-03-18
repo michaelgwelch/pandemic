@@ -104,7 +104,7 @@ public struct City : Equatable, Hashable {
      ````
     */
     public static func findByName(portionOfName:String) -> [City] {
-        return allCards.findByName(portionOfName)
+        return allCards.findCityByName(portionOfName)
     }
 
 }
