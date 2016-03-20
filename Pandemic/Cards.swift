@@ -18,7 +18,9 @@ private func shuffle<T>(cards:[T]) -> [T] {
     let numberOfCards = cards.count
     for index in (1..<numberOfCards).reverse() {
         let n = random(index + 1)
-        swap(&shuffledDeck[index], &shuffledDeck[n])
+        if (index != n) {
+            swap(&shuffledDeck[index], &shuffledDeck[n])
+        }
     }
     return shuffledDeck
 }
