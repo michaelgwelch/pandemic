@@ -13,7 +13,10 @@ private func random(upperBound:Int) -> Int {
     return Int(arc4random_uniform(UInt32(upperBound)))
 }
 
-private func shuffle<T>(cards:[T]) -> [T] {
+public func shuffle<T>(cards:[T]) -> [T] {
+    guard cards.count > 0 else {
+        return cards
+    }
     var shuffledDeck = cards
     let numberOfCards = cards.count
     for index in (1..<numberOfCards).reverse() {
