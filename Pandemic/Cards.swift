@@ -102,10 +102,20 @@ extension Array {
 
 
 public struct InfectionCardDeck {
-    public let cards:[InfectionCard]
+    private(set) public var remainingCards:[InfectionCard]
+    private(set) public var discardPile:[InfectionCard] = []
 
     private init(_ cards:[InfectionCard]) {
-        self.cards = cards
+        self.remainingCards = cards
+    }
+
+    mutating func draw(city:CityInfo) {
+        var cards = remainingCards.findCityByName(city.name)
+        if (cards.count == 1) {
+            discardPile.append(cards[0])
+            let index = remainingCards.indexOf(cards[0])!
+            remainingCards.removeAtIndex(index)
+        }
     }
 
     public static func shuffledDeck() -> InfectionCardDeck {
